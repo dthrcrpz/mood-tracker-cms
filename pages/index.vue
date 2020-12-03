@@ -8,7 +8,7 @@
                 <div class="overlay">
                     <h2>Login</h2>
                     <h3>Welcome back, Please login to continue</h3>
-                    <form class="action" @submit.prevent>
+                    <form class="action" @submit.prevent="submit()">
                         <div class="group">
                             <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email">
                             <label for="email">Email Address</label>
@@ -47,6 +47,10 @@
             }
         },
         methods: {
+            submit () {
+                const me = this
+                me.$router.push('/dashboard')
+            },
             initialization (event) {
                 const me = this
                 if (document.readyState != 'interactive') {
