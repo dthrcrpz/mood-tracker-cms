@@ -49,6 +49,7 @@
         methods: {
             submit () {
                 const me = this
+                me.$cookies.set('access_token', 'testing123testing')
                 me.$router.push('/dashboard')
             },
             initialization (event) {
