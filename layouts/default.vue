@@ -43,7 +43,7 @@
         computed: {
             ...mapGetters ({
                 has_loaded: 'global/loader/loading',
-                has_toggled: 'global/nav-toggler/toggled'
+                has_toggled: 'global/sidebar/toggled'
             })
         },
         methods: {
@@ -69,6 +69,11 @@
                 me.validateToken()
             }
             // me.autoPadding()
+        },
+        head () {
+            return {
+                title: 'Admin Template | Designblue Philippines'
+            }
         }
     }
 </script>
