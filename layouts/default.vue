@@ -1,5 +1,5 @@
 <template>
-    <div class="__db">
+    <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
         <transition name="fade">
             <sidebar v-if="authenticated" />
         </transition>
@@ -42,7 +42,8 @@
         },
         computed: {
             ...mapGetters ({
-                has_loaded: 'global/loader/loading'
+                has_loaded: 'global/loader/loading',
+                has_toggled: 'global/nav-toggler/toggled'
             })
         },
         methods: {
