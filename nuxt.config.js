@@ -21,6 +21,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-cookie' },
     { src: '~/plugins/vee-validate' },
+    { src: '~/plugins/vue-moment' },
     { src: '~/plugins/mixins'}
   ],
 

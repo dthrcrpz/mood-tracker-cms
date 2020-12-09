@@ -4,9 +4,12 @@
             <sidebar v-if="authenticated" />
         </transition>
         <transition name="fade">
-            <header-bar v-if="authenticated" />
+            <topbar v-if="authenticated" />
         </transition>
         <Nuxt />
+        <transition name="fade">
+            <bottombar v-if="authenticated" />
+        </transition>
         <transition name="fade">
             <loader v-if="has_loaded" />
         </transition>
@@ -15,14 +18,16 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import Topbar from '~/components/global/Topbar'
     import Sidebar from '~/components/global/Sidebar'
-    import HeaderBar from '~/components/global/HeaderBar'
+    import Bottombar from '~/components/global/Bottombar'
     import Loader from '~/components/global/Loader'
 
     export default {
         components: {
+            Topbar,
             Sidebar,
-            HeaderBar,
+            Bottombar,
             Loader
         },
         data () {
