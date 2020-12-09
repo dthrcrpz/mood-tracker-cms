@@ -22,6 +22,7 @@ export default {
     { src: '~/plugins/vue-cookie' },
     { src: '~/plugins/vee-validate' },
     { src: '~/plugins/vue-moment' },
+    { src: '~/plugins/vue-click-outside' },
     { src: '~/plugins/mixins'}
   ],
 
