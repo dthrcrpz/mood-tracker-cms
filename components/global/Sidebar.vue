@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="sidebar" :class="[ (has_toggled) ? 'floating' : '', 'hovered' ]" @focus="resetHoverToggle()" @mouseover="resetHoverToggle()" @mouseleave="resetLeaveToggle()">
+    <div id="sidebar" :class="[ (has_toggled) ? 'floating' : '', 'hovered' ]" @focus="resetHoverToggle()" @mouseenter="resetHoverToggle()" @mouseleave="resetLeaveToggle()">
         <div class="top">
             <img src="/logo.png" />
             <h2>Template</h2>
@@ -21,8 +21,8 @@
                         <span>{{ data.name }}</span>
                     </nuxt-link>
                     <div class="sub" v-if="data.subs">
-                        <ul class="sub_list" v-for="(sub, key) in data.subs" :key="key">
-                            <li class="sub_item">
+                        <ul class="sub_list">
+                            <li class="sub_item" v-for="(sub, key) in data.subs" :key="key">
                                 <nuxt-link class="sub_link" :to="sub.slug">
                                     <div class="sub_link_icon" v-html="sub.icon"></div>
                                     <span>{{ sub.name }}</span>
@@ -40,6 +40,11 @@
     import { mapGetters } from 'vuex'
 
     export default {
+        data () {
+            return {
+                hovered: false
+            }
+        },
         computed: {
             ...mapGetters ({
                 links: 'global/sidebar/getLinks',
@@ -63,11 +68,38 @@
                 }
             },
             resetHoverToggle () {
-                const me = this
+                const me = this,
+                    elements = document.querySelectorAll('.list .toggled .sub')
+
+                me.hovered = true
+
+                if (me.hovered) {
+                    elements.forEach((element, index) => {
+                        setTimeout( () => {
+                            const length = element.querySelectorAll('.sub_item').length
+                            const height = 43
+                            const currentHeight = height * length
+                            element.style.height = `${currentHeight}px`
+                        }, 500)
+                    })
+                }
+
                 document.getElementById('sidebar').classList.add('hovered')
             },
             resetLeaveToggle () {
-                const me = this
+                const me = this,
+                    elements = document.querySelectorAll('.list .toggled .sub')
+
+                elements.forEach((element, index) => {
+                    setTimeout( () => {
+                        const length = element.querySelectorAll('.sub_list').length
+                        const height = element.querySelector('.sub_list').scrollHeight
+                        const currentHeight = height * length
+                        element.style.height = `${currentHeight}px`
+                    }, 500)
+                })
+
+                me.hovered = false
                 document.getElementById('sidebar').classList.remove('hovered')
             },
             toggleNav () {
