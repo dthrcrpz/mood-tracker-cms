@@ -39,8 +39,8 @@ body
 
 body
     overflow-x: hidden
+    background-color: $gray_v2
     &.cms
-        background-color: #f8f8fb
     &.no_click
         pointer-events: none
     &.no_scroll
@@ -107,6 +107,38 @@ span
 .pointer
     cursor: pointer
 
+/**
+ * Root */
+.__db
+    &.full
+        #header
+            max-width: calc(100% - 130px)
+            transition: .3s ease-in-out
+        #dashboard
+            margin-left: 70px
+            transition: .3s ease-in-out
+    #dashboard
+        padding: 120px 30px 30px
+        margin-left: 260px
+        transition: .3s ease-in-out
+
+/**
+ * Header */
+#header
+    position: fixed
+    top: 30px
+    z-index: 2
+    right: 30px
+    width: 100%
+    max-width: calc(100% - 320px)
+    padding: 20px
+    border-radius: 5px
+    background-color: $white
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
+    transition: .3s ease-in-out
+
+/**
+ * Button */
 .action_outline_button
     display: inline-block
     brandon_medium(14px, true)

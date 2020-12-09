@@ -1,18 +1,6 @@
 @import 'global'
 
 /**
- * Root */
-.__db
-    &.full
-        #dashboard
-            margin-left: 70px
-            transition: .3s ease-in-out
-    #dashboard
-        padding: 30px
-        margin-left: 260px
-        transition: .3s ease-in-out
-
-/**
  * Login */
 #login
     position: relative
@@ -228,6 +216,10 @@
                     background-color: transparent
                     transition: .3s ease-in-out
                     &.parent
+                        &.active
+                            padding: 7.5px 10px 7.5px 15px
+                            background-color: $gray_v2
+                            transition: .3s ease-in-out
                         &::after
                             content: ''
                             pointer-events: none
@@ -276,7 +268,7 @@
                         padding: 7.5px 10px 7.5px 15px
                         background-color: $gray_v2
                         transition: .3s ease-in-out
-                    &.nuxt-link-exact-active
+                    &.exact
                         color: $white
                         box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
                         transition: .3s ease-in-out
@@ -349,7 +341,7 @@
                                 &:hover
                                     padding: 7.5px 10px 7.5px 20px
                                     transition: .3s ease-in-out
-                                &.nuxt-link-exact-active
+                                &.exact
                                     color: $white
                                     box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
                                     transition: .3s ease-in-out

@@ -16,14 +16,16 @@
         <div class="bottom">
             <ul class="list">
                 <li class="item" v-for="(data, key) in links" :key="key">
-                    <nuxt-link :event="''" :to="data.slug" :class="[ 'link', (data.subs) ? 'parent' : '' ]" @click.native.self="navigate(data, $event)">
+                    <nuxt-link :event="''" :to="data.slug" :class="[ 'link', (data.subs) ? 'parent' : '' ]" exact-active-class="exact"
+                        active-class="active" @click.native.self="navigate(data, $event)">
                         <div class="link_icon" v-html="data.icon"></div>
                         <span>{{ data.name }}</span>
                     </nuxt-link>
                     <div class="sub" v-if="data.subs">
                         <ul class="sub_list">
                             <li class="sub_item" v-for="(sub, key) in data.subs" :key="key">
-                                <nuxt-link class="sub_link" :to="sub.slug">
+                                <nuxt-link class="sub_link" :to="sub.slug" exact-active-class="exact"
+                                    active-class="active">
                                     <div class="sub_link_icon" v-html="sub.icon"></div>
                                     <span>{{ sub.name }}</span>
                                 </nuxt-link>

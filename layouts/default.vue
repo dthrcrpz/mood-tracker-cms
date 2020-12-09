@@ -3,6 +3,9 @@
         <transition name="fade">
             <sidebar v-if="authenticated" />
         </transition>
+        <transition name="fade">
+            <header-bar v-if="authenticated" />
+        </transition>
         <Nuxt />
         <transition name="fade">
             <loader v-if="has_loaded" />
@@ -13,11 +16,13 @@
 <script>
     import { mapGetters } from 'vuex'
     import Sidebar from '~/components/global/Sidebar'
+    import HeaderBar from '~/components/global/HeaderBar'
     import Loader from '~/components/global/Loader'
 
     export default {
         components: {
             Sidebar,
+            HeaderBar,
             Loader
         },
         data () {
