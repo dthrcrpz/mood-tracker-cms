@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="sidebar" :class="[ (has_toggled) ? 'floating' : '', 'hovered' ]" @focus="resetHoverToggle()" @mouseenter="resetHoverToggle()" @mouseleave="resetLeaveToggle()">
+    <div id="sidebar" :class="[ (has_toggled) ? 'floating' : '', 'hovered' ]" @focus="enter()" @mouseenter="enter()" @mouseleave="leave()">
         <div class="top">
             <img src="/logo.png" />
             <h2>Template</h2>
@@ -69,26 +69,25 @@
                     me.$router.push(data.slug)
                 }
             },
-            resetHoverToggle () {
+            enter () {
                 const me = this,
                     elements = document.querySelectorAll('.list .toggled .sub')
 
-                me.hovered = true
-
-                if (me.hovered) {
+                if (!me.hovered) {
                     elements.forEach((element, index) => {
                         setTimeout( () => {
-                            const length = element.querySelectorAll('.sub_item').length
-                            const height = 43
+                            const length = element.querySelectorAll('.sub_list').length
+                            const height = element.querySelector('.sub_list').scrollHeight
                             const currentHeight = height * length
                             element.style.height = `${currentHeight}px`
                         }, 500)
                     })
                 }
+                me.hovered = true
 
                 document.getElementById('sidebar').classList.add('hovered')
             },
-            resetLeaveToggle () {
+            leave () {
                 const me = this,
                     elements = document.querySelectorAll('.list .toggled .sub')
 
