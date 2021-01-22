@@ -3,12 +3,36 @@
         <table class="table list_view">
             <thead>
                 <tr>
-                    <th class="stick">Full Name</th>
-                    <th class="stick">Gender</th>
-                    <th class="stick">Birthday</th>
-                    <th class="stick">Contact Number</th>
-                    <th class="stick">Email Address</th>
-                    <th class="stick">Action</th>
+                    <th class="stick sort">
+                        <div class="label pointer asc">
+                            Full Name
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer desc">
+                            Gender
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Birthday
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Contact Number
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Email Address
+                        </div>
+                    </th>
+                    <th class="stick">
+                        <div class="label">
+                            Action
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>

@@ -427,10 +427,48 @@ span
                     position: relative
                     top: 0
                     padding: 0 15px
-                    brandon_medium(14px, true)
-                    color: $gray
                     background-color: transparent
                     transition: .3s ease-in-out
+                    .label
+                        position: relative
+                        display: inline-block
+                        color: $gray
+                        brandon_medium(14px, true)
+                        padding-right: 20px
+                    &.sort
+                        .label
+                            &.asc
+                                &::before
+                                    border-bottom: 7px solid $primary
+                                    transition: .3s ease-in-out
+                            &.desc
+                                &::after
+                                    border-top: 7px solid $primary
+                                    transition: .3s ease-in-out
+                            &::before
+                                content: ''
+                                pointer-events: none
+                                position: absolute
+                                top: 20%
+                                right: 0
+                                z-index: 1
+                                border-bottom: 7px solid $gray
+                                border-left: 7px solid transparent
+                                border-right: 7px solid transparent
+                                transform: translateY(-50%) rotate(0deg)
+                                transition: .3s ease-in-out
+                            &::after
+                                content: ''
+                                pointer-events: none
+                                position: absolute
+                                top: 80%
+                                right: 0
+                                z-index: 1
+                                border-top: 7px solid $gray
+                                border-left: 7px solid transparent
+                                border-right: 7px solid transparent
+                                transform: translateY(-50%) rotate(0deg)
+                                transition: .3s ease-in-out
         tbody
             tr
                 border-radius: 5px

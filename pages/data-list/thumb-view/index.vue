@@ -1,6 +1,36 @@
 <template lang="html">
     <div id="dashboard">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <table class="table list_view">
+            <thead>
+                <tr>
+                    <th class="stick">Full Name</th>
+                    <th class="stick">Gender</th>
+                    <th class="stick">Birthday</th>
+                    <th class="stick">Contact Number</th>
+                    <th class="stick">Email Address</th>
+                    <th class="stick">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(data, key) in 20" :key="key">
+                    <td>Juan Dela Cruz</td>
+                    <td>Male</td>
+                    <td>{{ $moment().format('MMM DD, YYYY') }}</td>
+                    <td>09012345678</td>
+                    <td>juandelacruz@gmail.com</td>
+                    <td class="actions">
+                        <div class="item edit pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="icon"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            <span>Edit</span>
+                        </div>
+                        <div class="item ml delete pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="icon"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <span>Delete</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
