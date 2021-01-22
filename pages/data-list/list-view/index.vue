@@ -1,6 +1,6 @@
 <template lang="html">
     <div id="dashboard">
-        <table class="table list_view">
+        <table class="table">
             <thead>
                 <tr>
                     <th class="stick sort">
@@ -37,7 +37,11 @@
             </thead>
             <tbody>
                 <tr v-for="(data, key) in 20" :key="key">
-                    <td>Juan Dela Cruz</td>
+                    <td>
+                        <div class="name pointer">
+                            Juan Dela Cruz
+                        </div>
+                    </td>
                     <td>Male</td>
                     <td>{{ $moment().format('MMM DD, YYYY') }}</td>
                     <td>09012345678</td>

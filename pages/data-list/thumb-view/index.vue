@@ -1,19 +1,53 @@
 <template lang="html">
     <div id="dashboard">
-        <table class="table list_view">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="stick">Full Name</th>
-                    <th class="stick">Gender</th>
-                    <th class="stick">Birthday</th>
-                    <th class="stick">Contact Number</th>
-                    <th class="stick">Email Address</th>
-                    <th class="stick">Action</th>
+                    <th class="stick sort">
+                        <div class="label pointer asc">
+                            Full Name
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer desc">
+                            Gender
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Birthday
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Contact Number
+                        </div>
+                    </th>
+                    <th class="stick sort">
+                        <div class="label pointer">
+                            Email Address
+                        </div>
+                    </th>
+                    <th class="stick">
+                        <div class="label">
+                            Action
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(data, key) in 20" :key="key">
-                    <td>Juan Dela Cruz</td>
+                    <td class="thumb">
+                        <div class="wrapper pointer">
+                            <img src="/default-image.png" v-if="key == 1 || key == 3" />
+                            <div class="image" v-else>
+                                <div class="overlay">
+                                    JD
+                                </div>
+                            </div>
+                            <div class="name">Juan Dela Cruz</div>
+                        </div>
+                    </td>
                     <td>Male</td>
                     <td>{{ $moment().format('MMM DD, YYYY') }}</td>
                     <td>09012345678</td>
