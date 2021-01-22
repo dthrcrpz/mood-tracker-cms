@@ -1,5 +1,10 @@
 <template lang="html">
     <div id="header">
+        <div class="header_nav">
+            <div class="title">
+                {{ title }}
+            </div>
+        </div>
         <div :class="`header_select ${(isToggled) ? 'active' : ''}`" v-click-outside="closeMe">
             <div class="header_user" @click="showSelect()">
                 <div class="user_picture">
@@ -32,11 +37,18 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
+
     export default {
         data () {
             return {
                 isToggled: false
             }
+        },
+        computed: {
+            ...mapGetters({
+                title: 'global/settings/getTitle'
+            })
         },
         methods: {
             showSelect () {

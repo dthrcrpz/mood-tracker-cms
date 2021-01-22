@@ -6,6 +6,9 @@
 
 <script>
     export default {
-
+        mounted () {
+            const me = this
+            me.$store.commit('global/settings/populateTitle', { title: 'Thumb View' })
+        }
     }
 </script>

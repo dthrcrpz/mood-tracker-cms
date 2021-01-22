@@ -57,6 +57,18 @@
             })
         },
         methods: {
+            windowScroll () {
+                const me = this
+                let selector = document.querySelector('.table.list_view')
+                if (selector) {
+                    let bounding = selector.getBoundingClientRect()
+                    if (bounding.top < 0) {
+                        selector.querySelector('thead').classList.add('sticky')
+                    } else {
+                        selector.querySelector('thead').classList.remove('sticky')
+                    }
+                }
+            },
             validateToken () {
                 const me = this
                 me.authenticated = (me.$cookies.get('access_token')) ? true : false
@@ -79,6 +91,12 @@
                 me.validateToken()
             }
             // me.autoPadding()
+        },
+        beforeMount () {
+            window.addEventListener('scroll', this.windowScroll)
+        },
+        beforeDestroy () {
+            window.removeEventListener('scroll', this.windowScroll)
         },
         head () {
             return {

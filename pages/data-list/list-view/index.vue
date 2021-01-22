@@ -3,27 +3,29 @@
         <table class="table list_view">
             <thead>
                 <tr>
-                    <th>Test</th>
-                    <th>Test</th>
-                    <th>Test</th>
-                    <th>Test</th>
-                    <th>Test</th>
-                    <th>Action</th>
+                    <th class="stick">Full Name</th>
+                    <th class="stick">Gender</th>
+                    <th class="stick">Birthday</th>
+                    <th class="stick">Contact Number</th>
+                    <th class="stick">Email Address</th>
+                    <th class="stick">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(data, key) in 10" :key="key">
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
-                    <td>Test</td>
+                <tr v-for="(data, key) in 20" :key="key">
+                    <td>Juan Dela Cruz</td>
+                    <td>Male</td>
+                    <td>{{ $moment().format('MMM DD, YYYY') }}</td>
+                    <td>09012345678</td>
+                    <td>juandelacruz@gmail.com</td>
                     <td class="actions">
-                        <div class="item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="#7A7A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit w-5 h-5 hover:text-primary stroke-current"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        <div class="item edit pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="icon"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                            <span>Edit</span>
                         </div>
-                        <div class="item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="#7A7A7A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash w-5 h-5 hover:text-danger stroke-current"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <div class="item ml delete pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="icon"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <span>Delete</span>
                         </div>
                     </td>
                 </tr>
@@ -34,6 +36,9 @@
 
 <script>
     export default {
-
+        mounted () {
+            const me = this
+            me.$store.commit('global/settings/populateTitle', { title: 'List View' })
+        }
     }
 </script>
