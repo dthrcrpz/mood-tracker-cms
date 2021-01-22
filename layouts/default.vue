@@ -60,7 +60,7 @@
         methods: {
             windowScroll () {
                 const me = this
-                let selector = document.querySelector('.table.list_view')
+                let selector = document.querySelector('.table')
                 if (selector) {
                     let bounding = selector.getBoundingClientRect()
                     if (bounding.top < 50) {
