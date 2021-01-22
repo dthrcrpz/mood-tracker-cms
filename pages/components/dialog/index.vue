@@ -8,7 +8,7 @@
     export default {
         mounted () {
             const me = this
-            me.$store.commit('global/settings/populateTitle', { title: 'Alert' })
+            me.$store.commit('global/settings/populateTitle', { title: 'Dialog' })
         }
     }
 </script>
