@@ -112,6 +112,15 @@ span
 /**
  * Root */
 .__db
+    position: relative
+    .swallower
+        position: sticky
+        top: 0
+        z-index: 0
+        height: 80px
+        width: 100%
+        pointer-events: none
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(41%,#fff),color-stop(95%,hsla(0,0%,100%,.11)),to(hsla(0,0%,100%,0)))
     &.full
         #header
             max-width: calc(100% - 130px)
@@ -123,7 +132,7 @@ span
             margin-left: 70px
             transition: .3s ease-in-out
     #dashboard
-        padding: 120px 30px 60px
+        padding: 60px 30px
         margin-left: 260px
         transition: .3s ease-in-out
 
@@ -421,8 +430,8 @@ span
                             transition: .3s ease-in-out
                             &:first-child
                                 border-radius: 5px 0 0 5px
-                                &:last-child
-                                    border-radius: 0 5px 5px 0
+                            &:last-child
+                                border-radius: 0 5px 5px 0
                         .label
                             color: $white
                             transition: .3s ease-in-out

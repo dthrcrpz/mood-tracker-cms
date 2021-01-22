@@ -1,5 +1,6 @@
 <template>
     <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
+        <div class="swallower"></div>
         <transition name="fade">
             <sidebar v-if="authenticated" />
         </transition>
@@ -62,7 +63,7 @@
                 let selector = document.querySelector('.table.list_view')
                 if (selector) {
                     let bounding = selector.getBoundingClientRect()
-                    if (bounding.top < 0) {
+                    if (bounding.top < 50) {
                         selector.querySelector('thead').classList.add('sticky')
                     } else {
                         selector.querySelector('thead').classList.remove('sticky')
