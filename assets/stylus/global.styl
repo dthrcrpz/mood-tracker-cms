@@ -114,6 +114,9 @@ span
         #header
             max-width: calc(100% - 130px)
             transition: .3s ease-in-out
+        #footer
+            max-width: calc(100% - 70px)
+            transition: .3s ease-in-out
         #dashboard
             margin-left: 70px
             transition: .3s ease-in-out
@@ -248,19 +251,21 @@ span
  * Footer */
 #footer
     position: fixed
-    bottom: 20px
+    bottom: 0
     z-index: 2
-    right: 30px
+    right: 0
     width: 100%
-    max-width: calc(100% - 320px)
+    max-width: calc(100% - 260px)
     display: flex
     flex-flow: row wrap
     align-items: center
+    padding: 10px 30px
+    background-color: $primary
     justify-content: space-between
     transition: .3s ease-in-out
     .label
-        color: $gray
-        brandon_light(16px, false)
+        color: $white
+        brandon_regular(14px, false)
 
 /**
  * Button */
