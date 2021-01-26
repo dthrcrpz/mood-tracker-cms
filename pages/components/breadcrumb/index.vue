@@ -4,9 +4,14 @@
         <div class="box mb">
             <div class="top_box">
                 <h2>Default</h2>
+                <div class="description">
+                    <p>Default <b>:separator="/"</b>and <b>:alignment="left"</b></p>
+                </div>
             </div>
             <div class="bottom_box">
-                <breadcrumb />
+                <div class="group">
+                    <breadcrumb />
+                </div>
             </div>
         </div>
 
@@ -18,7 +23,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div :class="[ 'group', (key != demo_separators.length) ? 'mb twenty' : '' ]" v-for="(demo_separator, key) in demo_separators" :key="key">
+                <div :class="[ 'group', (key + 1 != demo_separators.length) ? 'mb twenty' : '' ]" v-for="(demo_separator, key) in demo_separators" :key="key">
                     <breadcrumb :separator="demo_separator" />
                 </div>
             </div>
@@ -32,14 +37,8 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group mb twenty">
-                    <breadcrumb />
-                </div>
-                <div class="group mb twenty">
-                    <breadcrumb :alignment="'center'" />
-                </div>
-                <div class="group">
-                    <breadcrumb :alignment="'right'" />
+                <div :class="[ 'group', (key + 1 != demo_alignments.length) ? 'mb twenty' : '' ]" v-for="(demo_alignment, key) in demo_alignments" :key="key">
+                    <breadcrumb :alignment="demo_alignment" />
                 </div>
             </div>
         </div>
@@ -56,7 +55,8 @@
         },
         data () {
             return {
-                demo_separators: ['>', '-', '|', '◦', '▪']
+                demo_separators: ['>', '-', '|', '◦', '▪'],
+                demo_alignments: ['left', 'center', 'right']
             }
         },
         mounted () {
