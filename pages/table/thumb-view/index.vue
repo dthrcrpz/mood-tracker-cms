@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="dashboard">
+    <div id="dashboard" v-if="loaded">
         <table class="table">
             <thead>
                 <tr>

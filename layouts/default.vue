@@ -1,6 +1,6 @@
 <template>
     <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
-        <div class="swallower"></div>
+        <div class="swallower" v-if="authenticated"></div>
         <transition name="fade">
             <sidebar v-if="authenticated" />
         </transition>
