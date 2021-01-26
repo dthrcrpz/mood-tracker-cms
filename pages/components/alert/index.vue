@@ -15,7 +15,7 @@
 
         <div class="box mb">
             <div class="top_box">
-                <h2>Type</h2>
+                <h2>Types</h2>
                 <div class="description">
                     <p>These alerts are only for demo purposes. You can change alert type and message by adding <b>:type</b> property and <b>:description</b> in the alert component.</p>
                 </div>
@@ -55,6 +55,10 @@
                 loaded: false,
                 show: false,
                 demo_alerts: [
+                    {
+                        type: 'secondary',
+                        description: 'This is a secondary alert!'
+                    },
                     {
                         type: 'success',
                         description: 'This is a success alert!'

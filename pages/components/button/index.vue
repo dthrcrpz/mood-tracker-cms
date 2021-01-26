@@ -7,63 +7,67 @@
             </div>
             <div class="bottom_box">
                 <div class="group_inline">
-                    <div :class="[ data.class, 'ml twenty pointer' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    <div :class="[ data.class, 'ml ten pointer' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                 </div>
             </div>
         </div>
 
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Outline</h2>
-                <div class="description">
-                    <p>Just add <b>outline</b> class along with the button class.</p>
+        <div class="box_inline two mb">
+            <div class="box">
+                <div class="top_box">
+                    <h2>Outline</h2>
+                    <div class="description">
+                        <p>Just add <b>outline</b> class along with the button class.</p>
+                    </div>
+                </div>
+                <div class="bottom_box">
+                    <div class="group_inline">
+                        <div :class="[ data.class, 'ml ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    </div>
                 </div>
             </div>
-            <div class="bottom_box">
-                <div class="group_inline">
-                    <div :class="[ data.class, 'ml twenty pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+
+            <div class="box">
+                <div class="top_box">
+                    <h2>Flat</h2>
+                    <div class="description">
+                        <p>Just add <b>flat</b> class along with the button class.</p>
+                    </div>
+                </div>
+                <div class="bottom_box">
+                    <div class="group_inline">
+                        <div :class="[ data.class, 'ml ten pointer', 'flat' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Flat</h2>
-                <div class="description">
-                    <p>Just add <b>flat</b> class along with the button class.</p>
+        <div class="box_inline two mb">
+            <div class="box">
+                <div class="top_box">
+                    <h2>Rectangle</h2>
+                    <div class="description">
+                        <p>Just add <b>rectangle</b> class along with the button class.</p>
+                    </div>
+                </div>
+                <div class="bottom_box">
+                    <div class="group_inline">
+                        <div :class="[ data.class, 'ml ten pointer', 'rectangle' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    </div>
                 </div>
             </div>
-            <div class="bottom_box">
-                <div class="group_inline">
-                    <div :class="[ data.class, 'ml twenty pointer', 'flat' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Rectangle</h2>
-                <div class="description">
-                    <p>Just add <b>rectangle</b> class along with the button class.</p>
+            <div class="box">
+                <div class="top_box">
+                    <h2>Rectangle</h2>
+                    <div class="description">
+                        <p>Just add <b>rounded</b> class along with the button class.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="bottom_box">
-                <div class="group_inline">
-                    <div :class="[ data.class, 'ml twenty pointer', 'rectangle' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Rectangle</h2>
-                <div class="description">
-                    <p>Just add <b>rounded</b> class along with the button class.</p>
-                </div>
-            </div>
-            <div class="bottom_box">
-                <div class="group_inline">
-                    <div :class="[ data.class, 'ml twenty pointer', 'rounded' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                <div class="bottom_box">
+                    <div class="group_inline">
+                        <div :class="[ data.class, 'ml ten pointer', 'rounded' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,6 +85,10 @@
                     {
                         name: 'Primary',
                         class: 'primary_button'
+                    },
+                    {
+                        name: 'Secondary',
+                        class: 'secondary_button'
                     },
                     {
                         name: 'Success',
