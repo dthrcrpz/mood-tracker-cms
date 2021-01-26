@@ -4,7 +4,7 @@
             <div class="title">
                 {{ title }}
             </div>
-            <breadcrumb />
+            <breadcrumb :separator="'◦'" />
         </div>
         <div :class="`header_select ${(isToggled) ? 'active' : ''}`" v-click-outside="closeMe">
             <div class="header_user" @click="showSelect()">

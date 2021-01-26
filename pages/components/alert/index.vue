@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div :class="[ 'action_button', (show) ? 'none mb twenty' : 'pointer' ]" @click="triggerAutoDismiss()">Show Alert</div>
+                <div :class="[ 'primary_button', (show) ? 'none mb twenty' : 'pointer' ]" @click="triggerAutoDismiss()">Show Alert</div>
                 <transition name="fade">
                     <alert :type="'success'" :auto_dismiss="true" v-if="show" />
                 </transition>

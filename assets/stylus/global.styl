@@ -10,7 +10,7 @@ $gray = #7A7A7A
 $gray_v2 = #F6F6F6
 $gray_v3 = #C3C3C3
 $success = #00A014
-$warning = #ff9f43
+$warning = #ffc800
 
 html
     -webkit-text-size-adjust: none
@@ -118,6 +118,11 @@ span
     &.twenty
         margin-bottom: 20px
         transition: .3s ease-in-out
+
+.ml
+    margin-right: 30px
+    &.twenty
+        margin-right: 20px
 
 /**
  * Root */
@@ -359,7 +364,7 @@ span
             p
                 color: $red
     &.warning
-        background-color: rgba(255, 159, 67, 0.2)
+        background-color: rgba(255, 200, 0, 0.2)
         .wrapper
             p
                 color: $warning
@@ -380,26 +385,8 @@ span
             brandon_medium(16px, false)
 
 /**
- * Button */
-.action_outline_button
-    display: inline-block
-    brandon_medium(14px, true)
-    color: $primary
-    padding: 10px 15px
-    border: 1px solid $primary
-    border-radius: 10px
-    background-color: transparent
-    box-shadow: 0 0 20px transparent
-    transform: translateY(0)
-    transition: .3s ease-in-out
-    &:hover
-        color: $white
-        background-color: $primary
-        box-shadow: 0 0 20px rgba(255, 68, 0, 0.5)
-        transform: translateY(-5px)
-        transition: .3s ease-in-out
-
-.action_button
+ * Buttons */
+.primary_button
     display: inline-block
     brandon_medium(14px, true)
     color: $white
@@ -410,10 +397,204 @@ span
     box-shadow: 0 0 20px transparent
     transform: translateY(0)
     transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $primary
+        background-color: transparent
+    &.flat
+        color: $primary
+        border: none
+        background-color: transparent
     &:hover
-        box-shadow: 0 0 20px rgba(255, 68, 0, 0.5)
+        box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
         transform: translateY(-5px)
         transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $primary
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(255, 144, 0, 0.2)
+            transition: .3s ease-in-out
+
+.success_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $success
+    background-color: $success
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $success
+        background-color: transparent
+    &.flat
+        color: $success
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(0, 160, 20, 0.5)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $success
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(0, 160, 20, 0.2)
+            transition: .3s ease-in-out
+
+.cancel_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $red
+    background-color: $red
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $red
+        background-color: transparent
+    &.flat
+        color: $red
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(234, 84, 85, 0.5)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $red
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(234, 84, 85, 0.2)
+            transition: .3s ease-in-out
+
+.warning_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $warning
+    background-color: $warning
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $warning
+        background-color: transparent
+    &.flat
+        color: $warning
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(255, 200, 0, 0.2)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $warning
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(255, 200, 0, 0.2)
+            transition: .3s ease-in-out
+
+.info_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $blue
+    background-color: $blue
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $blue
+        background-color: transparent
+    &.flat
+        color: $blue
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(67, 142, 255, 0.2)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $blue
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(67, 142, 255, 0.2)
+            transition: .3s ease-in-out
+
+.dark_button
+    display: inline-block
+    brandon_medium(14px, true)
+    color: $white
+    padding: 10px 15px
+    border: 1px solid $gray
+    background-color: $gray
+    border-radius: 10px
+    box-shadow: 0 0 20px transparent
+    transform: translateY(0)
+    transition: .3s ease-in-out
+    &.rounded
+        border-radius: 50px
+    &.rectangle
+        border-radius: 0px
+    &.outline
+        color: $gray
+        background-color: transparent
+    &.flat
+        color: $gray
+        border: none
+        background-color: transparent
+    &:hover
+        box-shadow: 0 0 20px rgba(122, 122, 122, 0.2)
+        transform: translateY(-5px)
+        transition: .3s ease-in-out
+        &.outline
+            color: $white
+            background-color: $gray
+            transition: .3s ease-in-out
+        &.flat
+            box-shadow: none
+            background-color: rgba(122, 122, 122, 0.2)
+            transition: .3s ease-in-out
 
 /**
  * Form */
@@ -704,6 +885,11 @@ span
         .group
             padding: 10px
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
+        .group_inline
+            display: flex
+            flex-flow: row wrap
+            align-items: center
+            justify-content: flex-start
 
 /**
  * Loader */

@@ -25,8 +25,8 @@
                             <div class="call_to_action pointer">Forgot Password?</div>
                         </div>
                         <div class="buttons">
-                            <div class="action_outline_button pointer">Back To Home</div>
-                            <button type="submit" class="action_button pointer">Login</button>
+                            <div class="primary_button outline pointer">Back To Home</div>
+                            <button type="submit" class="primary_button pointer">Login</button>
                         </div>
                     </form>
                 </div>

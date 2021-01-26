@@ -56,7 +56,7 @@
         data () {
             return {
                 loaded: false,
-                demo_separators: ['>', '-', '|', '◦', '▪'],
+                demo_separators: ['-', '|', '◦', '▪', '▹'],
                 demo_alignments: ['left', 'center', 'right']
             }
         },
