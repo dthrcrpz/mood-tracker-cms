@@ -110,6 +110,11 @@ span
 .pointer
     cursor: pointer
 
+.mb
+    margin-bottom: 30px
+    &.twenty
+        margin-bottom: 20px
+
 /**
  * Root */
 .__db
@@ -162,8 +167,12 @@ span
         padding: 0 20px
         .title
             brandon_bold(18px, true)
-            color: $primary
+            color: $dark_primary
             letter-spacing: 0.25px
+            padding-right: 10px
+        #breadcrumb
+            padding-left: 10px
+            border-left: 1px solid #E2E2E2
     .header_select
         position: relative
         border-left: 1px solid #E2E2E2
@@ -288,6 +297,44 @@ span
     .label
         color: $white
         brandon_regular(14px, false)
+
+/**
+ * Breadcrumb */
+#breadcrumb
+    &.left
+        .list
+            justify-content: flex-start
+    &.right
+        .list
+            justify-content: flex-end
+    &.center
+        .list
+            justify-content: center
+    .list
+        list-style: none
+        padding: 0
+        margin: 0
+        display: flex
+        flex-flow: row wrap
+        align-items: center
+        justify-content: flex-start
+        .item
+            display: flex
+            flex-flow: row wrap
+            align-items: center
+            .link
+                color: $black
+                brandon_regular(14px, true)
+                &.nuxt-link-active
+                    color: $primary
+                &.nuxt-link-exact-active
+                    color: $black
+                svg
+                    display: block
+            .separator
+                color: $gray_v3
+                padding: 0 5px
+                brandon_regular(24px, false)
 
 /**
  * Button */
@@ -587,6 +634,33 @@ span
                             display: inline-block
                             padding-left: 5px
                             color: $white
+
+/**
+ * Layout */
+.box
+    padding: 20px
+    border-radius: 5px
+    background-color: $white
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
+    .top_box
+        padding-bottom: 20px
+        h2
+            brandon_medium(16px, true)
+            color: $gray
+        .description
+            padding-top: 5px
+            *
+                brandon_regular(16px, false)
+                color: $black
+            b
+                brandon_bold(16px, false)
+                color: $dark_primary
+                background-color: rgba(255, 68, 0, 0.25)
+                padding: 0 5px 2.5px
+    .bottom_box
+        .group
+            padding: 10px
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
 
 /**
  * Loader */

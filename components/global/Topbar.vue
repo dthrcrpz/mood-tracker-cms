@@ -4,6 +4,7 @@
             <div class="title">
                 {{ title }}
             </div>
+            <breadcrumb />
         </div>
         <div :class="`header_select ${(isToggled) ? 'active' : ''}`" v-click-outside="closeMe">
             <div class="header_user" @click="showSelect()">
@@ -38,8 +39,12 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import Breadcrumb from '~/components/global/Breadcrumb'
 
     export default {
+        components: {
+            Breadcrumb
+        },
         data () {
             return {
                 isToggled: false
