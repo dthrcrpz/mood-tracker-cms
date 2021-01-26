@@ -392,6 +392,39 @@ span
             brandon_medium(16px, false)
 
 /**
+ * Collapse */
+#collapse
+    .collapse_item
+        &.toggled
+            .item_bottom
+                .description
+                    opacity: 1
+                    visibility: visible
+                    transition: .3s ease-in-out
+        .item_top
+            position: relative
+            padding: 10px
+            border-bottom: 1px solid $gray_v3
+            h2
+                brandon_medium(18px, false)
+                color: $gray
+            &::before
+                content: ''
+                position: absolute
+                top: 50%
+                right: 10px
+                border-left: 7px solid transparent
+                border-right: 7px solid transparent
+                border-top: 7px solid $primary
+                transform: translateY(-50%)
+        .item_bottom
+            .description
+                height: 0px
+                opacity: 0
+                visibility: hidden
+                transition: .3s ease-in-out
+
+/**
  * Buttons */
 .primary_button
     display: inline-block
@@ -932,7 +965,6 @@ span
             flex-flow: row wrap
             align-items: center
             justify-content: flex-start
-
 .box_inline
     display: flex
     flex-flow: row wrap
