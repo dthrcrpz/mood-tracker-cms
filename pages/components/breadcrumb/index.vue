@@ -5,7 +5,7 @@
             <div class="top_box">
                 <h2>Default</h2>
                 <div class="description">
-                    <p>Default <b>:separator="/"</b>and <b>:alignment="left"</b></p>
+                    <p>Property <b>:separator="/"</b> and <b>:alignment="left"</b></p>
                 </div>
             </div>
             <div class="bottom_box">
@@ -77,7 +77,7 @@
             me.initialization()
         },
         asyncData ({ store }) {
-            me.$store.commit('global/settings/populateTitle', { title: 'Breadcrumb' })
+            store.commit('global/settings/populateTitle', { title: 'Breadcrumb' })
             store.commit('global/loader/checkLoader', { status: true })
         },
         beforeMount () {

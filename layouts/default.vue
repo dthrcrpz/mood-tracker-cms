@@ -1,16 +1,22 @@
 <template>
     <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
+
         <div class="swallower" v-if="authenticated"></div>
+
         <transition name="fade">
             <sidebar v-if="authenticated" />
         </transition>
+
         <transition name="fade">
             <topbar v-if="authenticated" />
         </transition>
+
         <Nuxt />
+
         <transition name="fade">
             <bottombar v-if="authenticated" />
         </transition>
+
         <transition name="fade">
             <loader v-if="has_loaded" />
         </transition>
@@ -22,6 +28,7 @@
     import Topbar from '~/components/global/Topbar'
     import Sidebar from '~/components/global/Sidebar'
     import Bottombar from '~/components/global/Bottombar'
+    import Alert from '~/components/global/Alert'
     import Loader from '~/components/global/Loader'
 
     export default {
@@ -53,8 +60,8 @@
         },
         computed: {
             ...mapGetters ({
-                has_loaded: 'global/loader/loading',
-                has_toggled: 'global/sidebar/toggled'
+                has_loaded: 'global/loader/hasLoaded',
+                has_toggled: 'global/sidebar/hasToggled'
             })
         },
         methods: {

@@ -1,5 +1,5 @@
 export default {
-    loading (state) {
+    hasLoaded (state) {
         return state.loading
     }
 }

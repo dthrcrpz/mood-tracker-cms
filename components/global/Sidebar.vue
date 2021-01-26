@@ -50,13 +50,14 @@
         computed: {
             ...mapGetters ({
                 links: 'global/sidebar/getLinks',
-                has_toggled: 'global/sidebar/toggled'
+                has_toggled: 'global/sidebar/hasToggled'
             })
         },
         methods: {
             navigate (data, event) {
                 const me = this,
                     target = event.target
+
                 if (data.subs) {
                     if (!target.parentNode.classList.contains('toggled')) {
                         target.nextElementSibling.style.height = `${target.nextElementSibling.scrollHeight}px`

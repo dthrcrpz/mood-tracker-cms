@@ -3,12 +3,14 @@
 $primary = #FF9000
 $dark_primary = #FF4400
 $black = #111
-$white = #fff
-$blue = #438eff
-$red = #ea5455
+$white = #FFF
+$blue = #438EFF
+$red = #EA5455
 $gray = #7A7A7A
 $gray_v2 = #F6F6F6
-$gray_v3 = #c3c3c3
+$gray_v3 = #C3C3C3
+$success = #00A014
+$warning = #ff9f43
 
 html
     -webkit-text-size-adjust: none
@@ -112,8 +114,10 @@ span
 
 .mb
     margin-bottom: 30px
+    transition: .3s ease-in-out
     &.twenty
         margin-bottom: 20px
+        transition: .3s ease-in-out
 
 /**
  * Root */
@@ -122,8 +126,8 @@ span
     .swallower
         position: sticky
         top: 0
-        z-index: 0
-        height: 80px
+        z-index: 1
+        height: 85px
         width: 100%
         pointer-events: none
         background: -webkit-gradient(linear,left top,left bottom,color-stop(41%,#fff),color-stop(95%,hsla(0,0%,100%,.11)),to(hsla(0,0%,100%,0)))
@@ -335,6 +339,45 @@ span
                 color: $gray_v3
                 padding: 0 5px
                 brandon_regular(24px, false)
+
+/**
+ * Alert */
+#alert
+    &.primary
+        background-color: rgba(255, 68, 0, 0.2)
+        .wrapper
+            p
+                color: $dark_primary
+    &.success
+        background-color: rgba(0, 160, 20, 0.2)
+        .wrapper
+            p
+                color: $success
+    &.error
+        background-color: rgba(234, 84, 85, 0.2)
+        .wrapper
+            p
+                color: $red
+    &.warning
+        background-color: rgba(255, 159, 67, 0.2)
+        .wrapper
+            p
+                color: $warning
+    &.info
+        background-color: rgba(67, 142, 255, 0.2)
+        .wrapper
+            p
+                color: $blue
+    &.dark
+        background-color: rgba(122, 122, 122, 0.2)
+        .wrapper
+            p
+                color: $gray
+    .wrapper
+        padding: 10px
+        border-radius: 5px
+        p
+            brandon_medium(16px, false)
 
 /**
  * Button */
@@ -648,7 +691,7 @@ span
             brandon_medium(16px, true)
             color: $gray
         .description
-            padding-top: 5px
+            padding-top: 10px
             *
                 brandon_regular(16px, false)
                 color: $black

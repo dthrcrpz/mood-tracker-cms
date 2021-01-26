@@ -2,7 +2,7 @@ export default {
     getLinks (state) {
         return state.links
     },
-    toggled (state) {
+    hasToggled (state) {
         return state.toggled
     }
 }
