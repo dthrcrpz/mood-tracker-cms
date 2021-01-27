@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="collapse">
+    <div id="collapse" :class="type">
         <collapse-item :item="item" v-for="(item, key) in populateItems" :key="key" />
     </div>
 </template>
@@ -23,6 +23,14 @@
                         }
                     ]
                 }
+            },
+            type: {
+                type: String,
+                default: 'collapse'
+            },
+            collapse: {
+                type: Boolean,
+                default: true
             }
         },
         computed: {
@@ -30,7 +38,7 @@
                 const me = this,
                     results = []
 
-                me.items.forEach((item, ket) => {
+                me.items.forEach((item, key) => {
                     results.push(item)
                 })
 
@@ -41,10 +49,16 @@
             checkItems (data) {
                 const me = this
                 me.items.forEach((item, key) => {
-                    if (data.id != item.id) {
-                        let target = document.getElementById(`item_${item.id}`)
-                        item.open = false
-                        target.querySelector('.description').style.height = '0px'
+                    let target = document.getElementById(`item_${item.id}`)
+                    if (!me.collapse) {
+                        if (data.id != item.id) {
+                            item.open = false
+                            target.querySelector('.description').style.height = '0px'
+                        }
+                    } else {
+                        if (item.open) {
+                            target.querySelector('.description').style.height = `${target.querySelector('.description').scrollHeight}px`
+                        }
                     }
                 })
             }

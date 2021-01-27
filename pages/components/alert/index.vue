@@ -18,6 +18,7 @@
                 <h2>Types</h2>
                 <div class="description">
                     <p>These alerts are only for demo purposes. You can change alert type and message by adding <b>:type</b> property and <b>:description</b> in the alert component.</p>
+                    <p><b>:type</b>: <i>primary, secondary, success, error, warning, info, dark</i></p>
                 </div>
             </div>
             <div class="bottom_box">

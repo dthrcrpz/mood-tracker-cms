@@ -29,11 +29,13 @@
                     target = document.getElementById(`item_${item.id}`)
 
                 item.open ^= true
+
                 if (item.open) {
                     target.querySelector('.description').style.height = `${target.querySelector('.description').scrollHeight}px`
                 } else {
                     target.querySelector('.description').style.height = '0px'
                 }
+
                 me.$parent.checkItems(item)
             }
         }
