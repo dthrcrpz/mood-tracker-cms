@@ -1078,12 +1078,132 @@ span
                         top: 56px
                         left: 12px
 
+#dialog
+    position: absolute
+    left: 0
+    z-index: 1024
+    &.centered
+        .wrapper
+            .content
+                top: 50%
+                transform: translateY(-50%)
+                animation: centered_slide 1s
+    .wrapper
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 1050
+        width: 100%
+        height: 100%
+        outline: 0
+        overflow-x: hidden
+        overflow-y: auto
+        .content
+            position: relative
+            z-index: 1041
+            width: auto
+            max-width: 600px
+            border-radius: 5px
+            margin: 0 auto
+            background-color: $white
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3)
+            transform: translateY(50px)
+            animation: basic_slide 1s
+            &.secondary
+                .close
+                    background-color: $dark_primary
+                .content_top
+                    color: $dark_primary
+            &.success
+                .close
+                    background-color: $success
+                .content_top
+                    color: $success
+            &.cancel
+                .close
+                    background-color: $red
+                .content_top
+                    color: $red
+            &.warning
+                .close
+                    background-color: $warning
+                .content_top
+                    color: $warning
+            &.info
+                .close
+                    background-color: $blue
+                .content_top
+                    color: $blue
+            &.dark
+                .close
+                    background-color: $gray
+                .content_top
+                    color: $gray
+            .close
+                position: absolute
+                top: -3px
+                right: -3px
+                display: inline-block
+                padding: 0 10px
+                border-radius: 5px
+                brandon_regular(20px, false)
+                background-color: $primary
+                color: $white
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+                z-index: 2
+                transition: .3s ease-in-out
+                &:hover
+                    top: -6px
+                    right: -6px
+                    transition: .3s ease-in-out
+            .content_top
+                border-radius: 5px 5px 0 0
+                background-color: rgba(0, 0, 0, 0.05)
+                padding: 10px 20px
+                brandon_medium(20px, false)
+                color: $primary
+            .content_middle
+                padding: 10px 20px
+                brandon_light(16px, false)
+                color: $black
+            .content_bottom
+                border-top: 2px solid rgba(0, 0, 0, 0.05)
+                text-align: right
+                padding: 10px 20px
+    .backdrop
+        position: fixed
+        top: 0
+        z-index: 1040
+        width: 100vw
+        height: 100vh
+        background-color: rgba(0, 0, 0, 0.2)
+
 @keyframes rotate
     0% {
         transform: rotate(0deg)
     }
     100% {
         transform: rotate(360deg)
+    }
+
+@keyframes basic_slide
+	from {
+		opacity: 0
+        transform: translateY(0)
+    }
+	to {
+		opacity: 1
+        transform: translateY(50px)
+    }
+
+@keyframes centered_slide
+	from {
+		opacity: 0
+        transform: translateY(-100%)
+    }
+	to {
+		opacity: 1
+        transform: translateY(-50%)
     }
 
 .page-enter-active,
