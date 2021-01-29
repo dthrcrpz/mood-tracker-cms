@@ -152,6 +152,19 @@ span
         padding: 60px 30px
         margin-left: 260px
         transition: .3s ease-in-out
+        &.error
+            .wrapper
+                display: flex
+                flex-flow: column wrap
+                align-items: center
+                justify-content: center
+                height: calc(100vh - 205px)
+                .title
+                    margin-top: 10px
+                    brandon_bold(30px, true)
+                .subtitle
+                    margin: 10px 0 20px
+                    brandon_regular(18px, false)
 
 /**
  * Header */

@@ -20,6 +20,11 @@
         <transition name="fade">
             <loader v-if="has_loaded" />
         </transition>
+
+        <!-- <div class="toast_wrapper">
+            <toast />
+        </div> -->
+
     </div>
 </template>
 
