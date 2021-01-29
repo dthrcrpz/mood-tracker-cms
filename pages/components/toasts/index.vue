@@ -22,7 +22,7 @@
             </div>
             <div class="bottom_box">
                 <div class="group_inline">
-                    <div :class="[ data.class, 'ml ten pointer' ]" @click="addToast({ type: data.type, message: data.message })" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    <div :class="[ data.class, 'ml ten outline pointer' ]" @click="addToast({ type: data.type, message: data.message })" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                 </div>
             </div>
         </div>

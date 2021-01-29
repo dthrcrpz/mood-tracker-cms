@@ -6,14 +6,26 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box">
-                <div id="switch" :class="[ (form.default) ? 'toggled' : '' ]">
-                    <label for="switch" @click="toggle('default')"></label>
-                    <input
+                <div class="group_inline">
+                    <div id="switch" :class="[ 'ml ten', (form.default) ? 'toggled' : '' ]">
+                        <label for="switch" @click="toggle('default')"></label>
+                        <input
                         type="checkbox"
                         name="switch"
                         id="switch"
                         :checked="form.default"
-                    />
+                        />
+                        <span>Active</span>
+                    </div>
+                    <div id="switch" class="disabled">
+                        <label for="switch"></label>
+                        <input
+                        type="checkbox"
+                        name="switch"
+                        id="switch"
+                        />
+                        <span>Disabled</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,10 +44,11 @@
                         <label :for="`switch_${key}`"></label>
                         <input
                         type="checkbox"
-                        :name="'`switch_${key}`'"
+                        :name="`switch_${key}`"
                         :id="`switch_${key}`"
                         checked="true"
                         />
+                        <span>{{ data }}</span>
                     </div>
                 </div>
             </div>
