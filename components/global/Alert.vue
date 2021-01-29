@@ -1,7 +1,7 @@
 <template lang="html">
     <div id="alert" :class="type" v-if="!remove">
         <div class="wrapper">
-            <p>{{ description }}</p>
+            <p>{{ message }}</p>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@
                 type: String,
                 default: 'primary'
             },
-            description: {
+            message: {
                 type: String,
                 default: 'The quick brown fox jumps over the lazy dog.'
             },

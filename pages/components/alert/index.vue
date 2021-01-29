@@ -17,12 +17,12 @@
             <div class="top_box">
                 <h2>Types</h2>
                 <div class="description">
-                    <p>These alerts are only for demo purposes. You can change alert type and message by adding <b>:type</b> property and <b>:description</b> in the alert component.</p>
+                    <p>These alerts are only for demo purposes. You can change alert type and message by adding <b>:type</b> property and <b>:message</b> in the alert component.</p>
                     <p><b>:type</b>: <i>primary, secondary, success, error, warning, info, dark</i></p>
                 </div>
             </div>
             <div class="bottom_box">
-                <alert :type="demo_alert.type" :description="demo_alert.description" :class="(key + 1 != demo_alerts.length) ? 'mb twenty' : ''" v-for="(demo_alert, key) in demo_alerts" :key="key" />
+                <alert :type="demo_alert.type" :message="demo_alert.message" :class="(key + 1 != demo_alerts.length) ? 'mb twenty' : ''" v-for="(demo_alert, key) in demo_alerts" :key="key" />
             </div>
         </div>
 
@@ -58,27 +58,27 @@
                 demo_alerts: [
                     {
                         type: 'secondary',
-                        description: 'This is a secondary alert!'
+                        message: 'This is a secondary alert!'
                     },
                     {
                         type: 'success',
-                        description: 'This is a success alert!'
+                        message: 'This is a success alert!'
                     },
                     {
                         type: 'error',
-                        description: 'This is a error alert!'
+                        message: 'This is a error alert!'
                     },
                     {
                         type: 'warning',
-                        description: 'This is a warning alert!'
+                        message: 'This is a warning alert!'
                     },
                     {
                         type: 'info',
-                        description: 'This is a info alert!'
+                        message: 'This is a info alert!'
                     },
                     {
                         type: 'dark',
-                        description: 'This is a dark alert!'
+                        message: 'This is a dark alert!'
                     }
                 ]
             }

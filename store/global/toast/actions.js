@@ -9,13 +9,13 @@ export default {
         commit('addCtr', {})
 
         list.innerHTML = `
-            <div class="wrapper ${payload.type}">
-                <p>${payload.id}</p>
+            <div class="wrapper">
+                <p>${payload.message}</p>
             </div>
             <div class="close pointer">×</div>
         `
         list.setAttribute('id', 'toast')
-        list.setAttribute('class', `toast_${payload.id}`)
+        list.setAttribute('class', `toast_${payload.id} ${payload.type}`)
 
         parent.prepend(list)
 
@@ -30,7 +30,7 @@ export default {
         if (document.querySelector(`.toast_${payload.id}`)) {
             setTimeout( () => {
                 commit('removeToast', payload)
-            }, 5000)
+            }, 7500)
         }
     }
 }

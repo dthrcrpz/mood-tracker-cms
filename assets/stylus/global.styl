@@ -410,7 +410,7 @@ span
     position: fixed
     top: 0
     right: 0
-    width: 350px
+    width: 400px
     height: 100vh
     z-index: 4
     background-color: transparent
@@ -453,18 +453,55 @@ span
                 right: -6px
                 transition: .3s ease-in-out
         .wrapper
-            background-color: rgba(255, 144, 0, 0.2)
+            background-color: $white
             border-left: 5px solid $primary
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.2)
             padding: 20px
             p
                 color: $primary
-                brandon_medium(16px, false)
-            &.secondary
-                background-color: rgba(255, 68, 0, 0.2)
+                brandon_medium(18px, false)
+        &.secondary
+            .close
+                background-color: $dark_primary
+            .wrapper
                 border-left: 5px solid $dark_primary
                 p
                     color: $dark_primary
+        &.success
+            .close
+                background-color: $success
+            .wrapper
+                border-left: 5px solid $success
+                p
+                    color: $success
+        &.cancel
+            .close
+                background-color: $red
+            .wrapper
+                border-left: 5px solid $red
+                p
+                    color: $red
+        &.warning
+            .close
+                background-color: $warning
+            .wrapper
+                border-left: 5px solid $warning
+                p
+                    color: $warning
+        &.info
+            .close
+                background-color: $blue
+            .wrapper
+                border-left: 5px solid $blue
+                p
+                    color: $blue
+        &.dark
+            .close
+                background-color: $gray
+            .wrapper
+                border-left: 5px solid $gray
+                p
+                    color: $gray
         &.last-child
             margin-bottom: 0
 
