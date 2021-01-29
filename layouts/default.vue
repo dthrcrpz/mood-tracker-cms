@@ -21,9 +21,7 @@
             <loader v-if="has_loaded" />
         </transition>
 
-        <!-- <div class="toast_wrapper">
-            <toast />
-        </div> -->
+        <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none' ]"></ul>
 
     </div>
 </template>
@@ -33,7 +31,6 @@
     import Topbar from '~/components/global/Topbar'
     import Sidebar from '~/components/global/Sidebar'
     import Bottombar from '~/components/global/Bottombar'
-    import Alert from '~/components/global/Alert'
     import Loader from '~/components/global/Loader'
 
     export default {
@@ -60,13 +57,13 @@
                 if (!me.routes.includes(me.$route.path)) {
                     me.validateToken()
                 }
-                // me.autoPadding()
             }
         },
         computed: {
             ...mapGetters ({
                 has_loaded: 'global/loader/hasLoaded',
-                has_toggled: 'global/sidebar/hasToggled'
+                has_toggled: 'global/sidebar/hasToggled',
+                toasts: 'global/toast/getToasts'
             })
         },
         methods: {
@@ -89,21 +86,12 @@
                     window.location.assign('/')
                 }
             }
-            // autoPadding () {
-            //     const me = this
-            //     let target_height = document.querySelector('.__n'), result = 0
-            //     if (target_height) {
-            //         result = `${target_height.offsetHeight - 1}px`
-            //     }
-            //     me.padding = result
-            // }
         },
         mounted () {
             const me = this
             if (!me.routes.includes(me.$route.path)) {
                 me.validateToken()
             }
-            // me.autoPadding()
         },
         beforeMount () {
             window.addEventListener('scroll', this.windowScroll)

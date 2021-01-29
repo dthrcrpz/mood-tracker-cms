@@ -1,11 +1,27 @@
 <template lang="html">
     <div id="dashboard">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Default</h2>
+            </div>
+            <div class="bottom_box">
+                <div class="group_inline">
+                    <div class="primary_button pointer" @click="addToast({ type: 'primary', message: 'Sample Text' })">Toast</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
+
     export default {
+        methods: {
+            ...mapActions('global/toast', {
+                addToast: 'addToast'
+            })
+        },
         mounted () {
             const me = this
             me.$store.commit('global/settings/populateTitle', { title: 'Toasts' })

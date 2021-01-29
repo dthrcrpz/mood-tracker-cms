@@ -7,7 +7,7 @@
                 </div>
                 <h1 class="title">Error 404</h1>
                 <h2 class="subtitle">The page you are trying to visit does not exist.</h2>
-                <nuxt-link to="/" class="primary_button">Back to Dashboard</nuxt-link>
+                <nuxt-link to="/dashboard" class="primary_button">Back to Dashboard</nuxt-link>
             </div>
             <div class="wrapper" v-else-if="error.statusCode == 403">
                 <div class="icon">
@@ -15,7 +15,7 @@
                 </div>
                 <h1 class="title">Error 403</h1>
                 <h2 class="subtitle">You don't have access to this page.</h2>
-                <nuxt-link to="/" class="primary_button">Back to Dashboard</nuxt-link>
+                <nuxt-link to="/dashboard" class="primary_button">Back to Dashboard</nuxt-link>
             </div>
             <div class="wrapper" v-else-if="error.statusCode == 401">
                 <div class="icon">
@@ -23,14 +23,15 @@
                 </div>
                 <h1 class="title">Error 401</h1>
                 <h2 class="subtitle">Oops! Looks like your token has been expired!</h2>
-                <nuxt-link to="/login" class="primary_button">Re-Login</nuxt-link>
+                <nuxt-link to="/" class="primary_button">Re-Login</nuxt-link>
             </div>
             <div class="wrapper" v-else>
                 <div class="icon">
                     <img src="/logo.png" />
                 </div>
-                <h1 class="title">Oops, Something Went Wrong!</h1>
-                <nuxt-link to="/" class="primary_button">Back to Dashboard</nuxt-link>
+                <h1 class="title">Oops</h1>
+                <h2 class="subtitle">Something Went Wrong!</h2>
+                <nuxt-link to="/dashboard" class="primary_button">Back to Dashboard</nuxt-link>
             </div>
         </div>
     </transition>
@@ -70,6 +71,7 @@
         },
         mounted () {
             const me = this
+            console.log();
             me.initialization()
         }
 	}

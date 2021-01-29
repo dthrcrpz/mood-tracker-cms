@@ -161,7 +161,7 @@ span
                 height: calc(100vh - 205px)
                 .title
                     margin-top: 10px
-                    brandon_bold(30px, true)
+                    brandon_bold(26px, true)
                 .subtitle
                     margin: 10px 0 20px
                     brandon_regular(18px, false)
@@ -403,6 +403,70 @@ span
         border-radius: 5px
         p
             brandon_medium(16px, false)
+
+/**
+ * Toast */
+#toast_wrapper
+    position: fixed
+    top: 0
+    right: 0
+    width: 350px
+    height: 100vh
+    z-index: 4
+    background-color: transparent
+    padding: 20px
+    list-style: none
+    overflow-y: auto
+    overflow-x: hidden
+    &::-webkit-scrollbar-track
+    	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1)
+    	background-color: $gray_v2
+    	border-radius: 10px
+    &::-webkit-scrollbar
+    	width: 5px
+    	height: 10px
+    	background-color: $gray_v2
+    &::-webkit-scrollbar-thumb
+    	border-radius: 10px
+    	background-color: $primary
+    #toast
+        position: relative
+        right: 0
+        margin-bottom: 20px
+        transform: translateX(0px)
+        animation: right_slide 1s
+        .close
+            position: absolute
+            top: -3px
+            right: -3px
+            display: inline-block
+            padding: 0 10px
+            border-radius: 5px
+            brandon_regular(20px, false)
+            background-color: $primary
+            color: $white
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+            z-index: 2
+            transition: .3s ease-in-out
+            &:hover
+                top: -6px
+                right: -6px
+                transition: .3s ease-in-out
+        .wrapper
+            background-color: rgba(255, 144, 0, 0.2)
+            border-left: 5px solid $primary
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2)
+            padding: 20px
+            p
+                color: $primary
+                brandon_medium(16px, false)
+            &.secondary
+                background-color: rgba(255, 68, 0, 0.2)
+                border-left: 5px solid $dark_primary
+                p
+                    color: $dark_primary
+        &.last-child
+            margin-bottom: 0
 
 /**
  * Collapse */
@@ -1219,6 +1283,16 @@ span
         transform: translateY(-50%)
     }
 
+@keyframes right_slide
+    from {
+        opacity: 0
+        transform: translateX(100px)
+    }
+    to {
+        opacity: 1
+        transform: translateX(0)
+    }
+
 .page-enter-active,
 .page-leave-active
     transition: all .3s ease-in-out
@@ -1235,3 +1309,12 @@ span
 .fade-enter,
 .fade-leave-to
     opacity: 0
+
+.right_slide-enter-active,
+.right_slide-leave-active
+    transition: all .3s ease-in-out
+
+.right_slide-enter,
+.right_slide-leave-to
+    opacity: 0
+    transform: translateX(100px)
