@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import Collapse from '~/components/global/collapse/Collapse'
+    import Collapse from '~/components/collapse/Collapse'
 
     export default {
         components: {

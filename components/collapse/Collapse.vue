@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import CollapseItem from '~/components/global/collapse/CollapseItem'
+    import CollapseItem from '~/components/collapse/CollapseItem'
 
     export default {
         components: {

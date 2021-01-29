@@ -21,7 +21,7 @@
             <loader v-if="has_loaded" />
         </transition>
 
-        <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none', alignment ]"></ul>
+        <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none' ]"></ul>
 
     </div>
 </template>
@@ -63,8 +63,7 @@
             ...mapGetters ({
                 has_loaded: 'global/loader/hasLoaded',
                 has_toggled: 'global/sidebar/hasToggled',
-                toasts: 'global/toast/getToasts',
-                alignment: 'global/toast/getAlignment'
+                toasts: 'global/toast/getToasts'
             })
         },
         methods: {
