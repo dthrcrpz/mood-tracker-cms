@@ -923,6 +923,37 @@ span
                 .input
                     border-bottom: 2px solid $primary
                     transition: .3s ease-in-out
+        &.bordered
+            label
+                brandon_medium(12px, true)
+                color: $primary
+                transition: .3s ease-in-out
+            .input
+                position: relative
+                z-index: 1
+                width: 100%
+                background-color: transparent
+                border: none
+                padding: 10px
+                border: 2px solid $black
+                outline: none
+                box-shadow: none
+                brandon_regular(16px, false)
+                color: $gray
+                transition: .3s ease-in-out
+                &:focus
+                    border: 2px solid $primary
+                    transition: .3s ease-in-out
+            &.filled
+                label
+                    brandon_medium(12px, true)
+                    color: $primary
+                    top: 0
+                    opacity: 1
+                    transition: .3s ease-in-out
+                .input
+                    border: 2px solid $primary
+                    transition: .3s ease-in-out
     .buttons
         padding-top: 20px
         display: flex
