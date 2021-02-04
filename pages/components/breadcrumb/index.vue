@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group">
+                <div class="box_group">
                     <breadcrumb />
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div :class="[ 'group', (key + 1 != demo_separators.length) ? 'mb twenty' : '' ]" v-for="(demo_separator, key) in demo_separators" :key="key">
+                <div :class="[ 'box_group', (key + 1 != demo_separators.length) ? 'mb twenty' : '' ]" v-for="(demo_separator, key) in demo_separators" :key="key">
                     <breadcrumb :separator="demo_separator" />
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div :class="[ 'group', (key + 1 != demo_alignments.length) ? 'mb twenty' : '' ]" v-for="(demo_alignment, key) in demo_alignments" :key="key">
+                <div :class="[ 'box_group', (key + 1 != demo_alignments.length) ? 'mb twenty' : '' ]" v-for="(demo_alignment, key) in demo_alignments" :key="key">
                     <breadcrumb :alignment="demo_alignment" />
                 </div>
             </div>

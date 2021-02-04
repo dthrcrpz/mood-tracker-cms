@@ -6,7 +6,7 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div class="primary_button pointer" @click="toggle('basic')">Basic</div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div class="primary_button pointer" @click="toggle('centered')">Centered</div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div class="primary_button pointer" @click="toggle('confirmation')">Confirm</div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div :class="[ data.class, 'ml ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key" @click="toggleType(data)">{{ data.name }}</div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div class="primary_button pointer" @click="addToast({ type: 'primary', message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' })">Toast</div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div class="group_inline">
+                <div class="box_group_inline">
                     <div :class="[ data.class, 'ml ten outline pointer' ]" @click="addToast({ type: data.type, message: data.message })" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                 </div>
             </div>
