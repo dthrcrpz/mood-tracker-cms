@@ -6,9 +6,25 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box action">
-                <div class="group">
-                    <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email">
-                    <label for="email">Email Address</label>
+                <div class="group floating">
+                    <input type="text" :class="[ 'input', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
+                    <label for="sample">Input</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Types</h2>
+            </div>
+            <div class="bottom_box action">
+                <div :class="[ 'group fixed', (form.sample_v2.length > 0) ? 'filled' : '' ]">
+                    <label for="sample_v2">Input</label>
+                    <input type="text" class="input" name="sample_v2" autocomplete="off" v-model="form.sample_v2">
+                </div>
+                <div :class="[ 'group bordered', (form.sample_v3.length > 0) ? 'filled' : '' ]">
+                    <label for="sample_v3">Input</label>
+                    <input type="text" class="input" name="sample_v3" autocomplete="off" v-model="form.sample_v3">
                 </div>
             </div>
         </div>
@@ -22,7 +38,9 @@
             return {
                 loaded: false,
                 form: {
-                    email: ''
+                    sample: '',
+                    sample_v2: '',
+                    sample_v3: ''
                 }
             }
         },

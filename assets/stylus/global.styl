@@ -858,38 +858,70 @@ span
     .group
         position: relative
         margin-bottom: 20px
-        label
-            position: absolute
-            top: 50%
-            left: 0
-            brandon_medium(16px, true)
-            color: $gray
-            z-index: 0
-            opacity: 0.5
-            transform: translateY(-50%)
-            transition: .3s ease-in-out
-        .input
-            position: relative
-            z-index: 1
-            width: 100%
-            background-color: transparent
-            border: none
-            padding: 10px
-            border-bottom: 2px solid $black
-            outline: none
-            box-shadow: none
-            brandon_regular(16px, false)
-            color: $gray
-            transition: .3s ease-in-out
-            &.filled,
-            &:focus
-                border-bottom: 2px solid $primary
+        &.floating
+            label
+                position: absolute
+                top: 50%
+                left: 0
+                brandon_medium(16px, true)
+                color: $gray
+                z-index: 0
+                opacity: 0.5
+                transform: translateY(-50%)
                 transition: .3s ease-in-out
-                & ~ label
+            .input
+                position: relative
+                z-index: 1
+                width: 100%
+                background-color: transparent
+                border: none
+                padding: 10px
+                border-bottom: 2px solid $black
+                outline: none
+                box-shadow: none
+                brandon_regular(16px, false)
+                color: $gray
+                transition: .3s ease-in-out
+                &.filled,
+                &:focus
+                    border-bottom: 2px solid $primary
+                    transition: .3s ease-in-out
+                    & ~ label
+                        brandon_medium(12px, true)
+                        color: $primary
+                        top: 0
+                        opacity: 1
+                        transition: .3s ease-in-out
+        &.fixed
+            label
+                brandon_medium(12px, true)
+                color: $primary
+                transition: .3s ease-in-out
+            .input
+                position: relative
+                z-index: 1
+                width: 100%
+                background-color: transparent
+                border: none
+                padding: 10px
+                border-bottom: 2px solid $black
+                outline: none
+                box-shadow: none
+                brandon_regular(16px, false)
+                color: $gray
+                transition: .3s ease-in-out
+                &:focus
+                    border-bottom: 2px solid $primary
+                    transition: .3s ease-in-out
+            &.filled
+                label
                     brandon_medium(12px, true)
                     color: $primary
                     top: 0
                     opacity: 1
+                    transition: .3s ease-in-out
+                .input
+                    border-bottom: 2px solid $primary
                     transition: .3s ease-in-out
     .buttons
         padding-top: 20px
