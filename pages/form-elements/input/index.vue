@@ -11,8 +11,8 @@
                     <label for="sample">Input</label>
                 </div>
                 <div class="group pt floating">
-                    <input type="text" :class="[ 'input disabled', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
-                    <label for="sample">Input</label>
+                    <input type="text" :class="[ 'input disabled', (form.sample_v5.length > 0) ? 'filled' : '' ]" name="sample_v5" autocomplete="off" v-model="form.sample_v5">
+                    <label for="sample_v5">Disabled</label>
                 </div>
             </div>
         </div>
@@ -49,7 +49,8 @@
                     sample: '',
                     sample_v2: '',
                     sample_v3: '',
-                    sample_v4: ''
+                    sample_v4: '',
+                    sample_v5: ''
                 }
             }
         },

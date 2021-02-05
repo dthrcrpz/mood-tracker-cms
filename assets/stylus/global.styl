@@ -860,6 +860,22 @@ span
         margin-bottom: 20px
         &.pt
             padding-top: 20px
+        &.select
+            .dd
+                content: ''
+                position: absolute
+                top: 50%
+                right: 10px
+                border-left: 7px solid transparent
+                border-right: 7px solid transparent
+                border-top: 7px solid $primary
+                z-index: 1
+                transform: translateY(-50%)
+            &.fixed,
+            &.bordered,
+            &.radius
+                .dd
+                    transform: translateY(calc(-50% + 9px))
         .input
             position: relative
             z-index: 1
@@ -872,7 +888,12 @@ span
             box-shadow: none
             brandon_regular(16px, false)
             color: $black
+            appearance: none
             transition: .3s ease-in-out
+            &.disabled
+                pointer-events: none
+                cursor: not-allowed
+                background-color: rgba(122, 122, 122, 0.1)
             &:focus
                 border-bottom: 1px solid $primary
                 transition: .3s ease-in-out
@@ -889,9 +910,9 @@ span
                 transition: .3s ease-in-out
             .input
                 &.disabled
-                    pointer-events: none
-                    cursor: not-allowed
-                    background-color: rgba(122, 122, 122, 0.1)
+                    & ~ .dd
+                        border-top: 7px solid $gray
+                        transform: translateY(calc(-50% + 10px))
                     & ~ label
                         brandon_medium(12px, true)
                         color: $gray
@@ -912,7 +933,7 @@ span
         &.radius
             label
                 brandon_medium(12px, true)
-                color: $primary
+                color: $gray
                 transition: .3s ease-in-out
             .input
                 border-bottom: 1px solid $gray
@@ -922,10 +943,7 @@ span
                     transition: .3s ease-in-out
             &.filled
                 label
-                    brandon_medium(11px, true)
                     color: $primary
-                    top: 0
-                    opacity: 1
                     transition: .3s ease-in-out
                 .input
                     border-bottom: 2px solid $primary
