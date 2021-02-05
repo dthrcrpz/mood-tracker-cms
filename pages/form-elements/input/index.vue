@@ -10,6 +10,10 @@
                     <input type="text" :class="[ 'input', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
                     <label for="sample">Input</label>
                 </div>
+                <div class="group pt floating">
+                    <input type="text" :class="[ 'input disabled', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
+                    <label for="sample">Input</label>
+                </div>
             </div>
         </div>
 
@@ -26,6 +30,10 @@
                     <label for="sample_v3">Input</label>
                     <input type="text" class="input" name="sample_v3" autocomplete="off" v-model="form.sample_v3">
                 </div>
+                <div :class="[ 'group radius', (form.sample_v4.length > 0) ? 'filled' : '' ]">
+                    <label for="sample_v4">Input</label>
+                    <input type="text" class="input" name="sample_v4" autocomplete="off" v-model="form.sample_v4">
+                </div>
             </div>
         </div>
 
@@ -40,7 +48,8 @@
                 form: {
                     sample: '',
                     sample_v2: '',
-                    sample_v3: ''
+                    sample_v3: '',
+                    sample_v4: ''
                 }
             }
         },
