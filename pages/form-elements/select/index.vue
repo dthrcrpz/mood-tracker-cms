@@ -4,6 +4,9 @@
         <div class="box mb">
             <div class="top_box">
                 <h2>Default</h2>
+                <div class="description">
+                    <p>Add <b>:class</b>: <i>select</i> together with group class</p>
+                </div>
             </div>
             <div class="bottom_box action">
                 <div class="group floating select">
@@ -13,6 +16,17 @@
                     <div class="dd"></div>
                     <label for="sample">Select</label>
                 </div>
+            </div>
+        </div>
+
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Disabled</h2>
+                <div class="description">
+                    <p>Add <b>:class</b>: <i>disabled</i> together with input class</p>
+                </div>
+            </div>
+            <div class="bottom_box action">
                 <div class="group pt floating select">
                     <select :class="[ 'input disabled', (form.sample_v5.length > 0) ? 'filled' : '' ]" name="sample_v5" v-model="form.sample_v5">
                         <option value="test" v-for="n in 5">Test</option>
@@ -26,6 +40,10 @@
         <div class="box mb">
             <div class="top_box">
                 <h2>Types</h2>
+                <div class="description">
+                    <p>These selects are only for demo purposes. You can change select type by adding this classes together with group.</p>
+                    <p><b>class</b>: <i>fixed, bordered, radius</i></p>
+                </div>
             </div>
             <div class="bottom_box action">
                 <div :class="[ 'group select fixed', (form.sample_v2.length > 0) ? 'filled' : '' ]">

@@ -7,9 +7,13 @@
             </div>
             <div class="bottom_box action">
                 <div class="group_inline">
-                    <div class="checkbox">
-                        <input type="checkbox" class="check" name="sample" id="sample" @change="form.sample ^= true" :checked="form.sample">
-                        <label for="sample" class="pointer">Checkbox</label>
+                    <div class="group radios">
+                        <input type="radio" class="radio" value="yes" name="sample" id="yes" v-model="form.sample">
+                        <label for="yes" class="pointer">Yes</label>
+                    </div>
+                    <div class="group radios">
+                        <input type="radio" class="radio" value="no" name="sample" id="no" v-model="form.sample">
+                        <label for="no" class="pointer">No</label>
                     </div>
                 </div>
             </div>
@@ -19,14 +23,14 @@
             <div class="top_box">
                 <h2>Disabled</h2>
                 <div class="description">
-                    <p>Add <b>:class</b>: <i>disabled</i> together with checkbox class</p>
+                    <p>Add <b>:class</b>: <i>disabled</i> together with radios class</p>
                 </div>
             </div>
             <div class="bottom_box action">
-                <div class="group_inline">
-                    <div class="checkbox disabled">
-                        <input type="checkbox" class="check" name="sample_v2" id="sample_v2" @change="form.sample_v2 ^= true" :checked="form.sample_v2">
-                        <label for="sample_v2" class="pointer">Disabled</label>
+                <div class="group">
+                    <div class="group radios disabled">
+                        <input type="radio" class="radio" value="disabled" name="sample" id="disabled">
+                        <label for="disabled" class="pointer">Disabled</label>
                     </div>
                 </div>
             </div>
@@ -36,17 +40,15 @@
             <div class="top_box">
                 <h2>Types</h2>
                 <div class="description">
-                    <p>These checkboxes are only for demo purposes. You can change checkbox color by adding this classes.</p>
+                    <p>These radios are only for demo purposes. You can change radio color by adding this classes.</p>
                     <p><b>class</b>: <i>primary, secondary, success, error, warning, info, dark</i></p>
                 </div>
             </div>
             <div class="bottom_box action">
                 <div class="group_inline">
-                    <div class="group" v-for="(type, key) in types" :key="key">
-                        <div :class="[ 'checkbox', type.class ]">
-                            <input type="checkbox" class="check" :name="`sample_${key}`" :id="`sample_${key}`" @change="type.value ^= true" :checked="type.value">
-                            <label :for="`sample_${key}`" class="pointer">{{ type.name }}</label>
-                        </div>
+                    <div :class="[ 'group radios', type.class ]" v-for="(type, key) in types" :key="key">
+                        <input type="radio" class="radio" :value="type.class" :name="`sample_${key}`" :id="type.class" v-model="type.value">
+                        <label :for="type.class" class="pointer">{{ type.name }}</label>
                     </div>
                 </div>
             </div>
@@ -98,8 +100,7 @@
                     }
                 ],
                 form: {
-                    sample: false,
-                    sample_v2: false
+                    sample: ''
                 }
             }
         },
@@ -120,7 +121,7 @@
             me.initialization()
         },
         asyncData ({ store }) {
-            store.commit('global/settings/populateTitle', { title: 'Checkbox' })
+            store.commit('global/settings/populateTitle', { title: 'Radio' })
             store.commit('global/loader/checkLoader', { status: true })
         },
         beforeMount () {

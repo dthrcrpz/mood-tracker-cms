@@ -17,6 +17,19 @@
                         />
                         <span>Active</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Disabled</h2>
+                <div class="description">
+                    <p>Add <b>:class</b>: <i>disabled</i> together with switch id</p>
+                </div>
+            </div>
+            <div class="bottom_box">
+                <div class="box_group_inline">
                     <div id="switch" class="disabled">
                         <label for="switch"></label>
                         <input

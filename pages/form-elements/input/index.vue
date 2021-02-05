@@ -10,6 +10,17 @@
                     <input type="text" :class="[ 'input', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
                     <label for="sample">Input</label>
                 </div>
+            </div>
+        </div>
+
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Disabled</h2>
+                <div class="description">
+                    <p>Add <b>:class</b>: <i>disabled</i> together with input class</p>
+                </div>
+            </div>
+            <div class="bottom_box action">
                 <div class="group pt floating">
                     <input type="text" :class="[ 'input disabled', (form.sample_v5.length > 0) ? 'filled' : '' ]" name="sample_v5" autocomplete="off" v-model="form.sample_v5">
                     <label for="sample_v5">Disabled</label>
@@ -20,6 +31,10 @@
         <div class="box mb">
             <div class="top_box">
                 <h2>Types</h2>
+                <div class="description">
+                    <p>These inputs are only for demo purposes. You can change input type by adding this classes together with group.</p>
+                    <p><b>class</b>: <i>fixed, bordered, radius</i></p>
+                </div>
             </div>
             <div class="bottom_box action">
                 <div :class="[ 'group fixed', (form.sample_v2.length > 0) ? 'filled' : '' ]">
