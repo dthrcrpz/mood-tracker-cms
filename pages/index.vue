@@ -17,7 +17,7 @@
                             <input type="password" :class="[ 'input', (form.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.password">
                             <label for="password">Password</label>
                         </div>
-                        <div class="group_inline">
+                        <div class="group_inline between">
                             <div class="checkbox">
                                 <input type="checkbox" class="check" name="remember_me" id="remember_me" @change="form.remember_me ^= true" :checked="form.remember_me">
                                 <label for="remember_me" class="pointer">Remember Me</label>
