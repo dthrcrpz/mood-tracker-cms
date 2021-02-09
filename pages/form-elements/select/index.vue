@@ -8,7 +8,7 @@
                     <p>Add <b>:class</b>: <i>select</i> together with group class</p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group floating select">
                     <select :class="[ 'input', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" v-model="form.sample">
                         <option value="test" v-for="n in 5">Test</option>
@@ -26,7 +26,7 @@
                     <p>Add <b>:class</b>: <i>disabled</i> together with input class</p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group pt floating select">
                     <select :class="[ 'input disabled', (form.sample_v5.length > 0) ? 'filled' : '' ]" name="sample_v5" v-model="form.sample_v5">
                         <option value="test" v-for="n in 5">Test</option>
@@ -45,7 +45,7 @@
                     <p><b>class</b>: <i>fixed, bordered, radius</i></p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div :class="[ 'group select fixed', (form.sample_v2.length > 0) ? 'filled' : '' ]">
                     <label for="sample_v2">Select</label>
                     <select class="input" name="sample_v2" v-model="form.sample_v2">

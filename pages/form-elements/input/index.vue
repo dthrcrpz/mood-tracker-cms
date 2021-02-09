@@ -5,7 +5,7 @@
             <div class="top_box">
                 <h2>Default</h2>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group floating">
                     <input type="text" :class="[ 'input', (form.sample.length > 0) ? 'filled' : '' ]" name="sample" autocomplete="off" v-model="form.sample">
                     <label for="sample">Input</label>
@@ -20,7 +20,7 @@
                     <p>Add <b>:class</b>: <i>disabled</i> together with input class</p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group pt floating">
                     <input type="text" :class="[ 'input disabled', (form.sample_v5.length > 0) ? 'filled' : '' ]" name="sample_v5" autocomplete="off" v-model="form.sample_v5">
                     <label for="sample_v5">Disabled</label>
@@ -36,7 +36,7 @@
                     <p><b>class</b>: <i>fixed, bordered, radius</i></p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div :class="[ 'group fixed', (form.sample_v2.length > 0) ? 'filled' : '' ]">
                     <label for="sample_v2">Input</label>
                     <input type="text" class="input" name="sample_v2" autocomplete="off" v-model="form.sample_v2">

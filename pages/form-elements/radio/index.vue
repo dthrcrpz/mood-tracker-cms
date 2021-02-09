@@ -5,7 +5,7 @@
             <div class="top_box">
                 <h2>Default</h2>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group_inline">
                     <div class="group radios">
                         <input type="radio" class="radio" value="yes" name="sample" id="yes" v-model="form.sample">
@@ -26,7 +26,7 @@
                     <p>Add <b>:class</b>: <i>disabled</i> together with radios class</p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group">
                     <div class="group radios disabled">
                         <input type="radio" class="radio" value="disabled" name="sample" id="disabled">
@@ -44,7 +44,7 @@
                     <p><b>class</b>: <i>primary, secondary, success, error, warning, info, dark</i></p>
                 </div>
             </div>
-            <div class="bottom_box action">
+            <div class="bottom_box form">
                 <div class="group_inline">
                     <div :class="[ 'group radios', type.class ]" v-for="(type, key) in types" :key="key">
                         <input type="radio" class="radio" :value="type.class" :name="`sample_${key}`" :id="type.class" v-model="type.value">
