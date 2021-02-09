@@ -16,6 +16,7 @@
                     <span v-line-clamp="1">{{ data.name }}</span>
                 </div>
             </div>
+            <input type="hidden" name="file_id[]" value="0">
         </div>
         <div class="disclaimer">
             <div class="violator">Drag and drop {{ type }}.<br>
