@@ -9,6 +9,7 @@ $red = #EA5455
 $gray = #7A7A7A
 $gray_v2 = #F6F6F6
 $gray_v3 = #C3C3C3
+$gray_v4 = #E2E2E2
 $success = #00A014
 $warning = #ffc800
 
@@ -149,6 +150,7 @@ span
             margin-left: 70px
             transition: .3s ease-in-out
     #dashboard
+        position: relative
         padding: 60px 30px
         margin-left: 260px
         transition: .3s ease-in-out
@@ -165,142 +167,6 @@ span
                 .subtitle
                     margin: 10px 0 20px
                     brandon_regular(18px, false)
-
-/**
- * Header */
-#header
-    position: fixed
-    top: 30px
-    z-index: 2
-    right: 30px
-    width: 100%
-    max-width: calc(100% - 320px)
-    display: flex
-    flex-flow: row wrap
-    align-items: center
-    justify-content: space-between
-    border-radius: 5px
-    background-color: $white
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
-    transition: .3s ease-in-out
-    .header_nav
-        display: flex
-        flex-flow: row wrap
-        align-items: center
-        justify-content: space-between
-        padding: 0 20px
-        .title
-            brandon_bold(18px, true)
-            color: $dark_primary
-            letter-spacing: 0.25px
-            padding-right: 10px
-        #breadcrumb
-            padding-left: 10px
-            border-left: 1px solid #E2E2E2
-    .header_select
-        position: relative
-        border-left: 1px solid #E2E2E2
-        user-select: none
-        &::before
-            content: ''
-            position: absolute
-            top: 50%
-            right: calc(0% + 15px)
-            width: 0
-            border-left: 7px solid transparent
-            border-right: 7px solid transparent
-            border-top: 7px solid $primary
-            transform: translateY(-50%) rotateX(0deg)
-            transition: .3s ease-in-out
-        .header_user
-            padding: 10px 40px 10px 15px
-            display: flex
-            flex-flow: row wrap
-            align-items: center
-            cursor: pointer
-            .user_picture
-                position: relative
-                text-transform: uppercase
-                width: 35px
-                height: 35px
-                background-image: linear-gradient(45deg, $dark_primary, $primary)
-                border-radius: 50%
-                margin-right: 10px
-                .overlay
-                    position: absolute
-                    top: 50%
-                    left: 0
-                    right: 0
-                    text-align: center
-                    transform: translateY(-50%)
-                    color: $white
-                    brandon_regular(14px, false)
-            .user_name
-                brandon_regular(16px, false)
-                color: $black
-        .user_select
-            position: absolute
-            right: 0
-            top: calc(100% + 30px)
-            z-index: 1
-            width: 300px
-            border-radius: 5px
-            background-color: $white
-            opacity: 0
-            visibility: hidden
-            box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.05)
-            transition: all .2s ease-in-out
-            a
-                text-decoration: none
-                outline: none
-                display: block
-            .select_header
-                display: flex
-                flex-flow: row wrap
-                align-items: center
-                justify-content: space-between
-                padding: 20px
-                background-image: linear-gradient(45deg, $dark_primary, $primary)
-                border-radius: 5px 5px 0 0
-                .select_info
-                    .header_name
-                        brandon_regular(16px, false)
-                        color: $white
-                    .header_role
-                        brandon_light(14px, false)
-                        color: #F8F8FB
-                        margin-top: 5px
-                .header_studio
-                    .action_btn
-                        flex: 0 0 auto
-            .select_footer
-                display: flex
-                justify-content: space-between
-                .select_item
-                    position: relative
-                    brandon_regular(14px, false)
-                    color: $black
-                    padding: 10px 15px
-                    transition: .3s ease-in-out
-                    &.account
-                        span
-                            padding-left: 10px
-                    &.logout
-                        span
-                            padding-right: 10px
-                    &:hover
-                        color: $primary
-                        transition: .3s ease-in-out
-
-        &.active
-            &::before
-                transform: translateY(-50%) rotateX(180deg)
-                transition: .3s ease-in-out
-            .user_select
-                top: 100%
-                visibility: visible
-                opacity: 1
-                transition: all .2s ease-in-out
 
 /**
  * Footer */
@@ -984,6 +850,8 @@ span
         &.pt
             padding-top: 20px
         &.select
+            .input
+                padding: 13px 10px
             .dd
                 content: ''
                 position: absolute
@@ -998,7 +866,7 @@ span
             &.bordered,
             &.radius
                 .dd
-                    transform: translateY(calc(-50% + 9px))
+                    transform: translateY(calc(-50% + 12px))
         .input
             position: relative
             z-index: 1
@@ -1013,6 +881,10 @@ span
             color: $black
             appearance: none
             transition: .3s ease-in-out
+            &.search
+                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN0E3QTdBIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1zZWFyY2giPjxjaXJjbGUgY3g9IjExIiBjeT0iMTEiIHI9IjgiPjwvY2lyY2xlPjxsaW5lIHgxPSIyMSIgeTE9IjIxIiB4Mj0iMTYuNjUiIHkyPSIxNi42NSI+PC9saW5lPjwvc3ZnPgo=')
+                background-position: calc(100% - 5px) center
+                background-repeat: no-repeat
             &.disabled
                 pointer-events: none
                 cursor: not-allowed
@@ -1095,8 +967,82 @@ span
         justify-content: space-between
 
 /**
+ * Filter */
+.action_filter
+    position: fixed
+    width: 65px
+    top: 120px
+    right: -25px
+    z-index: 991
+    background-color: $blue
+    padding: 5px 7.5px
+    border-radius: 5px 0 0 5px
+    transition: .3s ease-in-out
+    &:hover
+        right: 0
+        transition: .3s ease-in-out
+
+#filter
+    position: absolute
+    left: 0
+    z-index: 1024
+    .wrapper
+        position: fixed
+        top: 0
+        left: 0
+        z-index: 1050
+        width: 100%
+        height: 100%
+        outline: 0
+        .content
+            position: relative
+            z-index: 1041
+            width: auto
+            max-width: 450px
+            height: 100%
+            overflow-y: auto
+            margin: 0 0 0 auto
+            background-color: $white
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3)
+            transform: translateX(0)
+            animation: right_slide 1s
+            .close
+                position: absolute
+                top: 22px
+                right: 20px
+                display: inline-block
+                padding: 0 10px
+                border-radius: 5px
+                brandon_regular(20px, false)
+                background-color: $primary
+                color: $white
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+                z-index: 2
+                transform: scale(1)
+                transition: .3s ease-in-out
+                &:hover
+                    transform: scale(1.1)
+                    transition: .3s ease-in-out
+            .content_top
+                padding: 20px
+                border-bottom: 1px solid $gray_v4
+                h2
+                    brandon_medium(24px, true)
+                    color: $dark_primary
+            .content_middle
+                padding: 20px
+    .backdrop
+        position: fixed
+        top: 0
+        z-index: 1040
+        width: 100vw
+        height: 100vh
+        background-color: rgba(0, 0, 0, 0.2)
+
+/**
  * Data List */
 .table
+    table-layout: fixed
     border-collapse: separate
     border-spacing: 0 15px
     thead

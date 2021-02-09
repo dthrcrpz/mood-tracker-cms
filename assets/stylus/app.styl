@@ -50,6 +50,142 @@
                     margin-top: 30px
 
 /**
+ * Header */
+#header
+    position: fixed
+    top: 30px
+    z-index: 2
+    right: 30px
+    width: 100%
+    max-width: calc(100% - 320px)
+    display: flex
+    flex-flow: row wrap
+    align-items: center
+    justify-content: space-between
+    border-radius: 5px
+    background-color: $white
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
+    transition: .3s ease-in-out
+    .header_nav
+        display: flex
+        flex-flow: row wrap
+        align-items: center
+        justify-content: space-between
+        padding: 0 20px
+        .title
+            brandon_bold(18px, true)
+            color: $dark_primary
+            letter-spacing: 0.25px
+            padding-right: 10px
+        #breadcrumb
+            padding-left: 10px
+            border-left: 1px solid $gray_v4
+    .header_select
+        position: relative
+        border-left: 1px solid $gray_v4
+        user-select: none
+        &::before
+            content: ''
+            position: absolute
+            top: 50%
+            right: calc(0% + 15px)
+            width: 0
+            border-left: 7px solid transparent
+            border-right: 7px solid transparent
+            border-top: 7px solid $primary
+            transform: translateY(-50%) rotateX(0deg)
+            transition: .3s ease-in-out
+        .header_user
+            padding: 10px 40px 10px 15px
+            display: flex
+            flex-flow: row wrap
+            align-items: center
+            cursor: pointer
+            .user_picture
+                position: relative
+                text-transform: uppercase
+                width: 35px
+                height: 35px
+                background-image: linear-gradient(45deg, $dark_primary, $primary)
+                border-radius: 50%
+                margin-right: 10px
+                .overlay
+                    position: absolute
+                    top: 50%
+                    left: 0
+                    right: 0
+                    text-align: center
+                    transform: translateY(-50%)
+                    color: $white
+                    brandon_regular(14px, false)
+            .user_name
+                brandon_regular(16px, false)
+                color: $black
+        .user_select
+            position: absolute
+            right: 0
+            top: calc(100% + 30px)
+            z-index: 1
+            width: 300px
+            border-radius: 5px
+            background-color: $white
+            opacity: 0
+            visibility: hidden
+            box-shadow: 15px 25px 40px rgba(0, 0, 0, 0.05)
+            transition: all .2s ease-in-out
+            a
+                text-decoration: none
+                outline: none
+                display: block
+            .select_header
+                display: flex
+                flex-flow: row wrap
+                align-items: center
+                justify-content: space-between
+                padding: 20px
+                background-image: linear-gradient(45deg, $dark_primary, $primary)
+                border-radius: 5px 5px 0 0
+                .select_info
+                    .header_name
+                        brandon_regular(16px, false)
+                        color: $white
+                    .header_role
+                        brandon_light(14px, false)
+                        color: #F8F8FB
+                        margin-top: 5px
+                .header_studio
+                    .action_btn
+                        flex: 0 0 auto
+            .select_footer
+                display: flex
+                justify-content: space-between
+                .select_item
+                    position: relative
+                    brandon_regular(14px, false)
+                    color: $black
+                    padding: 10px 15px
+                    transition: .3s ease-in-out
+                    &.account
+                        span
+                            padding-left: 10px
+                    &.logout
+                        span
+                            padding-right: 10px
+                    &:hover
+                        color: $primary
+                        transition: .3s ease-in-out
+
+        &.active
+            &::before
+                transform: translateY(-50%) rotateX(180deg)
+                transition: .3s ease-in-out
+            .user_select
+                top: 100%
+                visibility: visible
+                opacity: 1
+                transition: all .2s ease-in-out
+
+/**
  * Sidebar */
 #sidebar
     position: fixed
