@@ -20,7 +20,7 @@
                         <div class="content_top">
                             <h2>Filter</h2>
                         </div>
-                        <form class="content_middle action">
+                        <form class="content_middle form">
                             <div :class="[ 'group bordered', (form.sample.length > 0) ? 'filled' : '' ]">
                                 <label for="sample">Input</label>
                                 <input type="text" class="input search" name="sample" autocomplete="off" v-model="form.sample">
