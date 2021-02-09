@@ -21,6 +21,8 @@
             <loader v-if="has_loaded" />
         </transition>
 
+        <catcher />
+
         <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none' ]"></ul>
 
     </div>
@@ -31,6 +33,7 @@
     import Topbar from '~/components/global/Topbar'
     import Sidebar from '~/components/global/Sidebar'
     import Bottombar from '~/components/global/Bottombar'
+    import Catcher from '~/components/global/Catcher'
     import Loader from '~/components/global/Loader'
 
     export default {
@@ -38,6 +41,7 @@
             Topbar,
             Sidebar,
             Bottombar,
+            Catcher,
             Loader
         },
         data () {
@@ -57,6 +61,7 @@
                 if (!me.routes.includes(me.$route.path)) {
                     me.validateToken()
                 }
+                me.$store.commit('global/catcher/hideHasError', { status: false })
             }
         },
         computed: {
