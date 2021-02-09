@@ -42,11 +42,9 @@
             },
             extensions: {
                 type: Array/Object,
-                default: ['jpeg', 'jpg', 'png']
-            },
-            limit: {
-                type: Number,
-                default: 1
+                default: () => {
+                    return ['jpeg', 'jpg', 'png']
+                }
             }
         },
         data () {
