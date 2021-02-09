@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="group">
         <div class="file">
-            <input type="file" name="file[]" id="files" multiple class="o_hidden" @change="getFiles($event)" v-validate="{required: true, image: true, size: 500000, ext: ['jpeg', 'jpg', 'png']}">
+            <input type="file" name="file[]" id="files" :multiple="multiple" class="o_hidden" @change="getFiles($event)" v-validate="{required: true, image: true, size: 500000, ext: ['jpeg', 'jpg', 'png']}">
             <label for="files" @dragover.prevent @dragenter.prevent @drop.prevent="dropFiles($event)">
                 <p>Drag a file here<br>
                 or <b class="pointer">browse</b> to upload.</p>
@@ -27,6 +27,16 @@
 
 <script>
     export default {
+        props: {
+            multiple: {
+                type: Boolean,
+                default: false
+            },
+            limit: {
+                type: Number,
+                default: 1
+            }
+        },
         data () {
             return {
                 files: []
@@ -70,22 +80,20 @@
              */
             getFiles (event) {
                 const me = this
-                if (event.target.files[0]) {
-                    let element = document.getElementById('files')
+                let element = document.getElementById('files')
 
-                    if (element.files.length > 0) {
-                        me.files = []
-                        for (let i = 0; i < element.files.length; i++) {
+                if (event.target.files.length > 0) {
+                    me.files = []
+                    for (let i = 0; i < element.files.length; i++) {
 
-                            me.files.push(element.files[i])
+                        me.files.push(element.files[i])
 
-                            let reader = new FileReader()
-                            reader.onload = function () {
-                                let image = document.getElementById(`preview_image${i}`)
-                                image.src = reader.result
-                            }
-                            reader.readAsDataURL(element.files[i])
+                        let reader = new FileReader()
+                        reader.onload = function () {
+                            let image = document.getElementById(`preview_image${i}`)
+                            image.src = reader.result
                         }
+                        reader.readAsDataURL(element.files[i])
                     }
                 }
             },
@@ -100,7 +108,7 @@
                     target_file = document.getElementById('files')
 
                 const data_transfer = new DataTransfer()
-                let length = target.length
+                let length = (me.multiple) ? target.length : 1
 
                 for (let i = 0; i < length; i++) {
                     data_transfer.items.add(target[i])

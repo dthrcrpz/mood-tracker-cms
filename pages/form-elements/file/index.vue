@@ -3,10 +3,13 @@
 
         <div class="box mb">
             <div class="top_box">
-                <h2>Multiple</h2>
+                <h2>Default</h2>
+                <div class="description">
+                    <p>You can choose if file is multiple or single by adding <b>:multiple</b> property with a value of <b>TRUE</b> or <b>FALSES</b>.</p>
+                </div>
             </div>
             <div class="bottom_box form">
-                <multiple-container />
+                <file-container />
             </div>
         </div>
 
@@ -14,11 +17,11 @@
 </template>
 
 <script>
-    import MultipleContainer from '~/components/file/MultipleContainer'
+    import FileContainer from '~/components/file/FileContainer'
 
     export default {
         components: {
-            MultipleContainer
+            FileContainer
         },
         data () {
             return {
