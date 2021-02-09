@@ -30,7 +30,7 @@ export default {
         if (document.querySelector(`.toast_${payload.id}`)) {
             setTimeout( () => {
                 commit('removeToast', payload)
-            }, 7500)
+            }, 2000)
         }
     }
 }
