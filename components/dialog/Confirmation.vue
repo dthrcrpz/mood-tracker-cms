@@ -12,7 +12,7 @@
                     </div>
                     <div class="content_bottom">
                         <div class="inline">
-                            <div class="cancel_button outline pointer ml ten" @click="close()">{{ property.cancel }}</div>
+                            <div class="cancel_button outline pointer mr ten" @click="close()">{{ property.cancel }}</div>
                             <div class="primary_button pointer" @click="close()">{{ property.success }}</div>
                         </div>
                     </div>

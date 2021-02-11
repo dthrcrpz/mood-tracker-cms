@@ -35,7 +35,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline mb">
-                    <div class="primary_button ml ten pointer outline" v-for="(data, key) in buttons" :key="key" @click="getType(data)">{{ data }}</div>
+                    <div class="primary_button mr ten pointer outline" v-for="(data, key) in buttons" :key="key" @click="getType(data)">{{ data }}</div>
                 </div>
 
                 <collapse :items="demo_items" :collapse="false" :type="type" />

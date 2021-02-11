@@ -7,7 +7,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div id="switch" :class="[ 'ml ten', (form.default) ? 'toggled' : '' ]">
+                    <div id="switch" :class="[ 'mr ten', (form.default) ? 'toggled' : '' ]">
                         <label for="switch" @click="toggle('default')"></label>
                         <input
                             type="checkbox"
@@ -53,7 +53,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div id="switch" :class="[ 'toggled ml ten', data ]" v-for="(data, key) in types" :key="key">
+                    <div id="switch" :class="[ 'toggled mr ten', data ]" v-for="(data, key) in types" :key="key">
                         <label :for="`switch_${key}`"></label>
                         <input
                             type="checkbox"

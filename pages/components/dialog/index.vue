@@ -50,7 +50,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div :class="[ data.class, 'ml ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key" @click="toggleType(data)">{{ data.name }}</div>
+                    <div :class="[ data.class, 'mr ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key" @click="toggleType(data)">{{ data.name }}</div>
                 </div>
             </div>
         </div>

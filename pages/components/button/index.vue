@@ -7,7 +7,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div :class="[ data.class, 'ml ten pointer' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                    <div :class="[ data.class, 'mr ten pointer' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="bottom_box">
                     <div class="box_group_inline">
-                        <div :class="[ data.class, 'ml ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                        <div :class="[ data.class, 'mr ten pointer', 'outline' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="bottom_box">
                     <div class="box_group_inline">
-                        <div :class="[ data.class, 'ml ten pointer', 'flat' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                        <div :class="[ data.class, 'mr ten pointer', 'flat' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="bottom_box">
                     <div class="box_group_inline">
-                        <div :class="[ data.class, 'ml ten pointer', 'rectangle' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                        <div :class="[ data.class, 'mr ten pointer', 'rectangle' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="bottom_box">
                     <div class="box_group_inline">
-                        <div :class="[ data.class, 'ml ten pointer', 'rounded' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
+                        <div :class="[ data.class, 'mr ten pointer', 'rounded' ]" v-for="(data, key) in buttons" :key="key">{{ data.name }}</div>
                     </div>
                 </div>
             </div>
