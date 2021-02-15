@@ -142,6 +142,17 @@ span
     &.twenty
         margin-left: 20px
 
+.note-editor
+    &.note-frame
+        border: 1px solid $primary
+        border-radius: 0
+        .note-toolbar
+            background-color: $white
+        .note-editing-area
+            .note-editable
+                brandon_regular(16px, false)
+                padding: 15px
+
 /**
  * Root */
 .__db
@@ -245,12 +256,12 @@ span
  * Alert */
 #alert
     &.primary
-        background-color: rgba(255, 144, 0, 0.2)
+        background-color: rgba(0, 132, 176, 0.2)
         .wrapper
             p
                 color: $primary
     &.secondary
-        background-color: rgba(255, 68, 0, 0.2)
+        background-color: rgba(2, 5, 29, 0.2)
         .wrapper
             p
                 color: $dark_primary
@@ -322,8 +333,8 @@ span
             right: -3px
             display: inline-block
             padding: 5px 10px
-            border-radius: 5px
             opacity: 1
+            border-radius: 5px
             brandon_regular(20px, false)
             background-color: $primary
             color: $white
@@ -386,6 +397,41 @@ span
                     color: $gray
         &.last-child
             margin-bottom: 0
+
+/**
+ * Tabs */
+#tabs
+    .parent
+        ul
+            list-style: none
+            padding: 0
+            margin: 0
+            display: flex
+            flex-flow: row wrap
+            align-items: flex-start
+            justify-content: flex-start
+            li
+                padding: 15px 20px
+                brandon_bold(14px, true)
+                color: $gray
+                border-bottom: 5px solid $gray
+                background-color: $white
+                transition: .3s ease-in-out
+                &.active
+                    color: $white
+                    border-bottom: 5px solid $dark_primary
+                    background-color: $primary
+                    transition: .3s ease-in-out
+                &:hover
+                    color: $primary
+                    border-bottom: 5px solid $primary
+                    background-color: rgba(0, 132, 176, 0.2)
+                    transition: .3s ease-in-out
+                    &.active
+                        color: $white
+                        border-bottom: 5px solid $dark_primary
+                        background-color: $primary
+                        transition: .3s ease-in-out
 
 /**
  * Collapse */
@@ -473,7 +519,7 @@ span
         border: none
         background-color: transparent
     &:hover
-        box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
+        box-shadow: 0 0 20px rgba(0, 132, 176, 0.5)
         transform: translateY(-5px)
         transition: .3s ease-in-out
         &.outline
@@ -482,7 +528,7 @@ span
             transition: .3s ease-in-out
         &.flat
             box-shadow: none
-            background-color: rgba(255, 144, 0, 0.2)
+            background-color: rgba(0, 132, 176, 0.2)
             transition: .3s ease-in-out
 
 .secondary_button
@@ -509,7 +555,7 @@ span
         border: none
         background-color: transparent
     &:hover
-        box-shadow: 0 0 20px rgba(255, 68, 0, 0.5)
+        box-shadow: 0 0 20px rgba(2, 5, 29, 0.5)
         transform: translateY(-5px)
         transition: .3s ease-in-out
         &.outline
@@ -518,7 +564,7 @@ span
             transition: .3s ease-in-out
         &.flat
             box-shadow: none
-            background-color: rgba(255, 68, 0, 0.2)
+            background-color: rgba(2, 5, 29, 0.2)
             transition: .3s ease-in-out
 
 .success_button
@@ -705,6 +751,8 @@ span
  * Form */
 .form
     position: relative
+    &.flex
+        flex: 1 0 auto
     .validate
         position: absolute
         top: calc(100% + 5px)
@@ -780,6 +828,7 @@ span
                 flex: 0 0 calc(25% - 20px)
         .preview
             position: relative
+            z-index: 0
             flex: 0 0 calc((100% / 6) - 20px)
             margin: 0 10px 20px
             animation: slide 1s
@@ -873,6 +922,92 @@ span
                             width: 100%
                             opacity: 1
                             transition: .3s ease-in-out
+    .form_image_group
+        margin-bottom: 20px
+        label
+            user-select: none
+            display: block
+            brandon_medium(12px, true)
+            font-weight: normal
+            color: $primary
+            margin-bottom: 2px
+        .action_image
+            position: absolute
+            bottom: 10px
+            opacity: 0
+        .action_image_label
+            position: relative
+            text-transform: none
+            cursor: pointer
+            width: 100%
+            background-color: $white
+            border: 1px solid $primary
+            padding: 10px 15px
+            brandon_regular(14px, false)
+            color: $gray
+            outline: none
+            transition: 0.3s ease-in-out
+            &::before
+                content: 'Browse'
+                color: $primary
+                position: absolute
+                top: 50%
+                right: 0
+                padding: 10px 20px
+                background-color: rgba(0, 132, 176, 0.2)
+                border-left: 1px solid $gray_v4
+                transform: translateY(-50%)
+                transition: .3s ease-in-out
+            &:hover,
+            &:focus
+                &::before
+                    color: $white
+                    background-color: $primary
+                    border-left: 1px solid $primary
+                    transition: .3s ease-in-out
+                & ~ .action_image_remove
+                    border-left: 1px solid $black
+                    border-right: 1px solid $black
+                    transition: .3s ease-in-out
+            & ~ .action_image_remove
+                cursor: pointer
+                brandon_regular(14px, false)
+                color: $white
+                position: absolute
+                top: 50%
+                right: 0
+                padding: 10px 20px
+                background-color: rgba(234, 84, 85, 1)
+                transform: translateY(-50%)
+                border-left: 1px solid $primary
+                border-right: 1px solid $primary
+                border-top: none
+                border-bottom: none
+                outline: none
+                box-shadow: 0 0 20px transparent
+                transition: 0.3s ease-in-out
+                &:hover,
+                &:focus
+                    box-shadow: 0 0 20px rgba(234, 84, 85, 0.5)
+                    transition: .3s ease-in-out
+        .form_tags_group
+            display: flex
+            flex-flow: row wrap
+            align-items: flex-start
+            justify-content: space-between
+            margin-bottom: 20px
+            .preview_group
+                flex: 0 0 30%
+                img
+                    width: 100%
+                    height: 200px
+                    background-color: $gray_v4
+                    object-fit: contain
+            .tags_group
+                flex: 0 0 68%
+                .form_group
+                    &:last-child
+                        margin-bottom: 0
     .radios
         display: flex
         flex-flow: row wrap
@@ -926,7 +1061,7 @@ span
             background-size: cover
             transition: .3s ease-in-out
             &:checked
-                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4gPGRlZnM+IDxzdHlsZT4uYXtmaWxsOiNmZmY7fS5ie2ZpbGw6I0ZGOTAwMDt9LmMsLmR7c3Ryb2tlOm5vbmU7fS5ke2ZpbGw6IzExMTt9PC9zdHlsZT4gPC9kZWZzPiA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzQ3IC0xMjM1KSI+IDxnIGNsYXNzPSJhIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNDcgMTIzNSkiPiA8cGF0aCBjbGFzcz0iYyIgZD0iTSA4IDE1LjUgQyAzLjg2NDQ5MDAzMjE5NjA0NSAxNS41IDAuNSAxMi4xMzU1MTA0NDQ2NDExMSAwLjUgOCBDIDAuNSAzLjg2NDQ5MDAzMjE5NjA0NSAzLjg2NDQ5MDAzMjE5NjA0NSAwLjUgOCAwLjUgQyAxMi4xMzU1MTA0NDQ2NDExMSAwLjUgMTUuNSAzLjg2NDQ5MDAzMjE5NjA0NSAxNS41IDggQyAxNS41IDEyLjEzNTUxMDQ0NDY0MTExIDEyLjEzNTUxMDQ0NDY0MTExIDE1LjUgOCAxNS41IFoiIC8+IDxwYXRoIGNsYXNzPSJkIiBkPSJNIDggMSBDIDQuMTQwMTkwMTI0NTExNzE5IDEgMSA0LjE0MDE5MDEyNDUxMTcxOSAxIDggQyAxIDExLjg1OTgwOTg3NTQ4ODI4IDQuMTQwMTkwMTI0NTExNzE5IDE1IDggMTUgQyAxMS44NTk4MDk4NzU0ODgyOCAxNSAxNSAxMS44NTk4MDk4NzU0ODgyOCAxNSA4IEMgMTUgNC4xNDAxOTAxMjQ1MTE3MTkgMTEuODU5ODA5ODc1NDg4MjggMSA4IDEgTSA4IDAgQyAxMi40MTgyNzk2NDc4MjcxNSAwIDE2IDMuNTgxNzIwMzUyMTcyODUyIDE2IDggQyAxNiAxMi40MTgyNzk2NDc4MjcxNSAxMi40MTgyNzk2NDc4MjcxNSAxNiA4IDE2IEMgMy41ODE3MjAzNTIxNzI4NTIgMTYgMCAxMi40MTgyNzk2NDc4MjcxNSAwIDggQyAwIDMuNTgxNzIwMzUyMTcyODUyIDMuNTgxNzIwMzUyMTcyODUyIDAgOCAwIFoiIC8+IDwvZz4gPGNpcmNsZSBjbGFzcz0iYiIgY3g9IjUiIGN5PSI1IiByPSI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNTAgMTIzOCkiIC8+IDwvZz4gPC9zdmc+Cg==')
+                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4gPGRlZnM+IDxzdHlsZT4uYXtmaWxsOiNmZmY7fS5ie2ZpbGw6IzAwODRCMDt9LmMsLmR7c3Ryb2tlOm5vbmU7fS5ke2ZpbGw6IzExMTt9PC9zdHlsZT4gPC9kZWZzPiA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzQ3IC0xMjM1KSI+IDxnIGNsYXNzPSJhIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNDcgMTIzNSkiPiA8cGF0aCBjbGFzcz0iYyIgZD0iTSA4IDE1LjUgQyAzLjg2NDQ5MDAzMjE5NjA0NSAxNS41IDAuNSAxMi4xMzU1MTA0NDQ2NDExMSAwLjUgOCBDIDAuNSAzLjg2NDQ5MDAzMjE5NjA0NSAzLjg2NDQ5MDAzMjE5NjA0NSAwLjUgOCAwLjUgQyAxMi4xMzU1MTA0NDQ2NDExMSAwLjUgMTUuNSAzLjg2NDQ5MDAzMjE5NjA0NSAxNS41IDggQyAxNS41IDEyLjEzNTUxMDQ0NDY0MTExIDEyLjEzNTUxMDQ0NDY0MTExIDE1LjUgOCAxNS41IFoiIC8+IDxwYXRoIGNsYXNzPSJkIiBkPSJNIDggMSBDIDQuMTQwMTkwMTI0NTExNzE5IDEgMSA0LjE0MDE5MDEyNDUxMTcxOSAxIDggQyAxIDExLjg1OTgwOTg3NTQ4ODI4IDQuMTQwMTkwMTI0NTExNzE5IDE1IDggMTUgQyAxMS44NTk4MDk4NzU0ODgyOCAxNSAxNSAxMS44NTk4MDk4NzU0ODgyOCAxNSA4IEMgMTUgNC4xNDAxOTAxMjQ1MTE3MTkgMTEuODU5ODA5ODc1NDg4MjggMSA4IDEgTSA4IDAgQyAxMi40MTgyNzk2NDc4MjcxNSAwIDE2IDMuNTgxNzIwMzUyMTcyODUyIDE2IDggQyAxNiAxMi40MTgyNzk2NDc4MjcxNSAxMi40MTgyNzk2NDc4MjcxNSAxNiA4IDE2IEMgMy41ODE3MjAzNTIxNzI4NTIgMTYgMCAxMi40MTgyNzk2NDc4MjcxNSAwIDggQyAwIDMuNTgxNzIwMzUyMTcyODUyIDMuNTgxNzIwMzUyMTcyODUyIDAgOCAwIFoiIC8+IDwvZz4gPGNpcmNsZSBjbGFzcz0iYiIgY3g9IjUiIGN5PSI1IiByPSI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNTAgMTIzOCkiIC8+IDwvZz4gPC9zdmc+Cg==')
                 transition: .3s ease-in-out
     .checkbox
         position: relative
@@ -982,11 +1117,16 @@ span
             background-size: contain
             transition: .3s ease-in-out
             &:checked
-                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDE5IDE5Ij48ZGVmcz48c3R5bGU+LmF7ZmlsbDojRkY5MDAwO30uYntmaWxsOm5vbmU7c3Ryb2tlOiNmZmY7c3Ryb2tlLXdpZHRoOjJweDt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUzMyAtMTIzOSkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxIDk3NSkiPjxwYXRoIGNsYXNzPSJhIiBkPSJNNCwwSDE1YTQsNCwwLDAsMSw0LDRWMTVhNCw0LDAsMCwxLTQsNEg0YTQsNCwwLDAsMS00LTRWNEE0LDQsMCwwLDEsNCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTEyIDI2NCkiLz48cGF0aCBjbGFzcz0iYiIgZD0iTS0xMjE5NC45MDgtNTA2Mi41NTRsMy4xNTksMy4xNTksNy43NS03Ljc1MSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI3MTEgNTMzNS43MDMpIi8+PC9nPjwvZz48L3N2Zz4K')
+                background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDE5IDE5Ij48ZGVmcz48c3R5bGU+LmF7ZmlsbDojMDA4NEIwO30uYntmaWxsOm5vbmU7c3Ryb2tlOiNmZmY7c3Ryb2tlLXdpZHRoOjJweDt9PC9zdHlsZT48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUzMyAtMTIzOSkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxIDk3NSkiPjxwYXRoIGNsYXNzPSJhIiBkPSJNNCwwSDE1YTQsNCwwLDAsMSw0LDRWMTVhNCw0LDAsMCwxLTQsNEg0YTQsNCwwLDAsMS00LTRWNEE0LDQsMCwwLDEsNCwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTEyIDI2NCkiLz48cGF0aCBjbGFzcz0iYiIgZD0iTS0xMjE5NC45MDgtNTA2Mi41NTRsMy4xNTksMy4xNTksNy43NS03Ljc1MSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI3MTEgNTMzNS43MDMpIi8+PC9nPjwvZz48L3N2Zz4K')
                 transition: .3s ease-in-out
     .group
         position: relative
         margin-bottom: 20px
+        .label
+            brandon_medium(12px, true)
+            color: $primary
+            padding-bottom: 5px
+            transition: .3s ease-in-out
         &.nmb
             margin-bottom: 0
         &.pt
@@ -1007,17 +1147,25 @@ span
             &.fixed,
             &.bordered,
             &.radius
+                &.slim
+                    .input
+                        height: 35px
+                        padding: 0 10px
+                    .dd
+                        transform: translateY(-50%)
                 .dd
                     transform: translateY(calc(-50% + 12px))
-        .input
+        .input,
+        .field-input
             position: relative
-            z-index: 1
+            z-index: 0
             width: 100%
             background-color: transparent
             border: none
             padding: 10px
             border-bottom: 1px solid $gray
             outline: none
+            border-radius: 0
             box-shadow: none
             brandon_regular(16px, false)
             color: $black
@@ -1036,8 +1184,8 @@ span
                 transition: .3s ease-in-out
         &.floating
             label
-                pointer-events: none
                 position: absolute
+                pointer-events: none
                 top: 50%
                 left: 0
                 brandon_medium(16px, true)
@@ -1046,7 +1194,8 @@ span
                 opacity: 0.5
                 transform: translateY(-50%)
                 transition: .3s ease-in-out
-            .input
+            .input,
+            .field-input
                 &.disabled
                     & ~ .dd
                         border-top: 7px solid $gray
@@ -1073,7 +1222,10 @@ span
                 brandon_medium(12px, true)
                 color: $gray
                 transition: .3s ease-in-out
-            .input
+                b
+                    color: $black
+            .input,
+            .field-input
                 border-bottom: 1px solid $gray
                 transition: .3s ease-in-out
                 &:focus
@@ -1083,23 +1235,27 @@ span
                 label
                     color: $primary
                     transition: .3s ease-in-out
-                .input
+                .input,
+                .field-input
                     border-bottom: 2px solid $primary
                     transition: .3s ease-in-out
         &.bordered,
         &.radius
-            .input
+            .input,
+            .field-input
                 border: 1px solid $gray
                 transition: .3s ease-in-out
                 &:focus
                     border: 1px solid $primary
                     transition: .3s ease-in-out
             &.filled
-                .input
+                .input,
+                .field-input
                     border: 1px solid $primary
                     transition: .3s ease-in-out
         &.radius
-            .input
+            .input,
+            .field-input
                 border-radius: 5px
                 transition: .3s ease-in-out
     .buttons
@@ -1108,6 +1264,8 @@ span
         flex-flow: row wrap
         align-items: center
         justify-content: space-between
+        &.start
+            justify-content: flex-start
         &.fixed
             position: fixed
             z-index: 2
@@ -1207,9 +1365,9 @@ span
 /**
  * Data List */
 .table
-    table-layout: fixed
     border-collapse: separate
     border-spacing: 0 15px
+    table-layout: fixed
     thead
         &.sticky
             tr
@@ -1375,6 +1533,11 @@ span
                             &:hover
                                 box-shadow: 0 8px 20px -8px $blue
                                 transition: .3s ease-in-out
+                        &.success
+                            background-color: $success
+                            &:hover
+                                box-shadow: 0 8px 20px -8px $success
+                                transition: .3s ease-in-out
                         &.ml
                             margin-left: 10px
                         .icon
@@ -1398,6 +1561,11 @@ span
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
     .top_box
         padding-bottom: 20px
+        &.inline
+            display: flex
+            flex-flow: row wrap
+            align-items: center
+            justify-content: space-between
         h2
             brandon_medium(16px, true)
             color: $gray
@@ -1412,6 +1580,22 @@ span
                 background-color: rgba(255, 68, 0, 0.25)
                 padding: 0 5px 2.5px
     .bottom_box
+        border-bottom: 2px solid $gray_v4
+        padding-bottom: 20px
+        margin-bottom: 20px
+        &:last-child
+            padding-bottom: 0
+            margin-bottom: 0
+            border-bottom: 2px solid transparent
+        .group_header
+            brandon_bold(14px, true)
+            color: $dark_primary
+            margin-bottom: 10px
+            &.inline
+                display: flex
+                flex-flow: row wrap
+                align-items: center
+                justify-content: space-between
         .box_group
             padding: 10px
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
@@ -1436,7 +1620,7 @@ span
     bottom: 0
     right: 0
     z-index: 99
-    background-color: rgba(255, 255, 255, 0.3)
+    background-color: rgba(0, 132, 176, 0.2)
     .wrapper
         position: absolute
         top: 50%
@@ -1572,7 +1756,8 @@ span
                 top: -3px
                 right: -3px
                 display: inline-block
-                padding: 0 10px
+                padding: 5px 10px
+                opacity: 1
                 border-radius: 5px
                 brandon_regular(20px, false)
                 background-color: $primary
