@@ -888,35 +888,25 @@ span
                     brandon_medium(16px, false)
                     color: $white
                     transform: translateY(-50%)
-            .close
+            .image_close
                 position: absolute
-                z-index: 1
+                top: -3px
+                right: -3px
+                display: inline-block
+                padding: 0 10px
                 opacity: 1
-                width: 30px
-                height: 30px
-                top: calc(0% + 5px)
-                right: calc(0% + 5px)
+                border-radius: 5px
+                brandon_regular(20px, false)
                 background-color: $red
-                border-radius: 50%
+                color: $white
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+                z-index: 2
                 cursor: pointer
-                &::before
-                    content: ''
-                    position: absolute
-                    top: 50%
-                    right: calc(0% + 14px)
-                    width: 2px
-                    height: 20px
-                    background-color: $white
-                    transform: translateY(-50%) rotate(45deg)
-                &::after
-                    content: ''
-                    position: absolute
-                    top: 50%
-                    right: calc(0% + 14px)
-                    width: 2px
-                    height: 20px
-                    background-color: $white
-                    transform: translateY(-50%) rotate(-45deg)
+                transition: .3s ease-in-out
+                &:hover
+                    top: -6px
+                    right: -6px
+                    transition: .3s ease-in-out
     .file
         position: relative
         display: flex
