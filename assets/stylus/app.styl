@@ -45,7 +45,7 @@
                 h3
                     brandon_light(18px, false)
                     color: $gray
-                    margin: 10px 0 30px
+                    margin: 10px 0 20px
                 .action
                     margin-top: 30px
 
@@ -79,10 +79,10 @@
             padding-right: 10px
         #breadcrumb
             padding-left: 10px
-            border-left: 1px solid $gray_v4
+            border-left: 1px solid #E2E2E2
     .header_select
         position: relative
-        border-left: 1px solid $gray_v4
+        border-left: 1px solid #E2E2E2
         user-select: none
         &::before
             content: ''
@@ -276,19 +276,19 @@
                                             z-index: 1
     .top
         position: relative
-        padding: 20px 17px
+        padding: 20px 7px
         display: flex
         flex-flow: row wrap
         align-items: center
         justify-content: flex-start
         transition: .3s ease-in-out .3s
         img
-            width: 30px
-            height: 30px
+            width: 50px
+            height: auto
             transition: .3s ease-in-out .3s
         h2
             padding-left: 10px
-            brandon_bold(18px, false)
+            brandon_bold(16px, false)
             color: $gray
             transition: .3s ease-in-out .3s
         .toggle
@@ -304,6 +304,7 @@
     .shadow
         position: absolute
         margin-top: -20px
+        margin-left: -5px
         z-index: 2
         height: 60px
         width: 100%
@@ -403,7 +404,7 @@
                         transition: .3s ease-in-out
                     &.exact
                         color: $white
-                        box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
+                        box-shadow: 0 0 20px rgba(0, 132, 176, 0.5)
                         transition: .3s ease-in-out
                         svg
                             &.icon
@@ -476,7 +477,7 @@
                                     transition: .3s ease-in-out
                                 &.exact
                                     color: $white
-                                    box-shadow: 0 0 20px rgba(255, 144, 0, 0.5)
+                                    box-shadow: 0 0 20px rgba(0, 132, 176, 0.5)
                                     transition: .3s ease-in-out
                                     svg
                                         &.icon
