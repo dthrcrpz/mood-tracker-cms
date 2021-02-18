@@ -11,7 +11,7 @@
         <div class="preview_image" v-if="files.length > 0">
             <div :class="[ 'preview', (type == 'file') ? 'big' : '' ]" v-for="(data, key) in populateFiles" :key="key">
                 <img src="" :id="`preview_image${key}`" v-if="type == 'image'" />
-                <div class="image_close" @click="removeTempFiles(key)"></div>
+                <div class="image_close" @click="removeTempFiles(key)">×</div>
                 <div class="item">
                     <span v-line-clamp="1">{{ data.name }}</span>
                 </div>
