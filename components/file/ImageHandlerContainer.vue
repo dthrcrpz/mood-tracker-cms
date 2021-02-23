@@ -1,7 +1,18 @@
 <template>
 	<div class="form_image_group">
-        <label>Image <span>{{ (notRequired) ? '*' : '' }}</span> <strong v-if="dimension.imageWidth != 0">( Max: 2MB: Dimension: {{ dimension.imageWidth }} x {{ dimension.imageHeight }} )</strong></label>
-		<image-handler v-for="(image, key) in images" :key="key" :unique="key" :item="image" ref="imagePicker" :parent="parent" :tableName="tableName" :notRequired="notRequired" :dimension="dimension" />
+        <label>{{ image_label }} <span>{{ (not_required) ? '*' : '' }}</span> <strong v-if="dimension.imageWidth != 0">( Max: 2MB: Dimension: {{ dimension.imageWidth }} x {{ dimension.imageHeight }} )</strong></label>
+		<image-handler
+			v-for="(image, key) in images"
+			ref="imagePicker"
+			:key="key"
+			:unique="(image.id) ? key : image"
+			:item="image"
+			:category="category"
+			:parent="parent"
+			:table_name="table_name"
+			:not_required="not_required"
+			:dimension="dimension"
+		/>
 		<!-- <button type="button" class="action_image_add" v-if="multiple" @click="addImage()">Add Image</button> -->
 	</div>
 </template>
@@ -10,11 +21,15 @@
 	import ImageHandler from './ImageHandler'
 	export default {
 		props: {
+			image_label: {
+				type: String,
+				default: 'Image'
+			},
 			multiple: {
 				type: Boolean,
 				default: false
 			},
-			notRequired: {
+			not_required: {
 				type: Boolean,
 				default: true
 			},
@@ -24,6 +39,10 @@
 			parent: {
 				type: Number,
 				default: 0
+			},
+			category: {
+				type: String,
+				default: 'image'
 			},
             dimension: {
                 type: Object,
@@ -41,7 +60,7 @@
 		},
 		data () {
 			return {
-				tableName: 'images',
+				table_name: 'images',
                 files: [],
 				images: [0],
 				showCloser: false

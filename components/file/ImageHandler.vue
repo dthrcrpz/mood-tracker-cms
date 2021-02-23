@@ -1,8 +1,8 @@
 <template>
     <div v-if="enabled" :data-vv-scope="`image_form_${unique}`">
         <div class="group">
-            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" accept=".jpeg, .jpg, .png" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`${(dataImage.id) ? '' : 'required|'}image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-if="notRequired">
-            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-else>
+            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" accept=".jpeg, .jpg, .png" :key="`image_form_${unique}.file[]`" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`${(dataImage.id) ? '' : 'required|'}image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-if="not_required">
+            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" accept=".jpeg, .jpg, .png" :key="`image_form_${unique}.file[]`" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-else>
             <input type="hidden" name="file_id[]" v-model="dataImage.id">
             <input type="hidden" name="file_category[]" v-model="category">
             <label class="action_image_label" :for="`image${unique}`">Choose File</label>
@@ -37,7 +37,7 @@
 <script>
     export default {
         props: {
-            notRequired: {
+            not_required: {
                 type: Boolean,
                 default: true
             },
@@ -51,7 +51,7 @@
                 type: Number,
                 default: 0
             },
-            tableName: {
+            table_name: {
                 type: String,
                 default: 'images'
             },
@@ -125,10 +125,10 @@
             setInterval( () => {
                 if (ctr < 1 && this.item) {
                     this.dataImage.id = (this.item.id != null) ? this.item.id : 0
-                    this.dataImage.title = this.item.title
-                    this.dataImage.alt = this.item.alt
-                    this.dataImage.sequence = this.item.sequence
-                    this.showTags = (this.item != 0) ? true : false
+                    this.dataImage.title = (this.item.title) ? this.item.title : ''
+                    this.dataImage.alt = (this.item.alt) ? this.item.alt : ''
+                    this.dataImage.sequence = (this.item.sequence) ? this.item.sequence : 0
+                    this.showTags = (this.item[0] && this.item[0].id) ? true : false
                     ctr++
                 }
             }, 500)
