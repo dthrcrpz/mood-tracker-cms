@@ -436,63 +436,41 @@ span
 
 /**
  * Collapse */
-#collapse
-    &.border
-        border: 1px solid $gray_v3
-        .collapse_item
-            border-bottom: 1px solid $gray_v3
-            &:last-child
-                border-bottom: none
-            .item_top
-                border-bottom: none
-    &.shadow
-        .collapse_item
-            border-radius: 5px
-            background-color: $white
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1)
-            margin-bottom: 15px
-            &:last-child
-                margin-bottom: 0
-            .item_top
-                border-bottom: none
-    .collapse_item
-        &.toggled
-            .item_top
-                &::before
-                    transform: translateY(-50%) rotateX(180deg)
-                    transition: .3s ease-in-out
-            .item_bottom
-                padding: 10px
-                transition: .3s ease-in-out
-                .description
-                    opacity: 1
-                    visibility: visible
-                    transition: .3s ease-in-out
+.collapse
+    &.toggled
         .item_top
-            position: relative
-            padding: 10px
-            border-bottom: 1px solid $gray_v3
-            h2
-                brandon_medium(18px, false)
-                color: $gray
-            &::before
-                content: ''
-                position: absolute
-                top: 50%
-                right: 10px
-                border-left: 7px solid transparent
-                border-right: 7px solid transparent
-                border-top: 7px solid $primary
-                transform: translateY(-50%) rotateX(0deg)
+            &.top_box
+                padding-bottom: 20px
+                transition: .3s ease-in-out
+            .arrow
+                top: calc(50% - 10px)
+                transform: translateY(-50%) rotateX(180deg)
                 transition: .3s ease-in-out
         .item_bottom
-            padding: 0 10px
+            height: 100%
+            opacity: 1
+            visibility: visible
             transition: .3s ease-in-out
-            .description
-                height: 0px
-                opacity: 0
-                visibility: hidden
-                transition: .3s ease-in-out
+    .item_top
+        position: relative
+        &.top_box
+            padding-bottom: 0
+            transition: .3s ease-in-out
+        .arrow
+            content: ''
+            position: absolute
+            top: 50%
+            right: 0
+            border-left: 10px solid transparent
+            border-right: 10px solid transparent
+            border-top: 10px solid $dark_primary
+            transform: translateY(-50%) rotateX(0deg)
+            transition: .3s ease-in-out
+    .item_bottom
+        height: 0px
+        opacity: 0
+        visibility: hidden
+        transition: .3s ease-in-out
 
 /**
  * Buttons */
