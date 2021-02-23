@@ -55,6 +55,10 @@
                 type: String,
                 default: 'images'
             },
+            image_label: {
+				type: String,
+				default: 'Image'
+			},
             category: {
                 type: String,
                 default: 'image'
@@ -99,6 +103,10 @@
                     }
                     setTimeout( () => {
                         reader.readAsDataURL(element.files[0])
+                        if (me.$parent.$parent.collapsible) {
+                            let target = document.getElementById('item_1')
+                            target.style.height = `${target.scrollHeight}px`
+                        }
                     }, 10)
                 }
             },
@@ -128,7 +136,7 @@
                     this.dataImage.title = (this.item.title) ? this.item.title : ''
                     this.dataImage.alt = (this.item.alt) ? this.item.alt : ''
                     this.dataImage.sequence = (this.item.sequence) ? this.item.sequence : 0
-                    this.showTags = (this.item[0] && this.item[0].id) ? true : false
+                    this.showTags = (this.item && this.item.id) ? true : false
                     ctr++
                 }
             }, 500)
