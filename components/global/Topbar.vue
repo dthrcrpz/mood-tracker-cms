@@ -8,6 +8,7 @@
         </div>
         <div :class="`header_select ${(isToggled) ? 'active' : ''}`" v-click-outside="closeMe">
             <div class="header_user" @click="showSelect()">
+                <!-- <img :src="user.images[0].path" v-if="user.images.length > 0" /> -->
                 <div class="user_picture">
                     <div class="overlay">
                         MA
