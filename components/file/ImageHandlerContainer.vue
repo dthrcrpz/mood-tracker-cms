@@ -7,6 +7,7 @@
 			:key="key"
 			:unique="(image.id) ? key : image"
 			:item="image"
+			:image_label="image_label"
 			:category="category"
 			:parent="parent"
 			:table_name="table_name"

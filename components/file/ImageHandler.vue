@@ -15,17 +15,17 @@
             </div>
             <div class="tags_group">
                 <div class="group bordered filled">
-                    <label :for="`image_title${unique}`">Image Title <span>*</span></label>
+                    <label :for="`image_title${unique}`">{{ image_label }}  Title <span>*</span></label>
                     <input type="text" name="file_title[]" :id="`image_title${unique}`" :data-vv-name="`image_form_${unique}.file_title[]`" v-validate="{required: true, regex: '^[a-zA-Z0-9\-_ |\_]*$', max: 50}" autocomplete="off" class="input" v-model="dataImage.title">
                     <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_title[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_title[]`)) }}</span></transition>
                 </div>
                 <div :class="[ 'group bordered filled', ($parent.multiple) ? '' : 'nmb' ]">
-                    <label :for="`image_alt${unique}`">Image Alt <span>*</span></label>
+                    <label :for="`image_alt${unique}`">{{ image_label }}  Alt <span>*</span></label>
                     <input type="text" name="file_alt[]" :id="`image_alt_${unique}`" :data-vv-name="`image_form_${unique}.file_alt[]`" v-validate="{required: true, regex: '^[a-zA-Z0-9\_\-]*$', max: 50}" autocomplete="off" class="input" v-model="dataImage.alt">
                     <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_alt[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_alt[]`)) }}</span></transition>
                 </div>
                 <div class="group bordered filled nmb" v-if="$parent.multiple">
-                    <label :for="`image_sequence${unique}`">Image Sequence <span>*</span></label>
+                    <label :for="`image_sequence${unique}`">{{ image_label }}  Sequence <span>*</span></label>
                     <input type="text" name="file_sequence[]" :id="`image_sequence_${unique}`" :data-vv-name="`image_form_${unique}.file_sequence[]`" v-validate="{required: true, numeric: true, min_value: 1, max_value: 99}" autocomplete="off" class="input" v-model="dataImage.sequence">
                     <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_sequence[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_sequence[]`)) }}</span></transition>
                 </div>
