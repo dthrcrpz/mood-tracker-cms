@@ -1,44 +1,25 @@
 <template lang="html">
     <div id="dashboard" v-if="loaded">
 
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Default</h2>
-                <div class="description">
-                    <p>Property <b>:collapse="TRUE"</b>, <b>:type="collapse"</b> and <b>:items="[{}]"</b></p>
-                </div>
-            </div>
-            <div class="bottom_box">
-                <collapse :items="collapse_items" />
-            </div>
-        </div>
-
-        <div class="box mb">
-            <div class="top_box">
+        <!-- Collapse 0 -->
+        <div :class="[ 'box mb collapse', (toggled.first) ? 'toggled' : '' ]">
+            <div class="top_box item_top">
                 <h2>Accordion</h2>
-                <div class="description">
-                    <p>In order to trigger the accordion, add a property <b>:collapse</b> and set to <b>FALSE</b>.</p>
-                </div>
+                <div class="arrow pointer" @click="toggleCollapse(0, 'first')"></div>
             </div>
-            <div class="bottom_box">
-                <collapse :items="accordion_items" :collapse="false" />
+            <div id="item_0" class="item_bottom bottom_box npb">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
         </div>
 
-        <div class="box mb">
-            <div class="top_box">
-                <h2>Types</h2>
-                <div class="description">
-                    <p>These collapse are only for demo purposes. You can change collapse type and message by adding <b>:type</b> property in the collapse component.</p>
-                    <p><b>:type</b>: <i>collapse, shadow, border</i></p>
-                </div>
+        <!-- Collapse 1 -->
+        <div :class="[ 'box mb collapse', (toggled.second) ? 'toggled' : '' ]">
+            <div class="top_box item_top">
+                <h2>Accordion</h2>
+                <div class="arrow pointer" @click="toggleCollapse(1, 'second')"></div>
             </div>
-            <div class="bottom_box">
-                <div class="box_group_inline mb">
-                    <div class="primary_button mr ten pointer outline" v-for="(data, key) in buttons" :key="key" @click="getType(data)">{{ data }}</div>
-                </div>
-
-                <collapse :items="demo_items" :collapse="false" :type="type" />
+            <div id="item_1" class="item_bottom bottom_box npb">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
         </div>
 
@@ -46,101 +27,35 @@
 </template>
 
 <script>
-    import Collapse from '~/components/collapse/Collapse'
-
     export default {
-        components: {
-            'collapse': Collapse
-        },
         data () {
             return {
                 loaded: false,
-                type: 'collapse',
-                buttons: ['collapse', 'shadow', 'border'],
-                collapse_items: [
-                    {
-                        id: 0,
-                        name: 'Collapse',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 1,
-                        name: 'Collapse',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 2,
-                        name: 'Collapse',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 3,
-                        name: 'Collapse',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    }
-                ],
-                accordion_items: [
-                    {
-                        id: 4,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 5,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 6,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 7,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    }
-                ],
-                demo_items: [
-                    {
-                        id: 8,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 9,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 10,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    },
-                    {
-                        id: 11,
-                        name: 'Accordion',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                        open: false
-                    }
-                ]
+                toggled: {
+                    first: true,
+                    second: false
+                }
             }
         },
         methods: {
-            getType (data) {
+            /**
+             * collapse the form layout
+             * @param  {[number]} unique [unique key identifier]
+             * @param  {[string]} type   [type of collapse to toggle]
+             */
+            toggleCollapse (unique, type) {
                 const me = this
-                me.type = data
+                let toggled = false,
+                    target = document.getElementById(`item_${unique}`)
+
+                me.toggled[type] ^= true
+                toggled = me.toggled[type]
+
+                if (toggled) {
+                    target.style.height = `${target.scrollHeight}px`
+                } else {
+                    target.style.height = '0px'
+                }
             },
             initialization (event) {
                 const me = this

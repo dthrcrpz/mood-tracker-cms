@@ -815,9 +815,12 @@ span
         .group
             flex: 0 0 auto
             margin-bottom: 0
-            .checkbox
+            .checkbox,
+            .radios
                 margin-right: 20px
-                &:last-child
+            &:last-child
+                .checkbox,
+                .radios
                     margin-right: 0
     .call_to_action
         brandon_regular(14px, false)
@@ -1321,6 +1324,57 @@ span
                 flex: 0 0 100%
 
 /**
+ * Pagination */
+#pagination
+    display: flex
+    flex-flow: row wrap
+    align-items: center
+    justify-content: center
+    padding: 20px 0 30px
+    user-select: none
+    .separator
+        brandon_bold(16px, false)
+        color: $primary
+        padding: 0 5px
+    .next,
+    .prev
+        brandon_regular(16px, false)
+        color: $white
+        background-color: $primary
+        border: 1px solid $primary
+        padding: 5px 14px
+        margin: 0 3px
+        cursor: pointer
+        transition: .3s ease-in-out
+        &:hover,
+        &:focus
+            background-color: #ffe6c4
+            color: $primary
+            transition: .3s ease-in-out
+        &.disabled
+            background-color: #e2e2e2
+            color: $black
+            border: 1px solid #e2e2e2
+            transition: .3s ease-in-out
+    .number
+        brandon_regular(16px, false)
+        color: $primary
+        background-color: #ffe6c4
+        border: 1px solid $primary
+        padding: 5px 14px
+        margin: 0 3px
+        cursor: pointer
+        transition: .3s ease-in-out
+        &:hover,
+        &:focus,
+        &.active
+            background-color: $primary
+            color: $white
+            transition: .3s ease-in-out
+        &.active
+            pointer-events: none
+
+/**
  * Actions */
 .actions
     margin-bottom: 20px
@@ -1621,11 +1675,20 @@ span
                 flex: 0 0 19%
             &.right
                 flex: 0 0 58%
+    &.three_seventy
+        .box
+            &.left
+                flex: 0 0 24%
+            &.right
+                flex: 0 0 74%
     &.half
         .box
             &.left,
             &.right
                 flex: 0 0 49%
+    &.full
+        .box
+            flex: 0 0 100%
 .box
     padding: 20px
     border-radius: 5px
