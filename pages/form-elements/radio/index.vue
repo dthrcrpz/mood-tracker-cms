@@ -6,7 +6,7 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box form">
-                <div class="group_inline">
+                <div class="group_inline nmb">
                     <div class="group radios">
                         <input type="radio" class="radio" value="yes" name="sample" id="yes" v-model="form.sample">
                         <label for="yes" class="pointer">Yes</label>
@@ -27,11 +27,9 @@
                 </div>
             </div>
             <div class="bottom_box form">
-                <div class="group">
-                    <div class="group radios disabled">
-                        <input type="radio" class="radio" value="disabled" name="sample" id="disabled">
-                        <label for="disabled" class="pointer">Disabled</label>
-                    </div>
+                <div class="group radios disabled nmb">
+                    <input type="radio" class="radio" value="disabled" name="sample" id="disabled">
+                    <label for="disabled" class="pointer">Disabled</label>
                 </div>
             </div>
         </div>
@@ -45,7 +43,7 @@
                 </div>
             </div>
             <div class="bottom_box form">
-                <div class="group_inline">
+                <div class="group_inline nmb">
                     <div :class="[ 'group radios', type.class ]" v-for="(type, key) in types" :key="key">
                         <input type="radio" class="radio" :value="type.class" :name="`sample_${key}`" :id="type.class" v-model="type.value">
                         <label :for="type.class" class="pointer">{{ type.name }}</label>

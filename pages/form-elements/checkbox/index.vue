@@ -6,7 +6,7 @@
                 <h2>Default</h2>
             </div>
             <div class="bottom_box form">
-                <div class="group_inline">
+                <div class="group_inline nmb">
                     <div class="checkbox">
                         <input type="checkbox" class="check" name="sample" id="sample" @change="form.sample ^= true" :checked="form.sample">
                         <label for="sample" class="pointer">Checkbox</label>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="bottom_box form">
-                <div class="group_inline">
+                <div class="group_inline nmb">
                     <div class="checkbox disabled">
                         <input type="checkbox" class="check" name="sample_v2" id="sample_v2" @change="form.sample_v2 ^= true" :checked="form.sample_v2">
                         <label for="sample_v2" class="pointer">Disabled</label>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="bottom_box form">
-                <div class="group_inline">
+                <div class="group_inline nmb">
                     <div class="group" v-for="(type, key) in types" :key="key">
                         <div :class="[ 'checkbox', type.class ]">
                             <input type="checkbox" class="check" :name="`sample_${key}`" :id="`sample_${key}`" @change="type.value ^= true" :checked="type.value">
