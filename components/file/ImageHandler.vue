@@ -31,10 +31,19 @@
                 </div>
             </div>
         </div>
+        <!-- Delete Confirmation -->
+        <delete-confirmation
+            ref="confirmation"
+            :item="'image'"
+            :for_asset="true"
+            :api="api"
+        />
     </div>
 </template>
 
 <script>
+    import DeleteConfirmation from '~/components/file/modal/DeleteConfirmation'
+
     export default {
         props: {
             not_required: {
@@ -73,9 +82,13 @@
                 }
             }
         },
+        components: {
+            DeleteConfirmation
+        },
         inject: ['$validator'],
         data () {
             return {
+                api: '',
                 showTags: false,
                 enabled: true,
                 dataImage: {
@@ -121,10 +134,10 @@
 					this.enabled = false
 					this.$parent.determineIfShowCloser()
 				} else {
-                    me.$axios.delete(`images/${key}`).then(res => {
-                        this.enabled = false
-                        this.$parent.determineIfShowCloser()
-                    })
+                    setTimeout( () => {
+                        me.api = `images/${key}`
+                        me.$refs.confirmation.opened = true
+                    }, 10)
 				}
             }
         },
