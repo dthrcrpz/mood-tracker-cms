@@ -33,18 +33,38 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '@nuxtjs/dotenv'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
-
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.API_URL,
+    credentials: false
+  },
+  env: {
+    baseUrl: process.env.BASE_URL
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+  serverMiddleware: [
+    (req, res, next) => {
+      if (/\/{2,}/.test(req.url)) {
+        const url = req.url.replace(/\/{2,}/g, '/')
+        res.writeHead(301, { 'Location': url })
+        return res.end()
+      }
+      next()
+    }
+  ],
+  server: {
+    port: process.env.PORT
   }
 }
