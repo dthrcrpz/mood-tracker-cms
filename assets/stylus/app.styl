@@ -90,6 +90,7 @@
             top: 50%
             right: calc(0% + 15px)
             width: 0
+            cursor: pointer
             border-left: 7px solid transparent
             border-right: 7px solid transparent
             border-top: 7px solid $primary
@@ -101,6 +102,15 @@
             flex-flow: row wrap
             align-items: center
             cursor: pointer
+            img
+                display: inline-block
+                margin-right: 5px
+                width: 33px
+                height: 33px
+                border-radius: 50%
+                object-fit: cover
+                object-position: center
+                border: 2px solid $dark_primary
             .user_picture
                 position: relative
                 text-transform: uppercase
@@ -296,6 +306,7 @@
             top: 50%
             right: 10px
             opacity: 1
+            z-index: 2
             visibility: visible
             transform: translateY(-50%)
             transition: .3s ease-in-out .3s
