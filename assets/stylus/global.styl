@@ -1967,6 +1967,11 @@ span
     &.disabled
         opacity: 0.5
         pointer-events: none
+    &.cancel
+        label
+            background-color: $red
+            border: 2px solid $red
+            transition: .3s ease-in-out
     &.toggled
         &.secondary
             label
@@ -1977,11 +1982,6 @@ span
             label
                 background-color: $success
                 border: 2px solid $success
-                transition: .3s ease-in-out
-        &.cancel
-            label
-                background-color: $red
-                border: 2px solid $red
                 transition: .3s ease-in-out
         &.warning
             label
@@ -2110,7 +2110,7 @@ span
 .page-enter,
 .page-leave-to
     opacity: 0
-    transform: scale(1.05)
+    transform: translateX(100px)
 
 .fade-enter-active,
 .fade-leave-active
