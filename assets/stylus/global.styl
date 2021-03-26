@@ -1483,6 +1483,16 @@ span
     border-collapse: separate
     border-spacing: 0 15px
     table-layout: auto
+    &.striped
+        tbody
+            tr
+                border-radius: 5px
+                box-shadow: 0 0 20px 0 transparent
+                transition: .3s ease-in-out
+                &:nth-child(odd)
+                    background-color: rgba(255, 144, 0, 0.1)
+                &:nth-child(even)
+                    background-color: transparent
     thead
         &.sticky
             tr
@@ -1579,11 +1589,7 @@ span
             border-radius: 5px
             box-shadow: 0 0 20px 0 rgba(0 ,0, 0, .05)
             background-color: $white
-            border: 1px solid $primary
             transition: .3s ease-in-out
-            &:hover
-                border: 1px solid $primary
-                transition: .3s ease-in-out
             td
                 padding: 15px
                 brandon_regular(16px, false)
