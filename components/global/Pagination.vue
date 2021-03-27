@@ -60,152 +60,133 @@
             },
             nextPage (current, last) {
                 const me = this
-                // if (current != last) {
-                //     me.$store.commit('global/loader/checkLoader', { status: true })
-                //
-                //     let url = `${me.apiRoute}?page=${current - 1}`
-                //
-                //     if (me.$parent.filter) {
-                //         let formData = ''
-                //         if (document.getElementById('filter')) {
-                //             formData = new FormData(document.getElementById('filter'))
-                //         } else {
-                //             formData = new FormData()
-                //         }
-                //         me.$axios.post(url, formData).then(res => {
-                //             me.$parent.res = res.data
-                //
-                //             if ((me.incrementPage + 3) <= me.last) {
-                //                 if (current == me.incrementPage) {
-                //                     me.iteration = me.iteration + 3
-                //                     me.incrementPage = me.incrementPage + 3
-                //                 }
-                //             }
-                //         }).catch(err => {
-                //             me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //         }).then(() => {
-                //             setTimeout( () => {
-                //                 me.$store.commit('global/loader/checkLoader', { status: false })
-                //                 document.body.classList.remove('no_scroll', 'no_click')
-                //             }, 500)
-                //         })
-                //     } else {
-                //         me.$axios.get(url).then(res => {
-                //             me.$parent.res = res.data
-                //
-                //             if ((me.incrementPage + 3) <= me.last) {
-                //                 if (current == me.incrementPage) {
-                //                     me.iteration = me.iteration + 3
-                //                     me.incrementPage = me.incrementPage + 3
-                //                 }
-                //             }
-                //         }).catch(err => {
-                //             me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //         }).then(() => {
-                //             setTimeout( () => {
-                //                 me.$store.commit('global/loader/checkLoader', { status: false })
-                //                 document.body.classList.remove('no_scroll', 'no_click')
-                //             }, 500)
-                //         })
-                //     }
-                // }
+                if (current != last) {
+                    me.$store.commit('global/loader/checkLoader', { status: true })
+
+                    let url = `${me.api_route}?page=${current + 1}`
+
+                    if (me.$parent.has_search) {
+                        me.$axios.post(url, me.$parent.form).then(res => {
+                            me.$parent.res = res.data
+
+                            if ((me.incrementPage + 3) <= me.last) {
+                                if (current == me.incrementPage) {
+                                    me.iteration = me.iteration + 3
+                                    me.incrementPage = me.incrementPage + 3
+                                }
+                            }
+                        }).catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.$store.commit('global/loader/checkLoader', { status: false })
+                                document.body.classList.remove('no_scroll', 'no_click')
+                            }, 500)
+                        })
+                    } else {
+                        me.$axios.get(url).then(res => {
+                            me.$parent.res = res.data
+
+                            if ((me.incrementPage + 3) <= me.last) {
+                                if (current == me.incrementPage) {
+                                    me.iteration = me.iteration + 3
+                                    me.incrementPage = me.incrementPage + 3
+                                }
+                            }
+                        }).catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.$store.commit('global/loader/checkLoader', { status: false })
+                                document.body.classList.remove('no_scroll', 'no_click')
+                            }, 500)
+                        })
+                    }
+                }
             },
             currentPage (count, first) {
                 const me = this
-                // me.$store.commit('global/loader/checkLoader', { status: true })
-                // if (first) {
-                //     me.iteration = 1
-                //     me.incrementPage = 3
-                // } else {
-                //     if ((me.incrementPage + 3) <= me.last) {
-                //         if (count == me.last) {
-                //             me.iteration = (count + 1) - 3
-                //             me.incrementPage = count
-                //         }
-                //     }
-                // }
-                //
-                // let url = `${me.apiRoute}?page=${count}`
-                //
-                // if (me.$parent.filter) {
-                //     let formData = ''
-                //     if (document.getElementById('filter')) {
-                //         formData = new FormData(document.getElementById('filter'))
-                //     } else {
-                //         formData = new FormData()
-                //     }
-                //
-                //     me.$axios.post(url, formData).then(res => {
-                //         me.$parent.res = res.data
-                //     }).catch(err => {
-                //         me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //     }).then(() => {
-                //         setTimeout( () => {
-                //             me.$store.commit('global/loader/checkLoader', { status: false })
-                //             document.body.classList.remove('no_scroll', 'no_click')
-                //         }, 500)
-                //     })
-                // } else {
-                //     me.$axios.get(url).then(res => {
-                //         me.$parent.res = res.data
-                //
-                //     }).catch(err => {
-                //         me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //     }).then(() => {
-                //         setTimeout( () => {
-                //             me.$store.commit('global/loader/checkLoader', { status: false })
-                //             document.body.classList.remove('no_scroll', 'no_click')
-                //         }, 500)
-                //     })
-                // }
+                me.$store.commit('global/loader/checkLoader', { status: true })
+                if (first) {
+                    me.iteration = 1
+                    me.incrementPage = 3
+                } else {
+                    if ((me.incrementPage + 3) <= me.last) {
+                        if (count == me.last) {
+                            me.iteration = (count + 1) - 3
+                            me.incrementPage = count
+                        }
+                    }
+                }
+
+                let url = `${me.api_route}?page=${count}`
+
+                if (me.$parent.has_search) {
+                    me.$axios.post(url, me.$parent.form).then(res => {
+                        me.$parent.res = res.data
+                    }).catch(err => {
+                        me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                    }).then(() => {
+                        setTimeout( () => {
+                            me.$store.commit('global/loader/checkLoader', { status: false })
+                            document.body.classList.remove('no_scroll', 'no_click')
+                        }, 500)
+                    })
+                } else {
+                    me.$axios.get(url).then(res => {
+                        me.$parent.res = res.data
+
+                    }).catch(err => {
+                        me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                    }).then(() => {
+                        setTimeout( () => {
+                            me.$store.commit('global/loader/checkLoader', { status: false })
+                            document.body.classList.remove('no_scroll', 'no_click')
+                        }, 500)
+                    })
+                }
             },
             prevPage (current, last) {
                 const me = this
-                // if (current != 1) {
-                //     me.$store.commit('global/loader/checkLoader', { status: true })
-                //
-                //     let url = `${me.apiRoute}?page=${current - 1}`
-                //
-                //     if (me.$parent.filter) {
-                //         let formData = ''
-                //         if (document.getElementById('filter')) {
-                //             formData = new FormData(document.getElementById('filter'))
-                //         } else {
-                //             formData = new FormData()
-                //         }
-                //         me.$axios.post(url, formData).then(res => {
-                //             me.$parent.res = res.data
-                //
-                //             if (current == me.iteration) {
-                //                 me.iteration = me.iteration - 3
-                //                 me.incrementPage = me.incrementPage - 3
-                //             }
-                //         }).catch(err => {
-                //             me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //         }).then(() => {
-                //             setTimeout( () => {
-                //                 me.$store.commit('global/loader/checkLoader', { status: false })
-                //                 document.body.classList.remove('no_scroll', 'no_click')
-                //             }, 500)
-                //         })
-                //     } else {
-                //         me.$axios.get(url).then(res => {
-                //             me.$parent.res = res.data
-                //
-                //             if (current == me.iteration) {
-                //                 me.iteration = me.iteration - 3
-                //                 me.incrementPage = me.incrementPage - 3
-                //             }
-                //         }).catch(err => {
-                //             me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                //         }).then(() => {
-                //             setTimeout( () => {
-                //                 me.$store.commit('global/loader/checkLoader', { status: false })
-                //                 document.body.classList.remove('no_scroll', 'no_click')
-                //             }, 500)
-                //         })
-                //     }
-                // }
+                if (current != 1) {
+                    me.$store.commit('global/loader/checkLoader', { status: true })
+
+                    let url = `${me.api_route}?page=${current - 1}`
+
+                    if (me.$parent.has_search) {
+                        me.$axios.post(url, me.$parent.form).then(res => {
+                            me.$parent.res = res.data
+
+                            if (current == me.iteration) {
+                                me.iteration = me.iteration - 3
+                                me.incrementPage = me.incrementPage - 3
+                            }
+                        }).catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.$store.commit('global/loader/checkLoader', { status: false })
+                                document.body.classList.remove('no_scroll', 'no_click')
+                            }, 500)
+                        })
+                    } else {
+                        me.$axios.get(url).then(res => {
+                            me.$parent.res = res.data
+
+                            if (current == me.iteration) {
+                                me.iteration = me.iteration - 3
+                                me.incrementPage = me.incrementPage - 3
+                            }
+                        }).catch(err => {
+                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.$store.commit('global/loader/checkLoader', { status: false })
+                                document.body.classList.remove('no_scroll', 'no_click')
+                            }, 500)
+                        })
+                    }
+                }
             }
         }
     }
