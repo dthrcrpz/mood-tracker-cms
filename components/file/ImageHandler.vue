@@ -1,34 +1,39 @@
 <template>
-    <div v-if="enabled" :data-vv-scope="`image_form_${unique}`">
-        <div class="group">
-            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" accept=".jpeg, .jpg, .png" :key="`image_form_${unique}.file[]`" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`${(dataImage.id) ? '' : 'required|'}image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-if="not_required">
-            <input type="file" class="action_image" :data-vv-name="`image_form_${unique}.file[]`" accept=".jpeg, .jpg, .png" :key="`image_form_${unique}.file[]`" :id="`image${unique}`" name="file[]" ref="file" @change="getFile($event)" v-validate="`image|ext:jpeg,jpg,png,svg|size:20000${(dimension.imageWidth == 0) ? '' : `|dimensions:${dimension.imageWidth},${dimension.imageHeight}`}`" v-else>
-            <input type="hidden" name="file_id[]" v-model="dataImage.id">
-            <input type="hidden" name="file_category[]" v-model="category">
+    <ValidationObserver tag="div" v-if="enabled" :vid="`image_form_${unique}`" :data-vv-scope="`image_form_${unique}`">
+        <ValidationProvider v-if="not_required" tag="div" class="group" name="File" :vid="`image_form_${unique}.file[]`" :data-vv-name="`image_form_${unique}.file[]`" ref="provider" v-slot="{ errors, validate }" :rules="file_rules">
+            <input type="file" class="action_image" accept=".jpeg, .jpg, .png" :id="`image${unique}`" name="file[]" ref="file" :data-vv-name="`image_form_${unique}.file[]`" @change="getFile($event)">
             <label class="action_image_label" :for="`image${unique}`">Choose File</label>
             <div v-if="$parent.showCloser" class="action_image_remove" @click="removeImage($event, unique, item.id, parent)">Remove</div>
-            <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file[]`)">{{ properFormat(errors.first(`image_form_${unique}.file[]`)) }}</span></transition>
-        </div>
+            <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+        </ValidationProvider>
+        <ValidationProvider v-else tag="div" class="group" name="File" :vid="`image_form_${unique}.file[]`" :data-vv-name="`image_form_${unique}.file[]`" ref="provider" v-slot="{ errors, validate }" :rules="file_rules">
+            <input type="file" class="action_image" accept=".jpeg, .jpg, .png" :id="`image${unique}`" name="file[]" ref="file" :data-vv-name="`image_form_${unique}.file[]`" @change="getFile($event)">
+            <label class="action_image_label" :for="`image${unique}`">Choose File</label>
+            <div v-if="$parent.showCloser" class="action_image_remove" @click="removeImage($event, unique, item.id, parent)">Remove</div>
+            <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+        </ValidationProvider>
+        <input type="hidden" name="file_id[]" v-model="dataImage.id">
+        <input type="hidden" name="file_category[]" v-model="category">
         <div class="form_tags_group" v-if="showTags">
             <div class="preview_group">
                 <img :id="`preview_image${unique}`" :src="`${(item != null) ? item.path : ''}`" />
             </div>
             <div class="tags_group">
-                <div class="group bordered filled">
-                    <label :for="`image_title${unique}`">{{ image_label }}  Title <span>*</span></label>
-                    <input type="text" name="file_title[]" :id="`image_title${unique}`" :data-vv-name="`image_form_${unique}.file_title[]`" v-validate="{required: true, regex: '^[a-zA-Z0-9\-_ |\_]*$', max: 50}" autocomplete="off" class="input" v-model="dataImage.title">
-                    <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_title[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_title[]`)) }}</span></transition>
-                </div>
-                <div :class="[ 'group bordered filled', ($parent.multiple) ? '' : 'nmb' ]">
+                <ValidationProvider tag="div" class="group bordered filled" :name="`${image_label} Title`" :rules="{ required: true, regex: '^[a-zA-Z0-9\-_ |\_]*$', max: 50 }" :vid="`image_form_${unique}.file_title[]`" :data-vv-name="`image_form_${unique}.file_title[]`" v-slot="{ errors }">
+                    <label :for="`image_title${unique}`">{{ image_label }} Title <span>*</span></label>
+                    <input type="text" name="file_title[]" :id="`image_title${unique}`" :data-vv-name="`image_form_${unique}.file_title[]`" autocomplete="off" class="input" v-model="dataImage.title">
+                    <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                </ValidationProvider>
+                <ValidationProvider tag="div" :class="['group bordered filled', ($parent.multiple) ? '' : 'nmb' ]" :name="`${image_label} Alt`" :vid="`image_form_${unique}.file_alt[]`" :data-vv-name="`image_form_${unique}.file_alt[]`" :rules="{ required: true, regex: '^[a-zA-Z0-9\_\-]*$', max: 50 }" v-slot="{ errors }">
                     <label :for="`image_alt${unique}`">{{ image_label }}  Alt <span>*</span></label>
-                    <input type="text" name="file_alt[]" :id="`image_alt_${unique}`" :data-vv-name="`image_form_${unique}.file_alt[]`" v-validate="{required: true, regex: '^[a-zA-Z0-9\_\-]*$', max: 50}" autocomplete="off" class="input" v-model="dataImage.alt">
-                    <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_alt[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_alt[]`)) }}</span></transition>
-                </div>
-                <div class="group bordered filled nmb" v-if="$parent.multiple">
+                    <input type="text" name="file_alt[]" :id="`image_alt_${unique}`" :data-vv-name="`image_form_${unique}.file_alt[]`" autocomplete="off" class="input" v-model="dataImage.alt">
+                    <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                </ValidationProvider>
+                <ValidationProvider tag="div" class="group bordered filled nmb" :name="`${image_label} Sequence`" :rules="{ required: true, numeric: true, min_value: 1, max_value: 99 }" :vid="`image_form_${unique}.file_sequence[]`" :data-vv-name="`image_form_${unique}.file_sequence[]`" v-slot="{ errors }" v-if="$parent.multiple">
                     <label :for="`image_sequence${unique}`">{{ image_label }}  Sequence <span>*</span></label>
-                    <input type="text" name="file_sequence[]" :id="`image_sequence_${unique}`" :data-vv-name="`image_form_${unique}.file_sequence[]`" v-validate="{required: true, numeric: true, min_value: 1, max_value: 99}" autocomplete="off" class="input" v-model="dataImage.sequence">
-                    <transition name="slide"><span class="validate" v-if="errors.has(`image_form_${unique}.file_sequence[]`)">{{ properFormat(errors.first(`image_form_${unique}.file_sequence[]`)) }}</span></transition>
-                </div>
+                    <input type="text" name="file_sequence[]" :id="`image_sequence_${unique}`" :data-vv-name="`image_form_${unique}.file_sequence[]`" autocomplete="off" class="input" v-model="dataImage.sequence">
+                    <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                </ValidationProvider>
             </div>
         </div>
         <!-- Delete Confirmation -->
@@ -38,7 +43,7 @@
             :for_asset="true"
             :api="api"
         />
-    </div>
+    </ValidationObserver>
 </template>
 
 <script>
@@ -85,9 +90,9 @@
         components: {
             DeleteConfirmation
         },
-        inject: ['$validator'],
         data () {
             return {
+                file_rules: { required: true },
                 api: '',
                 showTags: false,
                 enabled: true,
@@ -101,27 +106,31 @@
         },
         methods: {
             getFile (event) {
-                let element = event.target
-                let me = this
-                if (element.files[0]) {
-                    element.nextElementSibling.innerText = element.files[0].name
-                    me.showTags = true
-                    me.$parent.files[me.unique] = me.$refs.file.files[0]
-                }
-                if (element.files && element.files[0]) {
-                    let reader = new FileReader()
-                    reader.onload = function () {
-                        let image = document.getElementById(`preview_image${me.unique}`)
-                        image.src = reader.result
-                    }
-                    setTimeout( () => {
-                        reader.readAsDataURL(element.files[0])
-                        if (me.$parent.$parent.collapsible) {
-                            let target = document.getElementById('item_1')
-                            target.style.height = `${target.scrollHeight}px`
+                const me = this
+                me.$refs.provider.validate(event).then(success => {
+                    if (success) {
+                        let element = event.target
+                        if (element.files[0]) {
+                            element.nextElementSibling.innerText = element.files[0].name
+                            me.showTags = true
+                            me.$parent.files[me.unique] = me.$refs.file.files[0]
                         }
-                    }, 10)
-                }
+                        if (element.files && element.files[0]) {
+                            let reader = new FileReader()
+                            reader.onload = function () {
+                                let image = document.getElementById(`preview_image${me.unique}`)
+                                image.src = reader.result
+                            }
+                            setTimeout( () => {
+                                reader.readAsDataURL(element.files[0])
+                                if (me.$parent.$parent.collapsible) {
+                                    let target = document.getElementById('item_1')
+                                    target.style.height = `${target.scrollHeight}px`
+                                }
+                            }, 10)
+                        }
+                    }
+                })
             },
             removeImage (event, unique, key, parent) {
                 let me = this
@@ -130,26 +139,45 @@
                         me.$parent.files.splice(index, 1)
                     }
                 })
-                if (this.item == 0) {
-					this.enabled = false
-					this.$parent.determineIfShowCloser()
+                if (me.item == 0) {
+					me.enabled = false
+					me.$parent.determineIfShowCloser()
 				} else {
                     setTimeout( () => {
                         me.api = `images/${key}`
                         me.$refs.confirmation.opened = true
                     }, 10)
 				}
+            },
+            checkRules () {
+                const me = this
+
+                if (me.not_required) {
+                    if (me.dimension.imageWidth == 0) {
+                        me.file_rules = { required: (me.dataImage.id) ? false : true, image: true, ext: ['jpeg', 'jpg', 'png', 'svg'], size: 20000 }
+                    } else {
+                        me.file_rules = { required: (me.dataImage.id) ? false : true, image: true, ext: ['jpeg', 'jpg', 'png', 'svg'], size: 20000, dimensions: [me.dimension.imageWidth, me.dimension.imageHeight] }
+                    }
+                } else {
+                    if (me.dimension.imageWidth == 0) {
+                        me.file_rules = { image: true, ext: ['jpeg', 'jpg', 'png', 'svg'], size: 20000 }
+                    } else {
+                        me.file_rules = { image: true, ext: ['jpeg', 'jpg', 'png', 'svg'], size: 20000, dimensions: [me.dimension.imageWidth, me.dimension.imageHeight] }
+                    }
+                }
             }
         },
         mounted () {
+            const me = this
             let ctr = 0
+            me.checkRules()
             setInterval( () => {
-                if (ctr < 1 && this.item) {
-                    this.dataImage.id = (this.item.id != null) ? this.item.id : 0
-                    this.dataImage.title = (this.item.title) ? this.item.title : ''
-                    this.dataImage.alt = (this.item.alt) ? this.item.alt : ''
-                    this.dataImage.sequence = (this.item.sequence) ? this.item.sequence : 0
-                    this.showTags = (this.item && this.item.id) ? true : false
+                if (ctr < 1 && me.item) {
+                    me.dataImage.id = (me.item.id != null) ? me.item.id : 0
+                    me.dataImage.title = (me.item.title) ? me.item.title : ''
+                    me.dataImage.alt = (me.item.alt) ? me.item.alt : ''
+                    me.dataImage.sequence = (me.item.sequence) ? me.item.sequence : 0
+                    me.showTags = (me.item && me.item.id) ? true : false
                     ctr++
                 }
             }, 500)

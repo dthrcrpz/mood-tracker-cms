@@ -55,7 +55,6 @@
                 }
             }
 		},
-		inject: ['$validator'],
 		components: {
 			ImageHandler
 		},
@@ -63,7 +62,7 @@
 			return {
 				table_name: 'images',
                 files: [],
-				images: [0],
+				images: [0, 1],
 				showCloser: false
 			}
 		},
