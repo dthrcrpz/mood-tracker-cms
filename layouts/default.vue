@@ -86,16 +86,18 @@
             },
             validateToken () {
                 const me = this
-                me.authenticated = (me.$cookies.get('access_token')) ? true : false
-                if (!me.authenticated) {
-                    window.location.assign('/')
-                }
+                me.authenticated = true
+                // if (!me.authenticated) {
+                //     window.location.assign('/')
+                // }
             }
         },
         mounted () {
             const me = this
             if (!me.routes.includes(me.$route.path)) {
                 me.validateToken()
+            } else {
+                me.authenticated = false
             }
         },
         beforeMount () {
