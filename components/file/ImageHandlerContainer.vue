@@ -68,32 +68,35 @@
 		},
 		methods: {
 			addImage () {
-				this.images.push(0)
-                this.determineIfShowCloser()
+				const me = this
+				me.images.push(0)
+                me.determineIfShowCloser()
 			},
             determineIfShowCloser () {
+				const me = this
 				let enabledCount = 0
 				setTimeout(() => {
-					this.$refs.imagePicker.forEach((item, index) => {
+					me.$refs.imagePicker.forEach((item, index) => {
 						if (item.enabled == true) {
 							enabledCount++
 						}
 					})
-					this.showCloser = (enabledCount > 1) ? true : false
+					me.showCloser = (enabledCount > 1) ? true : false
 				}, 10)
 			}
 		},
 		mounted () {
+			const me = this
 			let ctr = 0
 			setInterval( () => {
-				if (ctr < 1 && this.data != '') {
-					this.images = this.data
-					this.data.forEach((item, index) => {
-						this.files.push(null)
+				if (ctr < 1 && me.data != '') {
+					me.images = me.data
+					me.data.forEach((item, index) => {
+						me.files.push(null)
 					})
 					ctr++
 				}
-				this.determineIfShowCloser()
+				me.determineIfShowCloser()
 			}, 500)
 		}
 	}
