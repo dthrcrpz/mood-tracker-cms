@@ -101,15 +101,6 @@ Vue.mixin({
             }
             return count
         },
-        notify (action) {
-            this.$store.state.notificationMessage = action
-            setTimeout( () => {
-                this.$store.state.isNotify = true
-            }, 500)
-            setTimeout( () => {
-                this.$store.state.isNotify = false
-            }, 2000)
-        },
         toJSON (data) {
             if (data) {
                 return JSON.parse(JSON.stringify(Object.fromEntries(data)))
@@ -133,77 +124,6 @@ Vue.mixin({
                 slug = data.toLowerCase().replace(/\s/g, '-')
             }
             return slug
-        },
-        loader (data) {
-            this.$store.state.isLoading = data
-            if (data) {
-                document.body.classList.add('no_click')
-            } else {
-                document.body.classList.remove('no_click')
-            }
-        },
-        logout () {
-            let token = (this.$route.query.token != null) ? this.$route.query.token : this.$cookies.get('70hokc3hhhn5')
-            if (token) {
-                this.loader(true)
-            }
-            this.$axios.post('/api/logout', {}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(res => {
-                // wala
-            }).catch(err => {
-                this.loader(false)
-                console.log(err)
-            }).then(() => {
-                this.$cookies.remove('70hokc3hhhn5')
-                if (this.$store.state.isAuth) {
-                    setTimeout(() => {
-                        this.loader(false)
-                        window.location.assign('/')
-                    }, 500)
-                } else {
-                    this.$store.state.isAuth = false
-                }
-            })
-        },
-        validateToken () {
-            let token = (this.$route.query.token != null) ? this.$route.query.token : this.$cookies.get('70hokc3hhhn5')
-            if (token != null || token != undefined) {
-                this.$axios.get('api/user', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }).then(res => {
-                    if (res.data != 0) {
-                        this.$store.state.isAuth = true
-                        this.$store.state.token = token
-                        this.$store.state.user = res.data.user
-                    } else {
-                        this.logout()
-                    }
-                }).catch(err => {
-                    console.log(err)
-                    this.logout()
-                })
-            } else {
-                this.logout()
-            }
-        },
-        async fetchData (apiRoute) {
-            const me = this
-            await me.validateToken()
-            let api = await me.$axios.get(apiRoute)
-            return api
-        },
-        async initFB () {
-            await FB.init({
-                appId            : '3306202862739419',
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v3.3'
-            })
         }
     }
 })
