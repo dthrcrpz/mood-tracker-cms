@@ -1,28 +1,30 @@
 <template lang="html">
-    <div class="group">
-        <div class="file">
-            <input type="file" :name="file_name" :id="`files${unique}`" :multiple="multiple" :accept="populateExtensions" class="o_hidden" @change="getFiles($event)" v-validate="{image: (type == 'image') ? true : false, size: 200000, ext: extensions}">
-            <label :for="`files${unique}`" @dragover.prevent @dragenter.prevent @drop.prevent="dropFiles($event)">
-                <p>Drag a {{ type }} here<br>
-                or <b class="pointer">browse</b> to upload.</p>
-            </label>
-        </div>
-        <div :class="[ 'preview_image', columns, (populateFiles.length > 3) ? 'scrollable' : '' ]" v-if="files.length > 0">
-            <div :class="[ 'preview', division, (type == 'file') ? 'big' : '' ]" v-for="(data, key) in populateFiles" :key="key" :data-vv-scope="`file_form_${key}`">
-                <img src="" :id="`preview_image${key}`" v-if="type == 'image'" />
-                <div class="image_close" @click="removeTempFiles(key)">×</div>
-                <div class="item mb twenty">
-                    <span v-line-clamp="1">{{ data.name }}</span>
+    <ValidationObserver tag="div" class="group">
+        <ValidationProvider name="File" ref="provider" v-slot="{ errors, validate }" :rules="{ required: true, image: (type == 'image') ? true : false, size: 200000, ext: extensions}">
+            <div class="file">
+                <input type="file" :name="file_name" :id="`files${unique}`" :multiple="multiple" :accept="populateExtensions" class="o_hidden" @change="getFiles($event)">
+                <label :for="`files${unique}`" @dragover.prevent @dragenter.prevent @drop.prevent="dropFiles($event)">
+                    <p>Drag a {{ type }} here<br>
+                    or <b class="pointer">browse</b> to upload.</p>
+                </label>
+            </div>
+            <div :class="[ 'preview_image', columns, (populateFiles.length > 3) ? 'scrollable' : '' ]" v-if="files.length > 0">
+                <div :class="[ 'preview', division, (type == 'file') ? 'big' : '' ]" v-for="(data, key) in populateFiles" :key="key" :data-vv-scope="`file_form_${key}`">
+                    <img src="" :id="`preview_image${key}`" v-if="type == 'image'" />
+                    <div class="image_close" @click="removeTempFiles(key)">×</div>
+                    <div class="item mb twenty">
+                        <span v-line-clamp="1">{{ data.name }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="disclaimer">
-            <div class="violator">Drag and drop {{ type }}.<br>
-            Maximum, file size is 20MB<br>
-            Supported file formats: {{ populateExtensions }}</div>
-        </div>
-        <transition name="slide"><span class="validate" v-if="errors.has(file_name)">{{ properFormat(errors.first(file_name)) }}</span></transition>
-    </div>
+            <div class="disclaimer">
+                <div class="violator">Drag and drop {{ type }}.<br>
+                Maximum, file size is 20MB<br>
+                Supported file formats: {{ populateExtensions }}</div>
+            </div>
+            <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+        </ValidationProvider>
+    </ValidationObserver>
 </template>
 
 <script>
@@ -64,7 +66,6 @@
                 files: []
             }
         },
-        inject: ['$validator'],
         computed: {
             populateFiles () {
                 const me = this
@@ -119,25 +120,29 @@
              */
             getFiles (event) {
                 const me = this
-                let element = document.getElementById(`files${me.unique}`)
+                me.$refs.provider.validate(event).then(success => {
+                    if (success) {
+                        let element = document.getElementById(`files${me.unique}`)
 
-                if (event.target.files.length > 0) {
-                    me.files = []
-                    me.$parent.files = []
-                    for (let i = 0; i < element.files.length; i++) {
+                        if (event.target.files.length > 0) {
+                            me.files = []
+                            me.$parent.files = []
+                            for (let i = 0; i < element.files.length; i++) {
 
-                        me.files.push(element.files[i])
+                                me.files.push(element.files[i])
 
-                        if (me.type == 'image') {
-                            let reader = new FileReader()
-                            reader.onload = function () {
-                                let image = document.getElementById(`preview_image${i}`)
-                                image.src = reader.result
+                                if (me.type == 'image') {
+                                    let reader = new FileReader()
+                                    reader.onload = function () {
+                                        let image = document.getElementById(`preview_image${i}`)
+                                        image.src = reader.result
+                                    }
+                                    reader.readAsDataURL(element.files[i])
+                                }
                             }
-                            reader.readAsDataURL(element.files[i])
                         }
                     }
-                }
+                })
             },
             /**
              * drag and drop event files
@@ -145,29 +150,32 @@
              */
             dropFiles (event) {
                 const me = this
+                me.$refs.provider.validate(event).then(success => {
+                    if (success) {
+                        let target = event.dataTransfer.files,
+                            target_file = document.getElementById(`files${me.unique}`)
 
-                let target = event.dataTransfer.files,
-                    target_file = document.getElementById(`files${me.unique}`)
+                        const data_transfer = new DataTransfer()
+                        let length = (me.multiple) ? target.length : 1
 
-                const data_transfer = new DataTransfer()
-                let length = (me.multiple) ? target.length : 1
+                        for (let i = 0; i < length; i++) {
+                            data_transfer.items.add(target[i])
 
-                for (let i = 0; i < length; i++) {
-                    data_transfer.items.add(target[i])
+                            target_file.files = data_transfer.files
+                            me.files = target_file.files
+                            me.$parent.files = target_file.files
 
-                    target_file.files = data_transfer.files
-                    me.files = target_file.files
-                    me.$parent.files = target_file.files
-
-                    if (me.type == 'image') {
-                        let reader = new FileReader()
-                        reader.onload = function () {
-                            let image = document.getElementById(`preview_image${i}`)
-                            image.src = reader.result
+                            if (me.type == 'image') {
+                                let reader = new FileReader()
+                                reader.onload = function () {
+                                    let image = document.getElementById(`preview_image${i}`)
+                                    image.src = reader.result
+                                }
+                                reader.readAsDataURL(target[i])
+                            }
                         }
-                        reader.readAsDataURL(target[i])
                     }
-                }
+                })
             }
         }
     }

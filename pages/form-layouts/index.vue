@@ -88,6 +88,9 @@
                         <div class="group nmb">
                             <image-handler-container ref="image_handler" :multiple="false" />
                         </div>
+                        <div class="group nmb">
+                            <asset-container />
+                        </div>
                     </div>
                 </div>
                 <div class="box mb">
@@ -119,12 +122,14 @@
 <script>
     import { ValidationObserver, ValidationProvider } from 'vee-validate'
     import ImageHandlerContainer from '~/components/file/ImageHandlerContainer'
+    import AssetContainer from '~/components/file/AssetContainer'
 
     export default {
         components: {
             ValidationObserver,
             ValidationProvider,
-            ImageHandlerContainer
+            ImageHandlerContainer,
+            AssetContainer
         },
         data () {
             return {
