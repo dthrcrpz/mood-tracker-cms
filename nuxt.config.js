@@ -11,7 +11,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/logo.png' }
     ]
   },
-
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: {
+    color: '#FF9000',
+    throttle: 0,
+    height: '4px'
+  },
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '~/assets/stylus/app.styl'
