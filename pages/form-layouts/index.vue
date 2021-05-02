@@ -120,14 +120,11 @@
 </template>
 
 <script>
-    import { ValidationObserver, ValidationProvider } from 'vee-validate'
     import ImageHandlerContainer from '~/components/file/ImageHandlerContainer'
     import AssetContainer from '~/components/file/AssetContainer'
 
     export default {
         components: {
-            ValidationObserver,
-            ValidationProvider,
             ImageHandlerContainer,
             AssetContainer
         },
