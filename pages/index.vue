@@ -1,34 +1,31 @@
 <template>
-    <div id="login">
+    <div id="login" v-if="loaded">
         <div class="wrapper">
             <div class="left">
-                <img src="/company-banner.png" />
+                <img src="/company-banner.jpg" />
             </div>
             <div class="right">
                 <div class="overlay">
                     <h2>Login</h2>
                     <h3>Welcome back, Please login to continue</h3>
-                    <form class="form" @submit.prevent="submit()">
-                        <div class="group floating">
-                            <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email">
-                            <label for="email">Email Address</label>
-                        </div>
-                        <div class="group floating">
-                            <input type="password" :class="[ 'input', (form.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.password">
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="group_inline between">
-                            <div class="checkbox">
-                                <input type="checkbox" class="check" name="remember_me" id="remember_me" @change="form.remember_me ^= true" :checked="form.remember_me">
-                                <label for="remember_me" class="pointer">Remember Me</label>
+                    <ValidationObserver tag="div" ref="form">
+                        <form class="form" @submit.prevent="submit()">
+                            <ValidationProvider tag="div" class="group floating" name="Email" :rules="{ required: true }" v-slot="{ errors }">
+                                <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email">
+                                <label for="email">Email Address</label>
+                                <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                            </ValidationProvider>
+                                <ValidationProvider tag="div" class="group floating" name="Password" :rules="{ required: true }" v-slot="{ errors }">
+                                <input type="password" :class="[ 'input', (form.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.password">
+                                <label for="password">Password</label>
+                                <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                            </ValidationProvider>
+                            <div class="buttons">
+                                <a href="https://bit-interchange.com" class="primary_button outline pointer">Back To Home</a>
+                                <button type="submit" class="primary_button pointer">Login</button>
                             </div>
-                            <div class="call_to_action pointer">Forgot Password?</div>
-                        </div>
-                        <div class="buttons">
-                            <div class="primary_button outline pointer">Back To Home</div>
-                            <button type="submit" class="primary_button pointer">Login</button>
-                        </div>
-                    </form>
+                        </form>
+                    </ValidationObserver>
                 </div>
             </div>
         </div>
@@ -39,6 +36,7 @@
     export default {
         data () {
             return {
+                loaded: false,
                 form: {
                     email: '',
                     password: '',
@@ -49,7 +47,28 @@
         methods: {
             submit () {
                 const me = this
-                me.$router.push('/dashboard')
+                me.$refs.form.validate().then(success => {
+                    if (!success) {
+                        me.$scrollTo('.validate', {
+    						offset: -250
+    					})
+                        return
+                    } else {
+                        // me.$store.commit('global/loader/checkLoader', { status: true })
+                        //
+                        // me.$auth.loginWith('local', { data: me.form }).then(res => {
+                            me.$router.push('/dashboard')
+                        // }).catch(err => {
+                        //     me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        // }).then(() => {
+                        //     me.$store.commit('global/loader/checkLoader', { status: false })
+                        //     document.body.classList.remove('no_scroll', 'no_click')
+                        // })
+                    }
+                    me.$nextTick(() => {
+                      me.$refs.form.reset()
+                    })
+                })
             },
             initialization (event) {
                 const me = this
