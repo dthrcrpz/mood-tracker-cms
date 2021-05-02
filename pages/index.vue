@@ -2,7 +2,7 @@
     <div id="login" v-if="loaded">
         <div class="wrapper">
             <div class="left">
-                <img src="/company-banner.jpg" />
+                <img src="/company-banner.png" />
             </div>
             <div class="right">
                 <div class="overlay">
