@@ -1,6 +1,6 @@
 {
   "name": "admin-template",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -10,10 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "^5.0.0-1622309801.87126e3",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/dotenv": "^1.4.1",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12",
+    "nuxt": "^2.15.7",
     "v-click-outside": "^2.1.5",
     "vee-validate": "^3.4.5",
     "vue-click-outside": "^1.0.7",

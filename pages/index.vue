@@ -1,5 +1,5 @@
 <template>
-    <div id="login" v-if="loaded">
+    <div id="login">
         <div class="wrapper">
             <div class="left">
                 <img src="/company-banner.png" />
@@ -34,16 +34,13 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                form: {
-                    email: '',
-                    password: '',
-                    remember_me: false
-                }
+        data: () => ({
+            form: {
+                email: '',
+                password: '',
+                remember_me: false
             }
-        },
+        }),
         methods: {
             submit () {
                 const me = this
@@ -69,30 +66,7 @@
                       me.$refs.form.reset()
                     })
                 })
-            },
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
             }
-        },
-        mounted () {
-            const me = this
-            me.initialization()
-        },
-        asyncData ({ store }) {
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         },
         head () {
             return {

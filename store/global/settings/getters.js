@@ -1,5 +1,8 @@
 export default {
-    getTitle (state) {
+    getTitle: (state) => {
         return state.title
+    },
+    getAuthenticated: (state) => {
+        return state.authenticated
     }
 }

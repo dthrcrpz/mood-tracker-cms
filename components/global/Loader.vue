@@ -1,5 +1,5 @@
 <template lang="html">
-    <div class="loader">
+    <div class="loader" v-if="loading">
         <div class="wrapper">
             <div class="icon">
                 <img src="/logo.png" >
@@ -11,8 +11,20 @@
 
 <script>
     export default {
-        mounted () {
-            document.body.classList.add('no_scroll', 'no_click')
+        data: () => ({
+            loading: false
+        }),
+        methods: {
+            start () {
+                const me = this
+                me.loading = true
+            },
+            finish () {
+                const me = this
+                setTimeout( () => {
+                    me.loading = false
+                }, 500)
+            }
         }
     }
 </script>

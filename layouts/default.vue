@@ -17,10 +17,6 @@
             <bottombar v-if="authenticated" />
         </transition>
 
-        <transition name="fade">
-            <loader v-if="has_loaded" />
-        </transition>
-
         <catcher />
 
         <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none' ]"></ul>
@@ -66,7 +62,6 @@
         },
         computed: {
             ...mapGetters ({
-                has_loaded: 'global/loader/hasLoaded',
                 has_toggled: 'global/sidebar/hasToggled',
                 toasts: 'global/toast/getToasts'
             })
@@ -83,27 +78,12 @@
                         selector.querySelector('thead').classList.remove('sticky')
                     }
                 }
-            },
-            validateToken () {
-                const me = this
-                me.authenticated = true
-                // if (!me.authenticated) {
-                //     window.location.assign('/')
-                // }
             }
         },
         mounted () {
-            const me = this
-            if (!me.routes.includes(me.$route.path)) {
-                me.validateToken()
-            } else {
-                me.authenticated = false
-            }
-        },
-        beforeMount () {
             window.addEventListener('scroll', this.windowScroll)
         },
-        beforeDestroy () {
+        destroyed () {
             window.removeEventListener('scroll', this.windowScroll)
         },
         head () {

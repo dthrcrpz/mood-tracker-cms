@@ -66,7 +66,7 @@
             logout () {
                 const me = this
                 me.$store.state.isAuth = false
-                me.$router.push('/')
+                window.location.assign('/')
             }
         }
     }
