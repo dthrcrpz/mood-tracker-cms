@@ -1,20 +1,20 @@
 <template>
     <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
 
-        <div class="swallower" v-if="authenticated"></div>
+        <div class="swallower" v-if="getAuthenticated"></div>
 
         <transition name="fade">
-            <sidebar v-if="authenticated" />
+            <sidebar v-if="getAuthenticated" />
         </transition>
 
         <transition name="fade">
-            <topbar v-if="authenticated" />
+            <topbar v-if="getAuthenticated" />
         </transition>
 
         <Nuxt />
 
         <transition name="fade">
-            <bottombar v-if="authenticated" />
+            <bottombar v-if="getAuthenticated" />
         </transition>
 
         <catcher />
@@ -26,42 +26,26 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import Topbar from '~/components/global/Topbar'
-    import Sidebar from '~/components/global/Sidebar'
-    import Bottombar from '~/components/global/Bottombar'
-    import Catcher from '~/components/global/Catcher'
-    import Loader from '~/components/global/Loader'
 
     export default {
         components: {
-            Topbar,
-            Sidebar,
-            Bottombar,
-            Catcher,
-            Loader
+            Topbar: () => import('~/components/global/Topbar'),
+            Sidebar: () => import('~/components/global/Sidebar'),
+            Bottombar: () => import('~/components/global/Bottombar'),
+            Catcher: () => import('~/components/global/Catcher')
         },
-        data () {
-            return {
-                padding: 0,
-                authenticated: false,
-                routes: [
-                    '/',
-                    '/forgot-password',
-                    '/reset-password'
-                ]
-            }
-        },
+        data: () => ({
+            padding: 0
+        }),
         watch: {
             $route (to, from) {
                 const me = this
-                if (!me.routes.includes(me.$route.path)) {
-                    me.validateToken()
-                }
                 me.$store.commit('global/catcher/hideHasError', { status: false })
             }
         },
         computed: {
             ...mapGetters ({
+                getAuthenticated: 'global/settings/getAuthenticated',
                 has_toggled: 'global/sidebar/hasToggled',
                 toasts: 'global/toast/getToasts'
             })
@@ -88,7 +72,7 @@
         },
         head () {
             return {
-                title: 'CISM | CMS',
+                title: 'Admin Template | CMS',
                 script: [
                     { src: 'https://code.jquery.com/jquery-3.2.1.slim.min.js' },
                     { src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js' },
