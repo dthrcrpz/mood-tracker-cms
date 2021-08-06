@@ -6,11 +6,9 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false
-            }
-        },
+        data: () => ({
+            loaded: false
+        }),
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Dashboard' })
             return {
