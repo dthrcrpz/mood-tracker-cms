@@ -5,7 +5,7 @@
 			v-for="(image, key) in images"
 			ref="imagePicker"
 			:key="key"
-			:unique="(image.id) ? image.id : image"
+			:unique="(image.id) ? image.id : key"
 			:item="image"
 			:image_label="image_label"
 			:category="category"
