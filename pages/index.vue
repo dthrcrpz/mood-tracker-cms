@@ -21,7 +21,7 @@
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
                             <div class="buttons">
-                                <a href="https://bit-interchange.com" class="primary_button outline pointer">Back To Home</a>
+                                <a href="#" class="primary_button outline pointer">Back To Home</a>
                                 <button type="submit" class="primary_button pointer">Login</button>
                             </div>
                         </form>
