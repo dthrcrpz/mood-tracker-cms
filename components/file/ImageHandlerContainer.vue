@@ -5,7 +5,7 @@
 			v-for="(image, key) in images"
 			ref="imagePicker"
 			:key="key"
-			:unique="(image.id) ? image.id : key"
+			:unique="(image.id) ? image.id : image"
 			:item="image"
 			:image_label="image_label"
 			:category="category"
@@ -63,13 +63,15 @@
 				table_name: 'images',
                 files: [],
 				images: [0, 1],
+				ctr: 0,
 				showCloser: false
 			}
 		},
 		methods: {
 			addImage () {
 				const me = this
-				me.images.push(0)
+				me.ctr += 1
+				me.images.push(me.ctr)
                 me.determineIfShowCloser()
 			},
             determineIfShowCloser () {
