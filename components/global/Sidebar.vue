@@ -16,18 +16,27 @@
         <div class="bottom">
             <ul class="list">
                 <li class="item" v-for="(data, key) in links" :key="key">
-                    <nuxt-link :event="''" :to="data.slug" :class="[ 'link', (data.subs) ? 'parent' : '' ]" exact-active-class="exact"
-                        active-class="active" @click.native.self="navigate(data, $event)">
-                        <div class="link_icon" v-html="data.icon"></div>
-                        <span>{{ data.name }}</span>
+                    <nuxt-link :to="data.slug" custom v-slot="{ isActive, isExactActive }">
+                        <a
+                            :class="[ 'link', 'pointer', (data.subs) ? 'parent' : '', { 'active' : isActive }, { exact : isExactActive } ]"
+                            @click.self="navigate(data, $event)"
+                        >
+                            <div class="link_icon" v-html="data.icon"></div>
+                            <span>{{ data.name }}</span>
+                        </a>
                     </nuxt-link>
                     <div class="sub" v-if="data.subs">
                         <ul class="sub_list">
                             <li class="sub_item" v-for="(sub, key) in data.subs" :key="key">
-                                <nuxt-link class="sub_link" :to="sub.slug" exact-active-class="exact"
-                                    active-class="active">
-                                    <div class="sub_link_icon" v-html="sub.icon"></div>
-                                    <span>{{ sub.name }}</span>
+                                <nuxt-link :to="sub.slug" custom v-slot="{ href, navigate, isActive, isExactActive }">
+                                    <a
+                                        :class="[ 'sub_link', { 'active' : isActive }, { exact : isExactActive } ]"
+                                        :href="href"
+                                        @click="navigate"
+                                    >
+                                        <div class="sub_link_icon" v-html="sub.icon"></div>
+                                        <span>{{ sub.name }}</span>
+                                    </a>
                                 </nuxt-link>
                             </li>
                         </ul>
