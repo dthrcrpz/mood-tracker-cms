@@ -33,7 +33,11 @@
             </template>
         </transition>
 
-        <catcher />
+        <transition name="fade">
+            <template v-if="getShowStatus('catcher')">
+                <catcher />
+            </template>
+        </transition>
 
         <ul id="toast_wrapper" :class="[ (getToasts > 0) ? '' : 'none' ]"></ul>
 

@@ -1,14 +1,20 @@
 <template lang="html">
     <div id="dashboard" v-if="loaded">
-        <quill-editor
-            class="editor"
-            ref="myTextEditor"
-            :value="content"
-            :options="options"
-            @change="onEditorChange"
-        />
-
-        <div class="preview" v-html="content"></div>
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Default</h2>
+                <div class="description" v-html="form.editor"></div>
+            </div>
+            <div class="bottom_box">
+                <quill-editor
+                    class="editor"
+                    ref="myTextEditor"
+                    :value="form.editor"
+                    :options="options"
+                    @change="onEditorChange"
+                />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -34,18 +40,14 @@
                     ]
                 }
             },
-            content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-        }),
-        computed: {
-            editor() {
-                const me = this
-                return me.$refs.myTextEditor.quill
+            form: {
+                editor: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>'
             }
-        },
+        }),
         methods: {
             onEditorChange (editor) {
                 const me = this
-                me.content = editor.html
+                me.form.editor = editor.html
             }
         },
         mounted () {
@@ -57,7 +59,7 @@
             }, 500)
         },
         asyncData ({ store }) {
-            store.commit('global/settings/populateTitle', { title: 'Wysiwyg' })
+            store.commit('global/settings/populateTitle', { title: 'Quill Editor' })
         }
     }
 </script>

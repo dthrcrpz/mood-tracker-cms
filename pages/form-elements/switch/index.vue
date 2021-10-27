@@ -72,15 +72,13 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                types: ['primary', 'secondary', 'success', 'cancel', 'warning', 'info', 'dark'],
-                form: {
-                    default: false
-                }
+        data: () => ({
+            loaded: false,
+            types: ['primary', 'secondary', 'success', 'cancel', 'warning', 'info', 'dark'],
+            form: {
+                default: false
             }
-        },
+        }),
         methods: {
             toggle (type) {
                 const me = this
@@ -89,31 +87,18 @@
                         me.form.default ^= true
                         break
                 }
-            },
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
             }
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Switch' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

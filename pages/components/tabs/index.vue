@@ -38,55 +38,40 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                tabs: [
-                    {
-                        name: 'Details',
-                        unique: 0
-                    },
-                    {
-                        name: 'Materials',
-                        unique: 1
-                    },
-                    {
-                        name: 'Videos',
-                        unique: 2
-                    }
-                ],
-                active_tab: 0
-            }
-        },
+        data: () => ({
+            loaded: false,
+            tabs: [
+                {
+                    name: 'Details',
+                    unique: 0
+                },
+                {
+                    name: 'Materials',
+                    unique: 1
+                },
+                {
+                    name: 'Videos',
+                    unique: 2
+                }
+            ],
+            active_tab: 0
+        }),
         methods: {
             getTab (data) {
                 const me = this
                 me.active_tab = data.unique
-            },
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
             }
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Tabs' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

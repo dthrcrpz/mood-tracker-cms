@@ -6,6 +6,7 @@ export default {
         }
         if (!payload.status) {
             document.body.classList.remove('no_scroll')
+            state.item = {}
         }
     }
 }

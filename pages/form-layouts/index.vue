@@ -3,9 +3,9 @@
 
         <!-- Back Action Item -->
         <div class="actions">
-            <nuxt-link to="/" class="primary_button pointer">
+            <nuxt-link to="/" class="cancel button pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                <span>Back to Form</span>
+                <span>Back</span>
             </nuxt-link>
         </div>
 
@@ -73,9 +73,14 @@
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
                         </div>
-                        <div class="group bordered filled description">
+                        <div class="group bordered filled">
                             <label for="description">Description *</label>
-                            <textarea class="input wysiwyg" name="description" id="description" autocomplete="off"></textarea>
+                            <quill-editor
+                                class="editor description"
+                                :value="form.description"
+                                :options="options"
+                                @change="updateEditor($event, 'description')"
+                            />
                             <transition name="slide"><span class="validate" v-if="validation.description">The Description field is required</span></transition>
                         </div>
                     </div>
@@ -86,7 +91,11 @@
                     </div>
                     <div class="bottom_box">
                         <div class="group nmb">
-                            <image-handler-container ref="image_handler" :multiple="false" />
+                            <image-handler-container
+                                ref="image_handler"
+                                :multiple="false"
+                                :input_name="'image[]'"
+                            />
                         </div>
                         <div class="group nmb">
                             <asset-container />
@@ -111,8 +120,8 @@
                     </div>
                 </div>
                 <div class="buttons fixed">
-                    <nuxt-link to="/" class="cancel_button half_width btn lg">Cancel</nuxt-link>
-                    <button type="submit" class="success_button half_width btn lg pointer">Submit</button>
+                    <nuxt-link to="/" class="cancel button half_width btn lg">Cancel</nuxt-link>
+                    <button type="submit" class="success button half_width btn lg pointer">Submit</button>
                 </div>
             </form>
         </ValidationObserver>
@@ -120,35 +129,54 @@
 </template>
 
 <script>
-    import ImageHandlerContainer from '~/components/file/ImageHandlerContainer'
-    import AssetContainer from '~/components/file/AssetContainer'
-
     export default {
         components: {
-            ImageHandlerContainer,
-            AssetContainer
+            ImageHandlerContainer: () => import('~/components/file/ImageHandlerContainer'),
+            AssetContainer: () => import('~/components/file/AssetContainer')
         },
-        data () {
-            return {
-                loaded: false,
-                validation: {
-                    description: false
-                },
-                form: {
-                    category_id: 1,
-                    first_name: '',
-                    middle_name: '',
-                    last_name: '',
-                    title: '',
-                    subtitle: '',
-                    date: this.$moment().format('YYYY-MM-DD'),
-                    featured: false,
-                    meta_title: '',
-                    meta_description: ''
+        data: ({ $moment }) => ({
+            loaded: false,
+            validation: {
+                description: false
+            },
+            options: {
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        [{ 'header': 1 }, { 'header': 2 }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'script': 'sub' }, { 'script': 'super' }],
+                        [{ 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'direction': 'rtl' }],
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'align': [] }],
+                        ['link', 'image', 'video']
+                    ]
                 }
+            },
+            form: {
+                category_id: 1,
+                first_name: '',
+                middle_name: '',
+                last_name: '',
+                title: '',
+                subtitle: '',
+                description: '',
+                date: $moment().format('YYYY-MM-DD'),
+                featured: false,
+                meta_title: '',
+                meta_description: ''
             }
-        },
+        }),
         methods: {
+            updateEditor (editor, type) {
+                const me = this
+                me.form[type] = editor.html
+                me.validation[type] = (me.form[type].length <= 0) ? true : false
+            },
             /**
              * toggle switch
              * @param  {[string]} type [type of switch]
@@ -164,108 +192,34 @@
                 const me = this
                 me.$refs.form.validate().then(success => {
                     if (!success) {
-                        me.validateSummernotes('description')
+                        me.validateWysiwyg(me, ['description'])
                         me.$scrollTo('.validate', {
     						offset: -250
     					})
                         return
                     } else {
-                        me.$store.commit('global/loader/checkLoader', { status: true })
+                        me.toggleModalStatus({ type: 'loader', status: true })
                         // axios
                         setTimeout( () => {
-                            me.$store.commit('global/loader/checkLoader', { status: false })
-                            document.body.classList.remove('no_scroll', 'no_click')
+                            me.toggleModalStatus({ type: 'loader', status: false })
                         }, 500)
                     }
                     me.$nextTick(() => {
-                      me.$refs.form.reset()
+                        me.$refs.form.reset()
                     })
                 })
-            },
-            /**
-             * validate summernotes
-             */
-            validateSummernotes (...args) {
-                const me = this
-                for (let arg of args) {
-                    let target = $(`.${arg} .note-editable`).text(), total_count = target.length
-
-                    if(total_count <= 0){
-                        me.validation[arg] = true
-                    } else {
-                        me.validation[arg] = false
-                    }
-                }
-            },
-            /**
-             * render summernotes
-             */
-            summernotes (...args) {
-                const me = this
-                for (let arg of args) {
-                    $(`#${arg}`).summernote({
-                        tabsize: 4,
-                        height: 400,
-                        followingToolbar: false,
-                        toolbar: [
-                            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'clear'] ],
-                            [ 'color', [ 'color' ] ],
-                            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-                            [ 'view', [ 'fullscreen', 'codeview' ] ]
-                        ],
-                        codemirror: {
-                            lineNumbers: true,
-                            htmlMode: true,
-                            mode: "text/html",
-                            tabMode: 'indent',
-                            lineWrapping: true
-                        },
-                        callbacks: {
-                            onChange: function(e) {
-                                let target = $(`.${arg} .note-editable`).text(), total_count = target.length
-
-                                if(total_count <= 0){
-                                    me.validation[arg] = true
-                                } else {
-                                    me.validation[arg] = false
-                                }
-                            }
-                        }
-                    })
-                }
-            },
-            /**
-             * ready state method
-             * check if DOM is still in the interactive state
-             * @param  {[object]} event [event listener of DOM]
-             */
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        setTimeout( () => {
-                            me.summernotes('description')
-                        }, 100)
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
             }
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
-            store.commit('global/settings/populateTitle', { title: 'Form Layouts' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
+            store.commit('global/settings/populateTitle', { title: 'Form Layout' })
         }
     }
 </script>

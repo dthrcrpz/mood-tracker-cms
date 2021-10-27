@@ -13,8 +13,8 @@
                     </div>
                     <div class="content_bottom">
                         <div class="inline">
-                            <div class="cancel_button outline pointer ml ten" @click="close()">Cancel</div>
-                            <div class="primary_button pointer" @click="confirm()">Confirm</div>
+                            <div class="cancel button outline pointer ml ten" @click="close()">Cancel</div>
+                            <div class="success button pointer" @click="confirm()">Confirm</div>
                         </div>
                     </div>
                 </div>

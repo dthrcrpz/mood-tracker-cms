@@ -67,7 +67,7 @@
 			return {
 				table_name: 'images',
                 files: [],
-				images: [0, 1],
+				images: [0],
 				ctr: 0,
 				showCloser: false
 			}

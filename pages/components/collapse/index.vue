@@ -28,15 +28,13 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                toggled: {
-                    first: true,
-                    second: false
-                }
+        data: () => ({
+            loaded: false,
+            toggled: {
+                first: true,
+                second: false
             }
-        },
+        }),
         methods: {
             /**
              * collapse the form layout
@@ -56,31 +54,18 @@
                 } else {
                     target.style.height = '0px'
                 }
-            },
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
             }
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Collapse' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

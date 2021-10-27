@@ -1,16 +1,20 @@
 <template>
     <div id="pagination" v-if="last > 1">
-        <div :class="`next ${(current == 1) ? 'disabled' : ''}`" @click.self="prevPage(current, last)">&lsaquo;</div>
+        <div :class="`next pointer ${(current == 1) ? 'disabled' : ''}`" @click="getPage(null, current, last, 'prev')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </div>
 
-        <div :class="`number ${(current == 1) ? 'active' : ''}`" v-if="(iteration + (current - 1)) > 3 && (6) <= last" @click.self="currentPage(1, true)">1</div>
-        <div class="separator" v-if="(iteration + (current - 1)) > 3 && (6) <= last">. . .</div>
+        <div class="text">Page</div>
 
-        <div :class="`number ${(current == count) ? 'active' : ''}`" v-for="(count, key) in populatePager" @click.self="currentPage(count, false)">{{ getCount(count) }}</div>
+        <div class="page_number">
+            <input type="number" class="input" v-model="page_number" @change="getPage($event)">
+        </div>
 
-        <div class="separator" v-if="(iteration + 3) < last && (incrementPage + 3) <= last">. . .</div>
-        <div :class="`number ${(current == last) ? 'active' : ''}`" v-if="(iteration + 3) < last && (incrementPage + 3) <= last" @click.self="currentPage(last, false)">{{ last }}</div>
+        <div class="text">of {{ last }}</div>
 
-        <div :class="`prev ${(current == last) ? 'disabled' : ''}`" @click.self="nextPage(current, last)">&rsaquo;</div>
+        <div :class="`prev pointer ${(current == last) ? 'disabled' : ''}`" @click="getPage(null, current, last, 'next')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
     </div>
 </template>
 
@@ -28,164 +32,44 @@
             last: {
                 type: Number,
                 default: 1
-            },
-            total: {
-                type: Number,
-                default: 1
             }
         },
-        data () {
-            return {
-                firstCount: 1,
-                lastCount: 0,
-                iteration: 1,
-                incrementPage: 3
-            }
-        },
-        computed: {
-            populatePager () {
-                const me = this
-                let result = []
-                for (let i = me.iteration; i <= ((me.incrementPage + 3) > me.last ? me.last : me.incrementPage); i++) {
-                    result.push(i)
-                }
-                return result
-            }
-        },
+        data: () => ({
+            page_number: 1
+        }),
         methods: {
-            getCount (count) {
+            getPage (event = null, current = null, last = null, type = null) {
                 const me = this
-                me.lastCount = count
-                return count
-            },
-            nextPage (current, last) {
-                const me = this
-                if (current != last) {
-                    me.$store.commit('global/loader/checkLoader', { status: true })
-
-                    let url = `${me.api_route}?page=${current + 1}`
-
-                    if (me.$parent.has_search) {
-                        me.$axios.post(url, me.$parent.form).then(res => {
-                            me.$parent.res = res.data
-
-                            if ((me.incrementPage + 3) <= me.last) {
-                                if (current == me.incrementPage) {
-                                    me.iteration = me.iteration + 3
-                                    me.incrementPage = me.incrementPage + 3
-                                }
-                            }
-                        }).catch(err => {
-                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                        }).then(() => {
-                            setTimeout( () => {
-                                me.$store.commit('global/loader/checkLoader', { status: false })
-                                document.body.classList.remove('no_scroll', 'no_click')
-                            }, 500)
-                        })
-                    } else {
-                        me.$axios.get(url).then(res => {
-                            me.$parent.res = res.data
-
-                            if ((me.incrementPage + 3) <= me.last) {
-                                if (current == me.incrementPage) {
-                                    me.iteration = me.iteration + 3
-                                    me.incrementPage = me.incrementPage + 3
-                                }
-                            }
-                        }).catch(err => {
-                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                        }).then(() => {
-                            setTimeout( () => {
-                                me.$store.commit('global/loader/checkLoader', { status: false })
-                                document.body.classList.remove('no_scroll', 'no_click')
-                            }, 500)
-                        })
-                    }
-                }
-            },
-            currentPage (count, first) {
-                const me = this
-                me.$store.commit('global/loader/checkLoader', { status: true })
-                if (first) {
-                    me.iteration = 1
-                    me.incrementPage = 3
+                if (!event) {
+                    me.page_number += 1
                 } else {
-                    if ((me.incrementPage + 3) <= me.last) {
-                        if (count == me.last) {
-                            me.iteration = (count + 1) - 3
-                            me.incrementPage = count
-                        }
+                    if (event.target.value != 0) {
+                        me.page_number = event.target.value
                     }
                 }
 
-                let url = `${me.api_route}?page=${count}`
+                me.toggleModalStatus({ type: 'loader', status: true })
 
                 if (me.$parent.has_search) {
                     me.$axios.post(url, me.$parent.form).then(res => {
                         me.$parent.res = res.data
                     }).catch(err => {
-                        me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
                     }).then(() => {
                         setTimeout( () => {
-                            me.$store.commit('global/loader/checkLoader', { status: false })
-                            document.body.classList.remove('no_scroll', 'no_click')
+                            me.toggleModalStatus({ type: 'loader', status: false })
                         }, 500)
                     })
                 } else {
                     me.$axios.get(url).then(res => {
                         me.$parent.res = res.data
-
                     }).catch(err => {
-                        me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
+                        me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
                     }).then(() => {
                         setTimeout( () => {
-                            me.$store.commit('global/loader/checkLoader', { status: false })
-                            document.body.classList.remove('no_scroll', 'no_click')
+                            me.toggleModalStatus({ type: 'loader', status: false })
                         }, 500)
                     })
-                }
-            },
-            prevPage (current, last) {
-                const me = this
-                if (current != 1) {
-                    me.$store.commit('global/loader/checkLoader', { status: true })
-
-                    let url = `${me.api_route}?page=${current - 1}`
-
-                    if (me.$parent.has_search) {
-                        me.$axios.post(url, me.$parent.form).then(res => {
-                            me.$parent.res = res.data
-
-                            if (current == me.iteration) {
-                                me.iteration = me.iteration - 3
-                                me.incrementPage = me.incrementPage - 3
-                            }
-                        }).catch(err => {
-                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                        }).then(() => {
-                            setTimeout( () => {
-                                me.$store.commit('global/loader/checkLoader', { status: false })
-                                document.body.classList.remove('no_scroll', 'no_click')
-                            }, 500)
-                        })
-                    } else {
-                        me.$axios.get(url).then(res => {
-                            me.$parent.res = res.data
-
-                            if (current == me.iteration) {
-                                me.iteration = me.iteration - 3
-                                me.incrementPage = me.incrementPage - 3
-                            }
-                        }).catch(err => {
-                            me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                        }).then(() => {
-                            setTimeout( () => {
-                                me.$store.commit('global/loader/checkLoader', { status: false })
-                                document.body.classList.remove('no_scroll', 'no_click')
-                            }, 500)
-                        })
-                    }
                 }
             }
         }

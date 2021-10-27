@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="bottom_box">
-                <div :class="[ 'primary_button', (show) ? 'none mb twenty' : 'pointer' ]" @click="triggerAutoDismiss()">Show Alert</div>
+                <div :class="[ 'primary button', (show) ? 'none mb twenty' : 'pointer' ]" @click="triggerAutoDismiss()">Show Alert</div>
                 <transition name="fade">
                     <alert :type="'success'" :auto_dismiss="true" v-if="show" />
                 </transition>
@@ -45,55 +45,38 @@
 </template>
 
 <script>
-    import Alert from '~/components/global/Alert'
-
     export default {
-        components: {
-            'alert': Alert
-        },
-        data () {
-            return {
-                loaded: false,
-                show: false,
-                demo_alerts: [
-                    {
-                        type: 'secondary',
-                        message: 'This is a secondary alert!'
-                    },
-                    {
-                        type: 'success',
-                        message: 'This is a success alert!'
-                    },
-                    {
-                        type: 'error',
-                        message: 'This is a error alert!'
-                    },
-                    {
-                        type: 'warning',
-                        message: 'This is a warning alert!'
-                    },
-                    {
-                        type: 'info',
-                        message: 'This is a info alert!'
-                    },
-                    {
-                        type: 'dark',
-                        message: 'This is a dark alert!'
-                    }
-                ]
-            }
-        },
-        methods: {
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
+        data: () => ({
+            loaded: false,
+            show: false,
+            demo_alerts: [
+                {
+                    type: 'secondary',
+                    message: 'This is a secondary alert!'
+                },
+                {
+                    type: 'success',
+                    message: 'This is a success alert!'
+                },
+                {
+                    type: 'error',
+                    message: 'This is a error alert!'
+                },
+                {
+                    type: 'warning',
+                    message: 'This is a warning alert!'
+                },
+                {
+                    type: 'info',
+                    message: 'This is a info alert!'
+                },
+                {
+                    type: 'dark',
+                    message: 'This is a dark alert!'
                 }
-            },
+            ]
+        }),
+        methods: {
             triggerAutoDismiss () {
                 const me = this
                 me.show = true
@@ -104,17 +87,14 @@
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Alert' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

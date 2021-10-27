@@ -7,7 +7,7 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div class="primary_button pointer" @click="addToast({ type: 'primary', message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' })">Toast</div>
+                    <div class="primary button pointer" @click="addToast({ type: 'primary', message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' })">Toast</div>
                 </div>
             </div>
         </div>
@@ -34,83 +34,68 @@
     import { mapActions } from 'vuex'
 
     export default {
-        data () {
-            return {
-                loaded: false,
-                buttons: [
-                    {
-                        name: 'Primary',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'primary',
-                        class: 'primary_button'
-                    },
-                    {
-                        name: 'Secondary',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'secondary',
-                        class: 'secondary_button'
-                    },
-                    {
-                        name: 'Success',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'success',
-                        class: 'success_button'
-                    },
-                    {
-                        name: 'Cancel',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'cancel',
-                        class: 'cancel_button'
-                    },
-                    {
-                        name: 'Warning',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'warning',
-                        class: 'warning_button'
-                    },
-                    {
-                        name: 'Info',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'info',
-                        class: 'info_button'
-                    },
-                    {
-                        name: 'Dark',
-                        message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                        type: 'dark',
-                        class: 'dark_button'
-                    }
-                ]
-            }
-        },
+        data: () => ({
+            loaded: false,
+            buttons: [
+                {
+                    name: 'Primary',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'primary',
+                    class: 'primary button'
+                },
+                {
+                    name: 'Secondary',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'secondary',
+                    class: 'secondary button'
+                },
+                {
+                    name: 'Success',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'success',
+                    class: 'success button'
+                },
+                {
+                    name: 'Cancel',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'cancel',
+                    class: 'cancel button'
+                },
+                {
+                    name: 'Warning',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'warning',
+                    class: 'warning button'
+                },
+                {
+                    name: 'Info',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'info',
+                    class: 'info button'
+                },
+                {
+                    name: 'Dark',
+                    message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+                    type: 'dark',
+                    class: 'dark button'
+                }
+            ]
+        }),
         methods: {
             ...mapActions('global/toast', {
                 addToast: 'addToast'
-            }),
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
-            }
+            })
         },
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Toasts' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

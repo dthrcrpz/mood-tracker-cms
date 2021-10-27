@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="dashboard">
+    <div id="dashboard" v-if="loaded">
         <div class="box mb">
             <div class="top_box">
                 <h2>Default</h2>
@@ -12,37 +12,20 @@
 </template>
 
 <script>
-    import Pagination from '~/components/global/Pagination'
-
     export default {
-        components: {
-            Pagination
-        },
-        methods: {
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
-            }
-        },
+        data: () => ({
+            loaded: false
+        }),
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Pagination' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

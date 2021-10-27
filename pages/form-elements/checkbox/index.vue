@@ -1,6 +1,5 @@
 <template lang="html">
     <div id="dashboard" v-if="loaded">
-
         <div class="box mb">
             <div class="top_box">
                 <h2>Default</h2>
@@ -51,83 +50,65 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                types: [
-                    {
-                        value: false,
-                        name: 'Primary',
-                        class: 'primary'
-                    },
-                    {
-                        value: false,
-                        name: 'Secondary',
-                        class: 'secondary'
-                    },
-                    {
-                        value: false,
-                        name: 'Success',
-                        class: 'success'
-                    },
-                    {
-                        value: false,
-                        name: 'Cancel',
-                        class: 'cancel'
-                    },
-                    {
-                        value: false,
-                        name: 'Warning',
-                        class: 'warning'
-                    },
-                    {
-                        value: false,
-                        name: 'Info',
-                        class: 'info'
-                    },
-                    {
-                        value: false,
-                        name: 'Dark',
-                        class: 'dark'
-                    }
-                ],
-                form: {
-                    sample: false,
-                    sample_v2: false
+        data: () => ({
+            loaded: false,
+            types: [
+                {
+                    value: false,
+                    name: 'Primary',
+                    class: 'primary'
+                },
+                {
+                    value: false,
+                    name: 'Secondary',
+                    class: 'secondary'
+                },
+                {
+                    value: false,
+                    name: 'Success',
+                    class: 'success'
+                },
+                {
+                    value: false,
+                    name: 'Cancel',
+                    class: 'cancel'
+                },
+                {
+                    value: false,
+                    name: 'Warning',
+                    class: 'warning'
+                },
+                {
+                    value: false,
+                    name: 'Info',
+                    class: 'info'
+                },
+                {
+                    value: false,
+                    name: 'Dark',
+                    class: 'dark'
                 }
+            ],
+            form: {
+                sample: false,
+                sample_v2: false
             }
-        },
-        methods: {
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
-                }
-            }
-        },
+        }),
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Checkbox' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

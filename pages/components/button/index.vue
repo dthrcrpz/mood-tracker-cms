@@ -76,68 +76,50 @@
 </template>
 
 <script>
-
     export default {
-        data () {
-            return {
-                loaded: false,
-                buttons: [
-                    {
-                        name: 'Primary',
-                        class: 'primary_button'
-                    },
-                    {
-                        name: 'Secondary',
-                        class: 'secondary_button'
-                    },
-                    {
-                        name: 'Success',
-                        class: 'success_button'
-                    },
-                    {
-                        name: 'Cancel',
-                        class: 'cancel_button'
-                    },
-                    {
-                        name: 'Warning',
-                        class: 'warning_button'
-                    },
-                    {
-                        name: 'Info',
-                        class: 'info_button'
-                    },
-                    {
-                        name: 'Dark',
-                        class: 'dark_button'
-                    }
-                ]
-            }
-        },
-        methods: {
-            initialization (event) {
-                const me = this
-                if (document.readyState != 'interactive') {
-                    setTimeout( () => {
-                        me.$store.commit('global/loader/checkLoader', { status: false })
-                        me.loaded = true
-                        document.body.classList.remove('no_scroll', 'no_click')
-                    }, 1000)
+        data: () => ({
+            loaded: false,
+            buttons: [
+                {
+                    name: 'Primary',
+                    class: 'primary button'
+                },
+                {
+                    name: 'Secondary',
+                    class: 'secondary button'
+                },
+                {
+                    name: 'Success',
+                    class: 'success button'
+                },
+                {
+                    name: 'Cancel',
+                    class: 'cancel button'
+                },
+                {
+                    name: 'Warning',
+                    class: 'warning button'
+                },
+                {
+                    name: 'Info',
+                    class: 'info button'
+                },
+                {
+                    name: 'Dark',
+                    class: 'dark button'
                 }
-            }
-        },
+            ]
+        }),
         mounted () {
             const me = this
-            me.initialization()
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
         },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Button' })
-            store.commit('global/loader/checkLoader', { status: true })
-        },
-        beforeMount () {
-            window.addEventListener('load', this.initialization)
-        },
-        beforeDestroy () {
-            window.removeEventListener('load', this.initialization)
         }
     }
 </script>

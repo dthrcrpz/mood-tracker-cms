@@ -13,8 +13,8 @@
                     </div>
                     <div class="content_bottom">
                         <div class="inline">
-                            <div class="cancel_button outline pointer" @click="toggleModalStatus({ type: 'delete_confirmation', status: false })">Cancel</div>
-                            <div class="success_button pointer ml ten" @click="confirm()">Confirm</div>
+                            <div class="cancel button outline pointer" @click="toggleModalStatus({ type: 'delete_confirmation', status: false })">Cancel</div>
+                            <div class="success button pointer ml ten" @click="confirm()">Confirm</div>
                         </div>
                     </div>
                 </div>

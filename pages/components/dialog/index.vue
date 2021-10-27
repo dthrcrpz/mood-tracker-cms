@@ -7,7 +7,18 @@
             </div>
             <div class="bottom_box">
                 <div class="box_group_inline">
-                    <div class="primary_button pointer" @click="toggleModalStatus({ type: 'confirmation', status: true, item: { action: 'primary' } })">Confirm</div>
+                    <div class="primary button pointer" @click="toggleModalStatus({ type: 'confirmation', status: true, item: { action: 'primary' } })">Confirm</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box mb">
+            <div class="top_box">
+                <h2>Error</h2>
+            </div>
+            <div class="bottom_box">
+                <div class="box_group_inline">
+                    <div class="cancel button pointer" @click="toggleModalStatus({ type: 'catcher', status: true, item: { errors: ['asdasd', 'asdasdsad'] } })">Show</div>
                 </div>
             </div>
         </div>
@@ -31,49 +42,47 @@
 
 <script>
     export default {
-        data () {
-            return {
-                loaded: false,
-                buttons: [
-                    {
-                        name: 'Primary',
-                        class: 'primary_button',
-                        dialog: 'primary'
-                    },
-                    {
-                        name: 'Secondary',
-                        class: 'secondary_button',
-                        dialog: 'secondary'
-                    },
-                    {
-                        name: 'Success',
-                        class: 'success_button',
-                        dialog: 'success'
-                    },
-                    {
-                        name: 'Cancel',
-                        class: 'cancel_button',
-                        dialog: 'cancel'
-                    },
-                    {
-                        name: 'Warning',
-                        class: 'warning_button',
-                        dialog: 'warning'
-                    },
-                    {
-                        name: 'Info',
-                        class: 'info_button',
-                        dialog: 'info'
-                    },
-                    {
-                        name: 'Dark',
-                        class: 'dark_button',
-                        dialog: 'dark'
-                    }
-                ],
-                type: 'primary'
-            }
-        },
+        data: () => ({
+            loaded: false,
+            buttons: [
+                {
+                    name: 'Primary',
+                    class: 'primary button',
+                    dialog: 'primary'
+                },
+                {
+                    name: 'Secondary',
+                    class: 'secondary button',
+                    dialog: 'secondary'
+                },
+                {
+                    name: 'Success',
+                    class: 'success button',
+                    dialog: 'success'
+                },
+                {
+                    name: 'Cancel',
+                    class: 'cancel button',
+                    dialog: 'cancel'
+                },
+                {
+                    name: 'Warning',
+                    class: 'warning button',
+                    dialog: 'warning'
+                },
+                {
+                    name: 'Info',
+                    class: 'info button',
+                    dialog: 'info'
+                },
+                {
+                    name: 'Dark',
+                    class: 'dark button',
+                    dialog: 'dark'
+                }
+            ],
+            type: 'primary'
+        }),
         methods: {
             toggleType (data) {
                 const me = this
