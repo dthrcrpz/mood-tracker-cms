@@ -10,18 +10,18 @@
                     <h3>Welcome back, Please login to continue</h3>
                     <ValidationObserver tag="div" ref="form">
                         <form class="form" @submit.prevent="submit()">
-                            <ValidationProvider tag="div" class="group floating" name="Email" :rules="{ required: true }" v-slot="{ errors }">
+                            <ValidationProvider tag="div" class="group floating" name="email" :rules="{ required: true }" v-slot="{ errors }">
                                 <input type="text" :class="[ 'input', (form.email.length > 0) ? 'filled' : '' ]" name="email" autofocus autocomplete="off" v-model="form.email">
                                 <label for="email">Email Address</label>
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
-                                <ValidationProvider tag="div" class="group floating" name="Password" :rules="{ required: true }" v-slot="{ errors }">
+                                <ValidationProvider tag="div" class="group floating" name="password" :rules="{ required: true }" v-slot="{ errors }">
                                 <input type="password" :class="[ 'input', (form.password.length > 0) ? 'filled' : '' ]" name="password" autocomplete="off" v-model="form.password">
                                 <label for="password">Password</label>
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
                             <div class="buttons">
-                                <a href="#" class="primary button outline pointer">Back To Home</a>
+                                <a href="#" class="cancel button outline pointer" @click.prevent>Back To Home</a>
                                 <button type="submit" class="primary button pointer">Login</button>
                             </div>
                         </form>
@@ -50,16 +50,15 @@
     					})
                         return
                     } else {
-                        // me.$store.commit('global/loader/checkLoader', { status: true })
-                        //
-                        // me.$auth.loginWith('local', { data: me.form }).then(res => {
+                        me.toggleModalStatus({ type: 'loader', status: true })
+
+                        me.$auth.loginWith('local', { data: me.form }).then(res => {
                             me.$router.push('/dashboard')
-                        // }).catch(err => {
-                        //     me.$store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
-                        // }).then(() => {
-                        //     me.$store.commit('global/loader/checkLoader', { status: false })
-                        //     document.body.classList.remove('no_scroll', 'no_click')
-                        // })
+                        }).catch(err => {
+                            me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
+                        }).then(() => {
+                            me.toggleModalStatus({ type: 'loader', status: false })
+                        })
                     }
                     me.$nextTick(() => {
                         me.$refs.form.reset()

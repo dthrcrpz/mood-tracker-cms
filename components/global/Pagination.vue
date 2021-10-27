@@ -7,7 +7,7 @@
         <div class="text">Page</div>
 
         <div class="page_number">
-            <input type="number" class="input" v-model="page_number" @change="getPage($event)">
+            <input type="number" class="input" v-model="page_number" @blur="getPage($event)">
         </div>
 
         <div class="text">of {{ last }}</div>
