@@ -55,7 +55,6 @@
                         me.$auth.loginWith('local', { data: me.form }).then(res => {
                             me.$router.push('/dashboard')
                         }).catch(err => {
-                            console.log(err.response.data.errors);
                             me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
                         }).then(() => {
                             me.toggleModalStatus({ type: 'loader', status: false })

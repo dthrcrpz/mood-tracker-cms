@@ -51,12 +51,6 @@
         data: () => ({
             padding: 0
         }),
-        watch: {
-            $route (to, from) {
-                const me = this
-                me.$store.commit('global/catcher/hideHasError', { status: false })
-            }
-        },
         computed: {
             ...mapGetters ({
                 getAuthenticated: 'global/settings/getAuthenticated',

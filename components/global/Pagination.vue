@@ -40,36 +40,53 @@
         methods: {
             getPage (event = null, current = null, last = null, type = null) {
                 const me = this
+                me.page_number = parseInt(me.page_number)
+
+                let url = `${me.api_route}?page=${me.page_number}`,
+                    call_api = true
+
                 if (!event) {
-                    me.page_number += 1
+                    me.page_number = (type == 'prev') ? me.page_number - 1 : me.page_number + 1
+                    if (me.page_number > me.last) {
+                        call_api = false
+                    }
                 } else {
-                    if (event.target.value != 0) {
-                        me.page_number = event.target.value
+                    let target = parseInt(event.target.value)
+                    if (target != 0) {
+                        if (target <= me.last) {
+                            me.page_number = parseInt(event.target.value)
+                        } else {
+                            call_api = false
+                        }
+                    } else {
+                        call_api = false
                     }
                 }
 
-                me.toggleModalStatus({ type: 'loader', status: true })
+                if (call_api) {
+                    me.toggleModalStatus({ type: 'loader', status: true })
 
-                if (me.$parent.has_search) {
-                    me.$axios.post(url, me.$parent.form).then(res => {
-                        me.$parent.res = res.data
-                    }).catch(err => {
-                        me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
-                    }).then(() => {
-                        setTimeout( () => {
-                            me.toggleModalStatus({ type: 'loader', status: false })
-                        }, 500)
-                    })
-                } else {
-                    me.$axios.get(url).then(res => {
-                        me.$parent.res = res.data
-                    }).catch(err => {
-                        me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
-                    }).then(() => {
-                        setTimeout( () => {
-                            me.toggleModalStatus({ type: 'loader', status: false })
-                        }, 500)
-                    })
+                    if (me.$parent.has_search) {
+                        me.$axios.post(url, me.$parent.form).then(res => {
+                            me.$parent.res = res.data
+                        }).catch(err => {
+                            me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.toggleModalStatus({ type: 'loader', status: false })
+                            }, 500)
+                        })
+                    } else {
+                        me.$axios.get(url).then(res => {
+                            me.$parent.res = res.data
+                        }).catch(err => {
+                            me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
+                        }).then(() => {
+                            setTimeout( () => {
+                                me.toggleModalStatus({ type: 'loader', status: false })
+                            }, 500)
+                        })
+                    }
                 }
             }
         }

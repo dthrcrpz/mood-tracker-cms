@@ -8,7 +8,7 @@ Vue.mixin({
         }),
         validateWysiwyg (page, wysiwygs) {
             wysiwygs.forEach((wysiwyg, key) => {
-                page.validation[wysiwyg] = (page.form[wysiwyg].length <= 0) ? true : false
+                page.validation[wysiwyg] = (page.form_data[wysiwyg].length <= 0) ? true : false
             })
         },
         /**
