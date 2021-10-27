@@ -57,7 +57,9 @@
                         }).catch(err => {
                             me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
                         }).then(() => {
-                            me.toggleModalStatus({ type: 'loader', status: false })
+                            setTimeout( () => {
+                                me.toggleModalStatus({ type: 'loader', status: false })
+                            }, 500)
                         })
                     }
                     me.$nextTick(() => {
