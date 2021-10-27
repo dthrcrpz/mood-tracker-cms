@@ -7,6 +7,7 @@
 			:key="key"
 			:unique="(image.id) ? image.id : image"
 			:item="image"
+			:input_name="input_name"
 			:image_label="image_label"
 			:category="category"
 			:parent="parent"
@@ -22,6 +23,10 @@
 	import ImageHandler from './ImageHandler'
 	export default {
 		props: {
+			input_name: {
+				type: String,
+				default: 'file[]'
+			},
 			image_label: {
 				type: String,
 				default: 'Image'
