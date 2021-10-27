@@ -1,7 +1,11 @@
 import Vue from 'vue'
+import { mapMutations } from 'vuex'
 
 Vue.mixin({
     methods: {
+        ...mapMutations({
+            toggleModalStatus: 'global/modal/toggleModalStatus'
+        }),
         /**
          * check if the input field has value
          * which is the length is greater the 0

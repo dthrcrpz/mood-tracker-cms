@@ -9,11 +9,16 @@
         data: () => ({
             loaded: false
         }),
+        mounted () {
+            const me = this
+            me.toggleModalStatus({ type: 'loader', status: true })
+            setTimeout( () => {
+                me.toggleModalStatus({ type: 'loader', status: false })
+                me.loaded = true
+            }, 500)
+        },
         asyncData ({ store }) {
             store.commit('global/settings/populateTitle', { title: 'Dashboard' })
-            return {
-                loaded: true
-            }
         }
     }
 </script>

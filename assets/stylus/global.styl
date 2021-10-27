@@ -142,18 +142,12 @@ span
 .nmr
     margin-right: 0 !important
 
-.note-editor
-    .CodeMirror
-        z-index: 0
-    &.note-frame
-        border: 1px solid $primary
-        border-radius: 0
-        .note-toolbar
-            background-color: $white
-        .note-editing-area
-            .note-editable
-                brandon_regular(16px, false)
-                padding: 15px
+.editor
+    border: 1px solid $gray
+    background-color: $white
+    .ql-editor
+        padding: 15px
+        brandon_regular(16px, false)
 
 .scrollable_content
     height: 100%
@@ -1158,6 +1152,27 @@ span
     .group
         position: relative
         margin-bottom: 20px
+        &.multi
+            .multiselect__placeholder
+                margin-bottom: 5px
+            .multiselect__select
+                top: 50%
+                transform: translateY(-50%)
+                &::before
+                    color: $primary
+                    border-color: $primary transparent transparent
+            .multiselect__tags
+                border: 1px solid $primary
+                padding: 10px 15px 5px
+                border-radius: 0
+            .multiselect__tag,
+            .multiselect__tag-icon:hover
+                background: $primary
+            .multiselect__tag-icon:after
+                color: $white
+            .multiselect__option--highlight,
+            .multiselect__option--highlight:after
+                background: $primary
         &.flex
             display: flex
             flex-flow: row wrap
@@ -1863,12 +1878,6 @@ span
     position: absolute
     left: 0
     z-index: 1024
-    &.centered
-        .wrapper
-            .content
-                top: 50%
-                transform: translateY(-50%)
-                animation: centered_slide 1s
     &.overlap
         z-index: 9999
     .wrapper

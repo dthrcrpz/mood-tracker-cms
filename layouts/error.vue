@@ -71,7 +71,6 @@
         },
         mounted () {
             const me = this
-            console.log();
             me.initialization()
         }
 	}

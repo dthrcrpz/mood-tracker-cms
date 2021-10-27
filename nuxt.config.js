@@ -14,7 +14,11 @@ export default {
 
     /*
     ** Customize the progress-bar color*/
-    loading: '~/components/global/Loader.vue',
+    loading: {
+        color: '#FF9000',
+        throttle: 0,
+        height: '4px'
+    },
 
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
@@ -24,16 +28,21 @@ export default {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         { src: '~/plugins/vue-scrollto', ssr: false },
+        { src: '~/plugins/vue-multiselect', ssr: false },
         { src: '~/plugins/vue-ctk-date-time-picker', ssr: false },
         { src: '~/plugins/vue-line-clamp', ssr: false },
         { src: '~/plugins/vee-validate' },
         { src: '~/plugins/vue-moment' },
-        { src: '~/plugins/vue-click-outside' },
-        { src: '~/plugins/mixins'}
+        { src: '~/plugins/vue-click-outside', ssr: false },
+        { src: '~/plugins/vue-quill-editor', ssr: false },
+        { src: '~/plugins/mixins' }
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
-    components: false,
+    components: [
+        '~/components/global',
+        '~/components/global/modal'
+    ],
 
     // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
     buildModules: [

@@ -37,8 +37,7 @@
         data: () => ({
             form: {
                 email: '',
-                password: '',
-                remember_me: false
+                password: ''
             }
         }),
         methods: {
@@ -63,14 +62,9 @@
                         // })
                     }
                     me.$nextTick(() => {
-                      me.$refs.form.reset()
+                        me.$refs.form.reset()
                     })
                 })
-            }
-        },
-        head () {
-            return {
-                title: 'Welcome | Admin Template'
             }
         }
     }

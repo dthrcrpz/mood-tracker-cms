@@ -1,5 +1,5 @@
 <template>
-    <div :class="[ '__db', (has_toggled) ? 'full' : '' ]">
+    <div :class="[ '__db', (hasToggled) ? 'full' : '' ]">
 
         <div class="swallower" v-if="getAuthenticated"></div>
 
@@ -17,9 +17,25 @@
             <bottombar v-if="getAuthenticated" />
         </transition>
 
+        <transition name="fade">
+            <loader v-if="getShowStatus('loader')" />
+        </transition>
+
+        <transition name="fade">
+            <template v-if="getShowStatus('confirmation')">
+                <confirmation />
+            </template>
+        </transition>
+
+        <transition name="fade">
+            <template v-if="getShowStatus('delete_confirmation')">
+                <delete-confirmation />
+            </template>
+        </transition>
+
         <catcher />
 
-        <ul id="toast_wrapper" :class="[ (toasts > 0) ? '' : 'none' ]"></ul>
+        <ul id="toast_wrapper" :class="[ (getToasts > 0) ? '' : 'none' ]"></ul>
 
     </div>
 </template>
@@ -28,12 +44,6 @@
     import { mapGetters } from 'vuex'
 
     export default {
-        components: {
-            Topbar: () => import('~/components/global/Topbar'),
-            Sidebar: () => import('~/components/global/Sidebar'),
-            Bottombar: () => import('~/components/global/Bottombar'),
-            Catcher: () => import('~/components/global/Catcher')
-        },
         data: () => ({
             padding: 0
         }),
@@ -46,8 +56,9 @@
         computed: {
             ...mapGetters ({
                 getAuthenticated: 'global/settings/getAuthenticated',
-                has_toggled: 'global/sidebar/hasToggled',
-                toasts: 'global/toast/getToasts'
+                getShowStatus: 'global/modal/getShowStatus',
+                hasToggled: 'global/sidebar/hasToggled',
+                getToasts: 'global/toast/getToasts'
             })
         },
         methods: {
@@ -72,19 +83,7 @@
         },
         head () {
             return {
-                title: 'Admin Template | CMS',
-                script: [
-                    { src: 'https://code.jquery.com/jquery-3.2.1.slim.min.js' },
-                    { src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.js' },
-                    { src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/mode/xml/xml.js' },
-                    { src: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/2.36.0/formatting.js' },
-                    { src: 'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js' }
-                ],
-                link: [
-                    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/codemirror.css' },
-                    { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/3.20.0/theme/monokai.css' },
-                    { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css' }
-                ]
+                title: 'Demo | Admin Template'
             }
         }
     }
