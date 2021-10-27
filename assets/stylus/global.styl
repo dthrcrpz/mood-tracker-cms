@@ -1772,6 +1772,12 @@ span
     z-index: 1024
     &.overlap
         z-index: 9999
+    &.centered
+        .wrapper
+            .content
+                top: 50%
+                transform: translateY(-50%)
+                animation: centered_slide 1s
     .wrapper
         position: fixed
         top: 0
