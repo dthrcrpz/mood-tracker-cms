@@ -81,7 +81,7 @@
         },
         head () {
             return {
-                title: 'Demo | Admin Template'
+                title: 'CMS | Mood Tracker'
             }
         }
     }

@@ -4,7 +4,7 @@ export default async function ({ app, redirect, route, error, store }) {
     switch (route.name) {
         case 'index':
             if (token) {
-                redirect('/dashboard')
+                redirect('/questios')
             }
             break
         default:
