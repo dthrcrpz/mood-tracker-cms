@@ -22,7 +22,7 @@
                         <h2>Information</h2>
                     </div>
                     <div class="bottom_box">
-                        <div class="group_inline two nmb">
+                        <div class="group_inline two">
                             <ValidationProvider tag="div" class="group bordered filled nmb" name="result" :rules="{ required: true }" v-slot="{ errors }">
                                 <label for="result">Result *</label>
                                 <input type="text" class="input" name="result" autocomplete="off" placeholder="Enter result" v-model="res.result">
@@ -33,6 +33,15 @@
                                 <input type="text" name="score" id="score" placeholder="Enter score" autocomplete="off" class="input" v-model="res.score">
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
+                        </div>
+                        <div class="group bordered filled">
+                            <label for="remarks">Remarks *</label>
+                            <quill-editor
+                                class="editor remarks"
+                                :value="form_data.remarks"
+                                @change="updateEditor($event, 'remarks')"
+                            />
+                            <transition name="slide"><span class="validate" v-if="validation.remarks">The remarks field is required</span></transition>
                         </div>
                     </div>
                 </div>
@@ -50,9 +59,20 @@
     export default {
         data: () => ({
             loaded: false,
+            validation: {
+                remarks: false
+            },
+            form_data: {
+                remarks: ''
+            },
             res: null
         }),
         methods: {
+            updateEditor (editor, type) {
+                const me = this
+                me.form_data[type] = document.querySelector(`.editor.${type} .ql-editor`).innerHTML
+                me.validation[type] = (me.form_data[type].length <= 0) ? true : false
+            },
             /**
              * submit post of entry
              */
@@ -69,6 +89,7 @@
 
                         let form_data = new FormData(document.getElementById('form'))
                         form_data.append('_method', 'PATCH')
+                        form_data.append('remarks', me.form_data.remarks)
 
                         me.$axios.post(`scoring-settings/${me.$route.params.id}`, form_data).then(res => {
                             me.$store.dispatch('global/toast/addToast', { type: 'success', message: 'Item has been updated!' })
@@ -104,7 +125,10 @@
 
             return $axios.get(`scoring-settings/${params.id}`).then(res => {
                 return {
-                    res: res.data.scoringSetting
+                    res: res.data.scoringSetting,
+                    form_data: {
+                        remarks: res.data.scoringSetting.remarks
+                    }
                 }
             }).catch(err => {
                 store.commit('global/catcher/populateErrors', { items: err.response.data.errors })
