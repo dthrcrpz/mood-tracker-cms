@@ -21,7 +21,7 @@
                                 <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                             </ValidationProvider>
                             <div class="buttons">
-                                <a href="#" class="cancel button outline pointer" @click.prevent>Back To Home</a>
+                                <div></div>
                                 <button type="submit" class="primary button pointer">Login</button>
                             </div>
                         </form>
