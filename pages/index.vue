@@ -53,7 +53,7 @@
                         me.toggleModalStatus({ type: 'loader', status: true })
 
                         me.$auth.loginWith('local', { data: me.form }).then(res => {
-                            me.$router.push('/questios')
+                            me.$router.push('/questions')
                         }).catch(err => {
                             me.toggleModalStatus({ type: 'catcher', status: true, item: { errors: err.response.data.errors } })
                         }).then(() => {
