@@ -83,7 +83,7 @@
                         me.toggleModalStatus({ type: 'loader', status: true })
 
                         let form_data = new FormData(document.getElementById('form'))
-                        form_data.append('remkars', me.form_data.remkars)
+                        form_data.append('remarks', me.form_data.remarks)
 
                         me.$axios.post('scoring-settings', form_data).then(res => {
                             me.$store.dispatch('global/toast/addToast', { type: 'success', message: 'Item has been added!' })
