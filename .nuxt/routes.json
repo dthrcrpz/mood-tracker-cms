@@ -1,0 +1,62 @@
+[
+  {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/dashboard/index.vue",
+    "chunkName": "pages/dashboard/index"
+  },
+  {
+    "name": "questions",
+    "path": "/questions",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/questions/index.vue",
+    "chunkName": "pages/questions/index"
+  },
+  {
+    "name": "users",
+    "path": "/users",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/users/index.vue",
+    "chunkName": "pages/users/index"
+  },
+  {
+    "name": "questions-create",
+    "path": "/questions/create",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/questions/create.vue",
+    "chunkName": "pages/questions/create"
+  },
+  {
+    "name": "settings-scoring",
+    "path": "/settings/scoring",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/settings/scoring/index.vue",
+    "chunkName": "pages/settings/scoring/index"
+  },
+  {
+    "name": "settings-scoring-create",
+    "path": "/settings/scoring/create",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/settings/scoring/create.vue",
+    "chunkName": "pages/settings/scoring/create"
+  },
+  {
+    "name": "settings-scoring-id-update",
+    "path": "/settings/scoring/:id/update",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/settings/scoring/_id/update.vue",
+    "chunkName": "pages/settings/scoring/_id/update"
+  },
+  {
+    "name": "questions-id-update",
+    "path": "/questions/:id/update",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/questions/_id/update.vue",
+    "chunkName": "pages/questions/_id/update"
+  },
+  {
+    "name": "users-id-view",
+    "path": "/users/:id/view",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/users/_id/view.vue",
+    "chunkName": "pages/users/_id/view"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/teryong/Codes/mood-tracker/cms/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
