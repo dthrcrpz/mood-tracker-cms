@@ -17,11 +17,18 @@
 						<h2>Information</h2>
 					</div>
 					<div class="bottom_box">
-						<ValidationProvider tag="div" class="group bordered filled nmb" name="question" :rules="{ required: true }" v-slot="{ errors }">
-							<label for="question">Question *</label>
-							<input type="text" class="input" name="question" autocomplete="off" placeholder="Enter question" v-model="form_data.question">
-							<transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
-						</ValidationProvider>
+						<div class="group_inline two nmb">
+							<ValidationProvider tag="div" class="group bordered filled nmb" name="question" :rules="{ required: true }" v-slot="{ errors }">
+								<label for="question">Question *</label>
+								<input type="text" class="input" name="question" autocomplete="off" placeholder="Enter question" v-model="form_data.question">
+								<transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+							</ValidationProvider>
+							<ValidationProvider tag="div" class="group bordered filled nmb" name="rating" :rules="{ required: true }" v-slot="{ errors }">
+								<label for="rating">Rating *</label>
+								<input type="text" class="input" name="rating" autocomplete="off" placeholder="Enter rating" v-model="form_data.rating">
+								<transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+							</ValidationProvider>
+						</div>
 					</div>
 				</div>
 

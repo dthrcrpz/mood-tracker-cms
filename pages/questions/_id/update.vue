@@ -22,11 +22,18 @@
                         <h2>Information</h2>
                     </div>
                     <div class="bottom_box">
-                        <ValidationProvider tag="div" class="group bordered filled nmb" name="question" :rules="{ required: true }" v-slot="{ errors }">
-                            <label for="question">Question *</label>
-                            <input type="text" class="input" name="question" autocomplete="off" placeholder="Enter question" v-model="res.question">
-                            <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
-                        </ValidationProvider>
+                        <div class="group_inline two nmb">
+                            <ValidationProvider tag="div" class="group bordered filled nmb" name="question" :rules="{ required: true }" v-slot="{ errors }">
+                                <label for="question">Question *</label>
+                                <input type="text" class="input" name="question" autocomplete="off" placeholder="Enter question" v-model="res.question">
+                                <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                            </ValidationProvider>
+                            <ValidationProvider tag="div" class="group bordered filled nmb" name="rating" :rules="{ required: true }" v-slot="{ errors }">
+                                <label for="rating">Rating *</label>
+                                <input type="text" class="input" name="rating" autocomplete="off" placeholder="Enter rating" v-model="res.rating">
+                                <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
+                            </ValidationProvider>
+                        </div>
                     </div>
                 </div>
 
@@ -47,7 +54,7 @@
                                         <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                                     </ValidationProvider>
                                     <ValidationProvider tag="div" class="group bordered filled" name="score" :rules="{ required: true, regex: '^[0-9]+(\.[0-9]{1,2})?$' }" :vid="`choice_${key}.choice_score[]`" :data-vv-name="`choice_${key}.choice_score[]`" v-slot="{ errors }">
-                                        <label :for="`choice_score${key}`">Score *</label>
+                                        <label :for="`choice_score${key}`">Score (Percentage) *</label>
                                         <input type="text" :name="`choice_score[${key}]`" :id="`choice_score${key}`" :data-vv-name="`choice_${key}.choice_score[]`" placeholder="Enter score" autocomplete="off" class="input" v-model="data.score">
                                         <transition name="slide"><span class="validate" v-if="errors.length > 0">{{ errors[0] }}</span></transition>
                                     </ValidationProvider>
